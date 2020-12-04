@@ -19,6 +19,7 @@
   "homepage": "https://github.com/ssbrear/supportx#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.11.3",
     "morgan": "^1.10.0"
   }
 }
