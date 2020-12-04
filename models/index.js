@@ -1,5 +1,5 @@
 module.exports = {
-  Recipe: require("./company"),
+  Company: require("./company"),
   Conversation: require("./conversation"),
   User: require("./user"),
 };
