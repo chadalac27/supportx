@@ -1,12 +1,13 @@
-import './App.css';
+import "./App.css";
+import {Route} from 'react-router-dom';
+import Home from "./components/Login"
 
 function App() {
-  return (
+  return(
     <div>
-      <h3>Poop</h3>
-      
+      <Route path="/" exact component={Home} />
     </div>
-  );
+  )
 }
 
 export default App;
