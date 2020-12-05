@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const conversationSchema = new Schema({
-  users: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
+const ticketSchema = new Schema({
+  agents: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
   sevarity: {type: Number, default: 0},
   title: {type:String, required: true},
   messages: [
@@ -14,6 +14,6 @@ const conversationSchema = new Schema({
   ],
 });
 
-const Conversation = mongoose.model("Conversation", conversationSchema);
+const Ticket = mongoose.model("Ticket", ticketSchema);
 
-module.exports = Conversation;
+module.exports = Ticket;

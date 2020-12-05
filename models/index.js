@@ -1,5 +1,5 @@
 module.exports = {
   Company: require("./company"),
-  Conversation: require("./conversation"),
+  Ticket: require("./ticket"),
   User: require("./user"),
 };
