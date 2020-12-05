@@ -7,7 +7,7 @@ const companySchema = new Schema({
   managers: [{ type: Schema.Types.ObjectId, ref: "User" }],
   agents: [{ type: Schema.Types.ObjectId, ref: "User" }],
   seats: { type: Number, default: 3},
-  conversations: [{ type: Schema.Types.ObjectId, ref: "Conversation" }],
+  tickets: [{ type: Schema.Types.ObjectId, ref: "Ticket" }],
   avatarURL: {type: String},
 });
 
