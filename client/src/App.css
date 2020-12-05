@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Corben&display=swap');
+
 .App {
   text-align: center;
 }
@@ -13,6 +15,16 @@
   color: white;
 }
 
-input {
-  color: white !important;
+body {
+  background-color: #282c34;
+  color: rgb(224, 221, 193);
+}
+
+a, a:visited, a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+a:active {
+  color: rgb(158, 165, 126);
 }
