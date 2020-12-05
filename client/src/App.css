@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Corben&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+body {
+  background-color: #282c34;
+  color: rgb(224, 221, 193);
+}
+
+a, a:visited, a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+a:active {
+  color: rgb(158, 165, 126);
+}
+
+a {
+  color: #6c747c
+}
