@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import Grid from "@material-ui/core/Grid";
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   title: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles({
     boxSizing: "border-box",
     transition: "all 1s",
     "&:focus": {
-      width: "20%",
+      width: "30%",
     },
   },
   buttonStyle: {
@@ -56,7 +57,7 @@ const Login = () => {
             className={classes.inputStyle}
             name="password"
           />
-          <a href="#">Don't have an account?</a>
+          <Link to="/signup">Don't have an account?</Link>
           <button type="submit" className={classes.buttonStyle}>Log In</button>
         </Grid>
       </form>
