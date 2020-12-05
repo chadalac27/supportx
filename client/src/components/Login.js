@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     "&:focus": {
       width: "30%",
     },
+    display: "inline-block"
   },
   buttonStyle: {
     marginTop: "16px",
@@ -41,7 +42,7 @@ const Login = () => {
       <div className={classes.title}>SupportX</div>
     </div>,
     <div className={classes.formStyle}>
-      <form>
+      <form action="#/dashboard">
         <Grid container direction="column" justify="center" alignItems="center">
           <label htmlFor="login-email">Email: </label>
           <input
