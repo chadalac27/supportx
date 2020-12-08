@@ -45,12 +45,15 @@ const useStyles = makeStyles({
     background: "#363a3e",
     height: "100%",
     width: "100%",
+    display: "flex",
   },
   channels: {
     userSelect: "none",
     background: "#2f3236",
-    width: "240px",
+    width: "280px",
     height: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
   nav: {
     "&:hover": {
@@ -60,7 +63,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "10px",
+    padding: "20px",
   },
   serverTitle: {
     marginTop: "0",
@@ -103,6 +106,105 @@ const useStyles = makeStyles({
   },
   hash: {
     fontSize: "24px",
+    color: "#8e9296",
+  },
+  userArea: {
+    marginTop: "auto",
+    background: "#292c2f",
+    padding: "10px 4px",
+    color: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  userIcon: {
+    width: "50px",
+    marginRight: "8px",
+    borderRadius: "50%",
+  },
+  settingsIcon: {
+    width: "50px",
+    paddingLeft: "16px",
+    cursor: "pointer",
+  },
+  userID: {
+    fontSize: "14px",
+  },
+  chat: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
+  chatNav: {
+    borderBottom: "2px solid #2c2e31",
+    display: "flex",
+    color: "white",
+    justifyContent: "space-between",
+  },
+  chatHeader: {
+    display: "flex",
+    height: "60px",
+    paddingLeft: "8px",
+    alignItems: "center",
+  },
+  chatTitle: {
+    margin: "0",
+    paddingLeft: "8px",
+    fontSize: "16px",
+  },
+  chatIcons: {
+    display: "flex",
+    alignItems: "center",
+    marginRight: "16px",
+  },
+  notificationIcon: {
+    width: "30px",
+    cursor: "pointer",
+  },
+  pinIcon: {
+    width: "30px",
+    margin: "0 8px",
+    cursor: "pointer",
+  },
+  memberIcon: {
+    width: "30px",
+    cursor: "pointer",
+  },
+  chatInner: {
+    display: "flex",
+    height: "100%",
+  },
+  messages: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
+  messageSend: {
+    marginTop: "auto",
+    padding: "15px",
+    display: "flex",
+  },
+  messageInput: {
+    width: "100%",
+    height: "40px",
+    background: "#40454a",
+    border: "0",
+    borderRadius: "10px",
+    outline: "0"
+  },
+  fileIcon: {
+    width: "40px",
+    marginRight: "16px",
+    cursor: "pointer"
+  },
+  members: {
+    userSelect: "none",
+    background: "#2f3236",
+    width: "280px",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    padding: "15px"
   },
 });
 
@@ -155,6 +257,57 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className={classes.userArea}>
+            <img
+              alt="User Icon"
+              src="https://via.placeholder.com/100"
+              className={classes.userIcon}
+            ></img>
+            <div className={classes.userName}>
+              Sebastian Brear
+              <div className={classes.userID}>#1234</div>
+            </div>
+            <img
+              alt="Settings icon"
+              src="https://cdn.iconscout.com/icon/premium/png-256-thumb/gear-1961574-1659804.png"
+              className={classes.settingsIcon}
+            ></img>
+          </div>
+        </div>
+        <div className={classes.chat}>
+          <nav className={classes.chatNav}>
+            <div className={classes.chatHeader}>
+              <span className={classes.hash}>#</span>
+              <h2 className={classes.chatTitle}>General</h2>
+            </div>
+            <div className={classes.chatIcons}>
+              <img
+                alt="Notification Icon"
+                className={classes.notificationIcon}
+                src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-bell-512.png"
+              ></img>
+              <img
+                alt="Pinned Messages Icon"
+                className={classes.pinIcon}
+                src="https://simpleicon.com/wp-content/uploads/pin.png"
+              ></img>
+              <img
+                alt="Member List Toggle"
+                className={classes.memberIcon}
+                src="https://static.thenounproject.com/png/983470-200.png"
+              ></img>
+            </div>
+          </nav>
+          <div className={classes.chatInner}>
+            <div className={classes.messages}>
+              <div className={classes.pastMessages}></div>
+              <div className={classes.messageSend}>
+                <img className={classes.fileIcon} alt="Attach file icon" src="https://freeiconshop.com/wp-content/uploads/edd/plus-flat.png"></img>
+                <input className={classes.messageInput} type="text"></input>
+              </div>
+            </div>
+            <div className={classes.members}>Test</div>
           </div>
         </div>
       </div>
