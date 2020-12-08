@@ -31,6 +31,7 @@ const useStyles = makeStyles({
     "&:hover": {
       borderRadius: "20%",
       background: "#42b680",
+      cursor: "pointer",
     },
     "&:focus": {
       background: "#42b680",
@@ -46,11 +47,15 @@ const useStyles = makeStyles({
     width: "100%",
   },
   channels: {
+    userSelect: "none",
     background: "#2f3236",
     width: "240px",
     height: "100%",
   },
   nav: {
+    "&:hover": {
+      cursor: "pointer",
+    },
     borderBottom: "2px solid #2c2e31",
     display: "flex",
     justifyContent: "space-between",
@@ -68,16 +73,19 @@ const useStyles = makeStyles({
     padding: "10px",
   },
   channelListHeader: {
+    "&:hover": {
+      cursor: "pointer",
+      color: "white",
+    },
     display: "flex",
     fontSize: "10px",
     alignItems: "center",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
   },
   channelDropdown: {
     paddingLeft: "8px",
   },
-  channelListContent: {
-  },
+  channelListContent: {},
   channelListItem: {
     display: "flex",
     alignItems: "center",
@@ -85,8 +93,9 @@ const useStyles = makeStyles({
     paddingLeft: "12px",
     borderRadius: "5px",
     "&:hover, &:focus": {
+      cursor: "pointer",
       color: "white",
-      background: "#393d42"
+      background: "#393d42",
     },
   },
   channelName: {
@@ -114,6 +123,7 @@ const Dashboard = () => {
           <nav className={classes.nav}>
             <h3 className={classes.serverTitle}>Server 1</h3>
             <img
+              className={classes.icon}
               width="15px"
               src="https://image.flaticon.com/icons/png/512/120/120890.png"
               alt="dropdown icon"
@@ -123,6 +133,7 @@ const Dashboard = () => {
             <div className={classes.channelListInner}>
               <div className={classes.channelListHeader}>
                 <img
+                  className={classes.icon}
                   width="10px"
                   src="https://image.flaticon.com/icons/png/512/120/120890.png"
                   alt="dropdown icon"
