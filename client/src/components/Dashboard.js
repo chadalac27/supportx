@@ -157,6 +157,20 @@ const useStyles = makeStyles({
     alignItems: "center",
     marginRight: "16px",
   },
+  searchBar: {
+    marginLeft: "6px",
+    background: "#202326",
+    height: "30px",
+    width: "150px",
+    border: "0",
+    borderRadius: "4px",
+    outline: "0",
+    padding: "8px",
+    color: "#bbbbbb",
+    "&:focus": {
+      width: "250px",
+    },
+  },
   notificationIcon: {
     width: "30px",
     cursor: "pointer",
@@ -183,6 +197,7 @@ const useStyles = makeStyles({
     marginTop: "auto",
     padding: "15px",
     display: "flex",
+    flexDirection: "row",
   },
   messageInput: {
     width: "100%",
@@ -190,12 +205,27 @@ const useStyles = makeStyles({
     background: "#40454a",
     border: "0",
     borderRadius: "10px",
-    outline: "0"
+    outline: "0",
+    fontSize: "15px",
+    padding: "10px",
+    color: "#bbbbbb",
+    transition: "all 0.2s ease-in-out",
+    "&:focus": {
+      height: "100px",
+    },
+    resize: "none",
   },
   fileIcon: {
     width: "40px",
     marginRight: "16px",
-    cursor: "pointer"
+    userSelect: "none",
+    cursor: "pointer",
+  },
+  sendIcon: {
+    width: "40px",
+    marginLeft: "16px",
+    userSelect: "none",
+    cursor: "pointer",
   },
   members: {
     userSelect: "none",
@@ -204,7 +234,7 @@ const useStyles = makeStyles({
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    padding: "15px"
+    padding: "15px",
   },
 });
 
@@ -297,14 +327,32 @@ const Dashboard = () => {
                 className={classes.memberIcon}
                 src="https://static.thenounproject.com/png/983470-200.png"
               ></img>
+              <input
+                className={classes.searchBar}
+                placeholder="Search"
+                type="text"
+              ></input>
             </div>
           </nav>
           <div className={classes.chatInner}>
             <div className={classes.messages}>
               <div className={classes.pastMessages}></div>
               <div className={classes.messageSend}>
-                <img className={classes.fileIcon} alt="Attach file icon" src="https://freeiconshop.com/wp-content/uploads/edd/plus-flat.png"></img>
-                <input className={classes.messageInput} type="text"></input>
+                <img
+                  className={classes.fileIcon}
+                  alt="Attach file icon"
+                  src="https://freeiconshop.com/wp-content/uploads/edd/plus-flat.png"
+                ></img>
+                <textarea
+                  placeholder="Message #General"
+                  className={classes.messageInput}
+                  type="text"
+                ></textarea>
+                <img
+                  className={classes.sendIcon}
+                  alt="Send message icon"
+                  src="https://icon-library.com/images/32c192cd9d.svg.svg"
+                ></img>
               </div>
             </div>
             <div className={classes.members}>Test</div>

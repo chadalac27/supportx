@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Corben&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Corben&display=swap");
 
 * {
   box-sizing: border-box;
@@ -19,7 +19,9 @@
   color: white;
 }
 
-a, a:visited, a:hover {
+a,
+a:visited,
+a:hover {
   color: white;
   text-decoration: none;
 }
@@ -29,5 +31,9 @@ a:active {
 }
 
 a {
-  color: #6c747c
+  color: #6c747c;
+}
+
+textarea::-webkit-scrollbar {
+  display: none;
 }
