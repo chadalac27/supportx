@@ -19,11 +19,6 @@
   color: white;
 }
 
-body {
-  background-color: #282c34;
-  color: rgb(224, 221, 193);
-}
-
 a, a:visited, a:hover {
   color: white;
   text-decoration: none;
