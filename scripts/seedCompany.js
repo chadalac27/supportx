@@ -11,6 +11,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/supportx_db");
 //         console.log(data);
 //     })
 
+StartSeed();
+
 function StartSeed(){
   const companySeed = [
     {
