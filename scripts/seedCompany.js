@@ -20,6 +20,7 @@ function StartSeed(){
       owner: "yolo",
       seats: "5",
       tickets: [],
+      agents: [],
       avatarURL:
         "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
     },
@@ -32,7 +33,8 @@ function StartSeed(){
       .then((dbTicket) => {
         myMan = dbUser[0];
         companySeed[0].owner = myMan._id;
-        companySeed[0].tickets.push(dbTicket[0]._id);
+        companySeed[0].agents.push({agentID: myMan._id});
+        companySeed[0].tickets.push({ticketID: dbTicket[0]._id});
         UpdateDB();
       })
       
