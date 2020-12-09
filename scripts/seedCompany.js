@@ -19,7 +19,7 @@ function StartSeed(){
       name: "The Bear Den",
       owner: "yolo",
       seats: "5",
-      tickets: "",
+      tickets: [],
       avatarURL:
         "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
     },
@@ -28,9 +28,14 @@ function StartSeed(){
   let myMan;
   db.User.find({})
     .then((dbUser) => {
-      myMan = dbUser[0];
-      companySeed[0].owner = myMan._id;
-      UpdateDB();
+      db.Ticket.find({})
+      .then((dbTicket) => {
+        myMan = dbUser[0];
+        companySeed[0].owner = myMan._id;
+        companySeed[0].tickets.push(dbTicket[0]._id);
+        UpdateDB();
+      })
+      
     })
     .catch((err) => {
         console.log(err);
