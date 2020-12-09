@@ -19,7 +19,7 @@ function StartSeed(){
       name: "The Bear Den",
       owner: "yolo",
       seats: "5",
-      tickets: [{ type: Schema.Types.ObjectId, ref: "Ticket" }],
+      tickets: "",
       avatarURL:
         "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
     },
