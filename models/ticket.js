@@ -9,7 +9,7 @@ const ticketSchema = new Schema({
     {
       message: { type: String, required: true },
       timeStamp: { type: Date, default: () => new Date() },
-      user: { type: Schema.Types.ObjectId, ref: "User" },
+      senderName: {type: String, required: true},
     },
   ],
 });
