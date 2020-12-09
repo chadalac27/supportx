@@ -27,6 +27,30 @@ app.get("/api/users", (req,res)=>{
       //res.status(400).json(err);
     });
 })
+app.get("/api/company", (req,res)=>{
+  console.log("hit me" )
+  db.Company.find({})
+
+  .then((dbCompany) => {
+      res.json(dbCompany)
+      
+  })
+  .catch((err) => {
+      console.log(err);
+    //res.status(400).json(err);
+  });
+})
+app.get("/api/ticket", (req,res)=>{
+  console.log("hit me" )
+  db.Ticket.find({})
+  .then((dbTicket) => {
+      res.json(dbTicket)
+  })
+  .catch((err) => {
+      console.log(err);
+    //res.status(400).json(err);
+  });
+})
 
 app.listen(PORT, function() {
   console.log(` Server Running on port ${PORT}!`);
