@@ -1,3 +1,5 @@
+// Company controller is where all the database calls are done
+//This seperates the routes from the database code
 const db = require("../models");
 
 // Defining methods for the CompanyController
