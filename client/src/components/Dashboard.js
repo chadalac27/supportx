@@ -48,7 +48,6 @@ const useStyles = makeStyles({
     display: "flex",
   },
   channels: {
-    userSelect: "none",
     background: "#2f3236",
     width: "280px",
     height: "100%",
@@ -88,18 +87,34 @@ const useStyles = makeStyles({
   channelDropdown: {
     paddingLeft: "8px",
   },
-  channelListContent: {},
+  channelListContent: {
+    display: "flex",
+    flexDirection: "column",
+  },
   channelListItem: {
+    fontSize: "14px",
+    color: "#8e9296",
+    background: "0",
     display: "flex",
     alignItems: "center",
     marginLeft: "4px",
     paddingLeft: "12px",
+    border: "0",
     borderRadius: "5px",
-    "&:hover, &:focus": {
+    flexDirection: "row",
+    outline: "0",
+    "&:hover": {
       cursor: "pointer",
       color: "white",
       background: "#393d42",
     },
+    "&:focus": {
+      color: "white",
+      background: "#393d42",
+    },
+  },
+  channelListDiv: {
+    display: "flex",
   },
   channelName: {
     margin: "8px",
@@ -122,6 +137,9 @@ const useStyles = makeStyles({
     marginRight: "8px",
     borderRadius: "50%",
   },
+  userName: {
+    color: "white",
+  },
   settingsIcon: {
     width: "50px",
     paddingLeft: "16px",
@@ -136,6 +154,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
   },
   chatNav: {
+    userSelect: "none",
     borderBottom: "2px solid #2c2e31",
     display: "flex",
     color: "white",
@@ -188,7 +207,8 @@ const useStyles = makeStyles({
     display: "flex",
     height: "100%",
   },
-  messages: {
+  messagesContainer: {
+    padding: "15px",
     width: "100%",
     display: "flex",
     flexDirection: "column",
@@ -198,6 +218,7 @@ const useStyles = makeStyles({
     padding: "15px",
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
   },
   messageInput: {
     width: "100%",
@@ -214,6 +235,35 @@ const useStyles = makeStyles({
       height: "100px",
     },
     resize: "none",
+  },
+  message: {
+    display: "flex",
+    flexDirection: "row",
+    margin: "12px 0",
+  },
+  messageContent: {
+    color: "#bbbbbb",
+    border: "0",
+    outline: "0",
+    fontSize: "15px",
+    paddingLeft: "10px",
+    resize: "none",
+    background: "none",
+  },
+  messageInfo: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  userInfo: {
+    paddingLeft: "10px",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  timeStamp: {
+    marginLeft: "8px",
+    color: "#777777",
+    fontSize: "12px",
   },
   fileIcon: {
     width: "40px",
@@ -273,18 +323,24 @@ const Dashboard = () => {
                 <h3 className={classes.channelDropdown}>Channels</h3>
               </div>
               <div className={classes.channelListContent}>
-                <div className={classes.channelListItem}>
-                  <span className={classes.hash}>#</span>
-                  <h5 className={classes.channelName}>General</h5>
-                </div>
-                <div className={classes.channelListItem}>
-                  <span className={classes.hash}>#</span>
-                  <h5 className={classes.channelName}>Shipping</h5>
-                </div>
-                <div className={classes.channelListItem}>
-                  <span className={classes.hash}>#</span>
-                  <h5 className={classes.channelName}>Processing</h5>
-                </div>
+                <button className={classes.channelListItem}>
+                  <div className={classes.channelListDiv}>
+                    <span className={classes.hash}>#</span>
+                    <h5 className={classes.channelName}>General</h5>
+                  </div>
+                </button>
+                <button className={classes.channelListItem}>
+                  <div className={classes.channelListDiv}>
+                    <span className={classes.hash}>#</span>
+                    <h5 className={classes.channelName}>Shipping</h5>
+                  </div>
+                </button>
+                <button className={classes.channelListItem}>
+                  <div className={classes.channelListDiv}>
+                    <span className={classes.hash}>#</span>
+                    <h5 className={classes.channelName}>Processing</h5>
+                  </div>
+                </button>
               </div>
             </div>
           </div>
@@ -335,8 +391,63 @@ const Dashboard = () => {
             </div>
           </nav>
           <div className={classes.chatInner}>
-            <div className={classes.messages}>
-              <div className={classes.pastMessages}></div>
+            <div className={classes.messagesContainer}>
+              <div className={classes.pastMessages}>
+                <div className={classes.message}>
+                  <img
+                    alt="User Icon"
+                    src="https://via.placeholder.com/100"
+                    className={classes.userIcon}
+                  ></img>
+                  <div className={classes.messageInfo}>
+                    <div className={classes.userInfo}>
+                      <div className={classes.userName}>Sebastian Brear</div>
+                      <div className={classes.timeStamp}>Today at 2:03 AM</div>
+                    </div>
+                    <div className={classes.messageContent}>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </div>
+                  </div>
+                </div>
+                <div className={classes.message}>
+                  <img
+                    alt="User Icon"
+                    src="https://via.placeholder.com/100"
+                    className={classes.userIcon}
+                  ></img>
+                  <div className={classes.messageInfo}>
+                    <div className={classes.userInfo}>
+                      <div className={classes.userName}>Sebastian Brear</div>
+                      <div className={classes.timeStamp}>Today at 2:03 AM</div>
+                    </div>
+                    <div className={classes.messageContent}>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </div>
+                  </div>
+                </div>
+                <div className={classes.message}>
+                  <img
+                    alt="User Icon"
+                    src="https://via.placeholder.com/100"
+                    className={classes.userIcon}
+                  ></img>
+                  <div className={classes.messageInfo}>
+                    <div className={classes.userInfo}>
+                      <div className={classes.userName}>Sebastian Brear</div>
+                      <div className={classes.timeStamp}>Today at 2:03 AM</div>
+                    </div>
+                    <div className={classes.messageContent}>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className={classes.messageSend}>
                 <img
                   className={classes.fileIcon}
