@@ -2,13 +2,15 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const db = require("./models");
+const apiRoutes = require("./routes");
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/supportx_db");
-
-
-
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+
+app.use("/api", apiRoutes.User);
+app.use("/api", apiRoutes.Company);
+app.use("/api", apiRoutes.Ticket);
 
 
 
@@ -17,40 +19,9 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/src/index.js"));
 });
 
-app.get("/api/users", (req,res)=>{
-    db.User.find({})
-    .then((dbUser) => {
-        res.json(dbUser)
-    })
-    .catch((err) => {
-        console.log(err);
-      //res.status(400).json(err);
-    });
-})
-app.get("/api/company", (req,res)=>{
-  console.log("hit me" )
-  db.Company.find({})
 
-  .then((dbCompany) => {
-      res.json(dbCompany)
-      
-  })
-  .catch((err) => {
-      console.log(err);
-    //res.status(400).json(err);
-  });
-})
-app.get("/api/ticket", (req,res)=>{
-  console.log("hit me" )
-  db.Ticket.find({})
-  .then((dbTicket) => {
-      res.json(dbTicket)
-  })
-  .catch((err) => {
-      console.log(err);
-    //res.status(400).json(err);
-  });
-})
+
+
 
 app.listen(PORT, function() {
   console.log(` Server Running on port ${PORT}!`);
