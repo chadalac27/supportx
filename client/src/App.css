@@ -37,3 +37,7 @@ a {
 textarea::-webkit-scrollbar {
   display: none;
 }
+
+ul {
+  list-style: none;
+}

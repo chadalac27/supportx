@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
+import $ from "jquery";
 
 const useStyles = makeStyles({
   app: {
@@ -204,7 +205,7 @@ const useStyles = makeStyles({
     cursor: "pointer",
   },
   chatInner: {
-    display: "flex",
+    display: "none",
     height: "100%",
   },
   messagesContainer: {
@@ -286,10 +287,60 @@ const useStyles = makeStyles({
     flexDirection: "column",
     padding: "15px",
   },
+  ticketList: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  ticketItem: {
+    border: "1px solid black",
+    color: "black",
+    padding: "24px",
+    margin: "8px",
+    background: "#42b680",
+  },
+  ticketInfo: {},
+  ticketSeverity: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  numAgents: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  severityIndicator: {
+    paddingLeft: "4px",
+    color: "red",
+  },
+  agentsIndicator: {
+    paddingLeft: "4px",
+    color: "red",
+  },
+  maxRow: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  midRow: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  lowRow: {
+    display: "flex",
+    flexDirection: "row",
+  },
 });
 
 const Dashboard = () => {
   const classes = useStyles();
+
+  function displayChat() {
+    $(".makeStyles-ticketList-1199").css("display", "none");
+    $(".makeStyles-chatInner-1238").css("display", "flex");
+  }
+
+  $(".makeStyles-ticketItem-1149").on("click", function () {
+    displayChat();
+  });
+
   return (
     <div className={classes.app}>
       <div className={classes.serverList}>
@@ -390,6 +441,59 @@ const Dashboard = () => {
               ></input>
             </div>
           </nav>
+          <ul className={classes.ticketList}>
+            <li className={classes.serverityRow}>
+              <ul className={classes.maxRow}>
+                <li className={classes.ticketItem}>
+                  <h1 className={classes.ticketTitle}>Cat stuck in tree</h1>
+                  <summary className={classes.ticketInfo}>
+                    <div className={classes.ticketSeverity}>
+                      Severity:{" "}
+                      <span className={classes.severityIndicator}>10</span>
+                    </div>
+                    <div className={classes.numAgents}>
+                      Number of Agents Assigned:{" "}
+                      <span className={classes.agentsIndicator}>0</span>
+                    </div>
+                  </summary>
+                </li>
+              </ul>
+            </li>
+            <li className={classes.serverityRow}>
+              <ul className={classes.midRow}>
+                <li className={classes.ticketItem}>
+                  <h1 className={classes.ticketTitle}>Cat stuck in tree</h1>
+                  <summary className={classes.ticketInfo}>
+                    <div className={classes.ticketSeverity}>
+                      Severity:{" "}
+                      <span className={classes.severityIndicator}>6</span>
+                    </div>
+                    <div className={classes.numAgents}>
+                      Number of Agents Assigned:{" "}
+                      <span className={classes.agentsIndicator}>0</span>
+                    </div>
+                  </summary>
+                </li>
+              </ul>
+            </li>
+            <li className={classes.serverityRow}>
+              <ul className={classes.lowRow}>
+                <li className={classes.ticketItem}>
+                  <h1 className={classes.ticketTitle}>Cat stuck in tree</h1>
+                  <summary className={classes.ticketInfo}>
+                    <div className={classes.ticketSeverity}>
+                      Severity:{" "}
+                      <span className={classes.severityIndicator}>2</span>
+                    </div>
+                    <div className={classes.numAgents}>
+                      Number of Agents Assigned:{" "}
+                      <span className={classes.agentsIndicator}>0</span>
+                    </div>
+                  </summary>
+                </li>
+              </ul>
+            </li>
+          </ul>
           <div className={classes.chatInner}>
             <div className={classes.messagesContainer}>
               <div className={classes.pastMessages}>
