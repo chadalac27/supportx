@@ -1,22 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Corben&display=swap");
+@import url(https://fonts.googleapis.com/css2?family=Corben&display=swap);
 
 * {
   box-sizing: border-box;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 a,
@@ -40,4 +25,405 @@ textarea::-webkit-scrollbar {
 
 ul {
   list-style: none;
+}
+
+.login-wrapper {
+  margin-top: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-top: 5rem;
+  font-size: 80px;
+  font-family: Corben;
+}
+.app {
+  height: 100vh;
+  display: flex;
+}
+.formStyle {
+  margin-top: "2rem";
+  text-align: "center";
+}
+.inputStyle {
+  padding: "12px 20px";
+  margin: "8px 0";
+  box-sizing: "border-box";
+  transition: "all 1s";
+  display: "inline-block";
+}
+.inputStyle:focus {
+  width: "30%";
+}
+.buttonStyle {
+  margin-top: "16px";
+  background: "rgb(224, 221, 193)";
+  padding: "15px 32px";
+  border-radius: "8px";
+  border: "none";
+}
+.buttonStyle:active {
+  background: "rgb(121, 119, 104)";
+}
+.serverList {
+  background: #202326;
+  height: 100%;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 12px;
+}
+.serverButton {
+  background: #363a3e;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  user-select: none;
+}
+.serverButton:hover {
+  border-radius: 20%;
+  background: #42b680;
+  cursor: pointer;
+}
+.serverButton:focus {
+  background: #42b680;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  outline: 0;
+}
+.chatOuter {
+  background: #363a3e;
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+.channels {
+  background: #2f3236;
+  width: 280px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.nav {
+  border-bottom: 2px solid #2c2e31;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.nav:hover {
+  cursor: pointer;
+}
+.serverTitle {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: white;
+  font-size: 15px;
+}
+.channelListOuter {
+  color: #8e9296;
+  padding: 10px;
+}
+.channelListHeader {
+  display: flex;
+  font-size: 10px;
+  align-items: center;
+  text-transform: uppercase;
+}
+.channelListHeader:hover {
+  cursor: pointer;
+  color: white;
+}
+.channelDropdown {
+  padding-left: 8px;
+}
+.channelListContent {
+  display: flex;
+  flex-direction: column;
+}
+.channelListItem {
+  font-size: 14px;
+  color: #8e9296;
+  background: 0;
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+  padding-left: 12px;
+  border: 0;
+  border-radius: 5px;
+  flex-direction: row;
+  outline: 0;
+}
+.channelListItem:hover {
+  cursor: pointer;
+  color: white;
+  background: #393d42;
+}
+.channelListItem:focus {
+  color: white;
+  background: #393d42;
+}
+.channelListDiv {
+  display: flex;
+}
+.channelName {
+  margin: 8px;
+}
+.hash {
+  font-size: 24px;
+  color: #8e9296;
+}
+.userArea {
+  margin-top: auto;
+  background: #292c2f;
+  padding: 10px 4px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.userIcon {
+  width: 50px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+.userName {
+  color: white;
+}
+.settingsIcon {
+  width: 50px;
+  padding-left: 16px;
+  cursor: pointer;
+}
+.userID {
+  font-size: 14px;
+}
+.chat {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.chatNav {
+  user-select: none;
+  border-bottom: 2px solid #2c2e31;
+  display: flex;
+  color: white;
+  justify-content: space-between;
+}
+.chatHeader {
+  display: flex;
+  height: 60px;
+  padding-left: 8px;
+  align-items: center;
+}
+.chatTitle {
+  margin: 0;
+  padding-left: 8px;
+  font-size: 16px;
+}
+.chatIcons {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+.searchBar {
+  margin-left: 6px;
+  background: #202326;
+  height: 30px;
+  width: 150px;
+  border: 0;
+  border-radius: 4px;
+  outline: 0;
+  padding: 8px;
+  color: #bbbbbb;
+}
+.searchBar:focus {
+  width: 250px;
+}
+.notificationIcon {
+  width: 30px;
+  cursor: pointer;
+}
+.pinIcon {
+  width: 30px;
+  margin: 0 8px;
+  cursor: pointer;
+}
+.memberIcon {
+  width: 30px;
+  cursor: pointer;
+}
+.chatInner {
+  display: none;
+  height: 100%;
+}
+.messagesContainer {
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.messageSend {
+  margin-top: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.messageInput {
+  width: 100%;
+  height: 40px;
+  background: #40454a;
+  border: 0;
+  border-radius: 10px;
+  outline: 0;
+  font-size: 15px;
+  padding: 10px;
+  color: #bbbbbb;
+  transition: all 0.2s ease-in-out;
+  resize: none;
+}
+.messageInput:focus {
+  height: 100px;
+}
+.message {
+  display: flex;
+  flex-direction: row;
+  margin: 12px 0;
+}
+.messageContent {
+  color: #bbbbbb;
+  border: 0;
+  outline: 0;
+  font-size: 15px;
+  padding-left: 10px;
+  resize: none;
+  background: none;
+}
+.messageInfo {
+  display: flex;
+  flex-direction: column;
+}
+.userInfo {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.timeStamp {
+  margin-left: 8px;
+  color: #777777;
+  font-size: 12px;
+}
+.fileIcon {
+  width: 40px;
+  margin-right: 16px;
+  user-select: none;
+  cursor: pointer;
+}
+.sendIcon {
+  width: 40px;
+  margin-left: 16px;
+  user-select: none;
+  cursor: pointer;
+}
+.sidebar {
+  user-select: none;
+  background: #2f3236;
+  width: 280px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+.ticketList {
+  display: flex;
+  flex-direction: column;
+}
+.ticketItem {
+  border: 1px solid black;
+  color: black;
+  padding: 24px;
+  margin: 8px;
+  background: #42b680;
+  transition: all 0.2s ease-in-out;
+}
+.ticketItem:hover {
+  border-radius: 25%;
+}
+.ticketItem:active {
+  background: #226144;
+}
+.ticketInfo {
+  padding: 8px;
+  border: 2px dotted black;
+}
+.ticketSeverity {
+  display: flex;
+  justify-content: center;
+}
+.numAgents {
+  display: flex;
+  justify-content: center;
+}
+.severityIndicator {
+  padding-left: 4px;
+  color: red;
+}
+.severityRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 8px 0;
+  color: white;
+}
+.ticketTitle {
+  font-size: 15px;
+}
+.agentsIndicator {
+  padding-left: 4px;
+  color: red;
+}
+.maxRow {
+  display: flex;
+  flex-direction: row;
+}
+.midRow {
+  display: flex;
+  flex-direction: row;
+}
+.lowRow {
+  display: flex;
+  flex-direction: row;
+}
+.backButton {
+  background: #42b680;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  transition: all 0.2s;
+  height: 150px;
+}
+.backButton:hover {
+  border-radius: 50%;
+}
+.backButton:active {
+  background: #226144;
 }
