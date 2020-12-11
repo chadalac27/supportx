@@ -8,26 +8,92 @@ const Dashboard = () => {
     $(".chatInner").css("display", "flex");
     $(".chatTitle").text(title);
   }
-
   $(document).on("click", ".ticketItem", function () {
     displayChat($(this).children(":first").text());
   });
-
   $(document).on("click", ".backButton", function () {
     $(".chatInner").css("display", "none");
     // UPDATE TICKET LIST FROM SERVER HERE
     $(".ticketList").css("display", "flex");
+
+    // Returns the chat title to the focused channel
+    const channelList = $(".channelListContent").children();
+    for (let i = 0; i < channelList.length; i++) {
+      const classList = $(channelList[i]).attr("class").split(/\s+/);
+      for (let j = 0; j < classList.length; j++) {
+        if (classList[j] === "focusChannel") {
+          $(".chatTitle").text($($($(channelList[i]).children(":first")).children()[1]).text());
+          return;
+        }
+      }
+    }
   });
+  $(document).on("click", ".sendIcon", function (e) {
+    e.stopImmediatePropagation();
+    newMessage($(".messageInput").val());
+    // STORE THE MESSAGE ON THE SERVER HERE
+  });
+  $(document).on("click", ".serverButton", function (e) {
+    e.stopImmediatePropagation();
+    const serverArray = $($(this).parent()).children();
+    // Check if any server is focused
+    for (let i = 0; i < serverArray.length; i++) {
+      $(serverArray[i]).removeClass("focusServer");
+    }
+    $(this).addClass("focusServer");
+  });
+  $(document).on("click", ".channelListItem", function (e) {
+    e.stopImmediatePropagation();
+    const channelArray = $($(this).parent()).children();
+    // Check if any server is focused
+    for (let i = 0; i < channelArray.length; i++) {
+      $(channelArray[i]).removeClass("focusChannel");
+    }
+    $(this).addClass("focusChannel");
+  });
+
+  function newMessage(input) {
+    const message = $("<div>").addClass("message");
+    const userIcon = $("<img>").attr({
+      class: "userIcon",
+      alt: "User Icon",
+      // SOURCE NEEDS TO BE BROUGHT IN FROM SERVER OR DEFAULTED WITH RANDOM COLOUR
+      src: "https://via.placeholder.com/100",
+    });
+    const messageInfo = $("<div>").addClass("messageInfo");
+    const userInfo = $("<div>").addClass("userInfo");
+    const userName = $("<div>").addClass("userName").text("Sebastian Brear");
+    const timeStamp = $("<div>").addClass("timeStamp").text("Today at 2:03 AM");
+    const messageContent = $("<div>").addClass("messageContent").text(input);
+
+    userInfo.append(userName, timeStamp);
+    messageInfo.append(userInfo, messageContent);
+    message.append(userIcon, messageInfo);
+
+    $(".pastMessages").append(message);
+  }
 
   return (
     <div class="app">
       <div class="serverList">
-        <button class="serverButton">Profile</button>
-        <button class="serverButton">Server 1</button>
-        <button class="serverButton">Server 2</button>
-        <button class="serverButton">Server 3</button>
-        <button class="serverButton">Server 4</button>
-        <button class="serverButton">Add New Server</button>
+        <button data-val="profile" class="serverButton">
+          Profile
+        </button>
+        <button data-val="1" class="serverButton">
+          Server 1
+        </button>
+        <button data-val="2" class="serverButton">
+          Server 2
+        </button>
+        <button data-val="3" class="serverButton">
+          Server 3
+        </button>
+        <button data-val="4" class="serverButton">
+          Server 4
+        </button>
+        <button data-val="new" class="serverButton">
+          Add New Server
+        </button>
       </div>
       <div class="chatOuter">
         <div class="channels">
@@ -169,62 +235,7 @@ const Dashboard = () => {
           </ul>
           <div class="chatInner">
             <div class="messagesContainer">
-              <div class="pastMessages">
-                <div class="message">
-                  <img
-                    alt="User Icon"
-                    src="https://via.placeholder.com/100"
-                    class="userIcon"
-                  ></img>
-                  <div class="messageInfo">
-                    <div class="userInfo">
-                      <div class="userName">Sebastian Brear</div>
-                      <div class="timeStamp">Today at 2:03 AM</div>
-                    </div>
-                    <div class="messageContent">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </div>
-                  </div>
-                </div>
-                <div class="message">
-                  <img
-                    alt="User Icon"
-                    src="https://via.placeholder.com/100"
-                    class="userIcon"
-                  ></img>
-                  <div class="messageInfo">
-                    <div class="userInfo">
-                      <div class="userName">Sebastian Brear</div>
-                      <div class="timeStamp">Today at 2:03 AM</div>
-                    </div>
-                    <div class="messageContent">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </div>
-                  </div>
-                </div>
-                <div class="message">
-                  <img
-                    alt="User Icon"
-                    src="https://via.placeholder.com/100"
-                    class="userIcon"
-                  ></img>
-                  <div class="messageInfo">
-                    <div class="userInfo">
-                      <div class="userName">Sebastian Brear</div>
-                      <div class="timeStamp">Today at 2:03 AM</div>
-                    </div>
-                    <div class="messageContent">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div class="pastMessages"></div>
               <div class="messageSend">
                 <img
                   class="fileIcon"
