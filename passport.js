@@ -13,7 +13,7 @@ const cookieExtractor = (req) => {
   return token;
 };
 
-console.log("token: ",process.env.JWT_TOKEN);
+//console.log("token: ",process.env.JWT_TOKEN);
 //Authorization to protect the endpoints
 passport.use(
   new JwtStrategy(

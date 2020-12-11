@@ -1,3 +1,4 @@
+//** MAKE SURE TO RUN SEED USER AND RUN SEED TICKET FIRST */
 const mongoose = require("mongoose");
 const db = require("../models");
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/supportx_db");
@@ -10,7 +11,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/supportx_db");
 
 StartSeed();
 
-function StartSeed(){
+function StartSeed() {
   const companySeed = [
     {
       name: "The Bear Den",
@@ -26,22 +27,19 @@ function StartSeed(){
   let myMan;
   db.User.find({})
     .then((dbUser) => {
-      db.Ticket.find({})
-      .then((dbTicket) => {
+      db.Ticket.find({}).then((dbTicket) => {
         myMan = dbUser[0];
         companySeed[0].owner = myMan._id;
-        companySeed[0].agents.push({agentID: myMan._id});
-        companySeed[0].tickets.push({ticketID: dbTicket[0]._id});
+        companySeed[0].agents.push({ agentID: myMan._id });
+        companySeed[0].tickets.push({ ticketID: dbTicket[0]._id });
         UpdateDB();
-      })
-      
+      });
     })
     .catch((err) => {
-        console.log(err);
+      console.log(err);
     });
 
   function UpdateDB() {
-    
     db.Company.remove({})
       .then(() => db.Company.collection.insertMany(companySeed))
       .then((data) => {
@@ -51,7 +49,5 @@ function StartSeed(){
         console.error(err);
         process.exit(1);
       });
-
-      
   }
 }

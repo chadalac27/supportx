@@ -4,18 +4,19 @@ const passport = require("passport");
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
-app.use(require('express-session')({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
-}));
-
+app.use(
+  require("express-session")({
+    secret: "keyboard cat",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 //express urlencoded allows use of params
-app.use(require('body-parser').urlencoded({ extended: true }));
+app.use(require("body-parser").urlencoded({ extended: true }));
 //json.. nuff said :D
 app.use(express.json());
-app.use(require('cookie-parser')());
+app.use(require("cookie-parser")());
 
 // Serve up static assets
 if (process.env.NODE_ENV === "production") {
@@ -28,14 +29,14 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/supportx_db");
 //Open routes
 app.use(routes);
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-app.listen(PORT, function() {
-  console.log(` Server Running on port ${PORT}!`);
+app.listen(PORT, function () {
+  console.log(`http://localhost:${PORT} Server Running on port ${PORT}!`);
 });
