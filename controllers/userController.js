@@ -2,8 +2,15 @@
 // This seperates the routes from the database code
 const db = require("../models");
 
+
+
 // Defining methods for the userController
 module.exports = {
+  login: function(req,res){
+    console.log("Authenticating");
+    
+      
+  },
   findAll: function(req, res) {
     db.User
       .find(req.query)
