@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const ticketSchema = new Schema({
   agents: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
-  sevarity: {type: Number, default: 0},
+  severity: {type: Number, default: 0},
   title: {type:String, required: true},
   messages: [
     {

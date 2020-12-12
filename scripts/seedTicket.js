@@ -16,7 +16,7 @@ function StartSeed() {
   const ticketSeed = [
     {
       agents: [],
-      sevarity: 0,
+      severity: 0,
       title: "Help! My Cats Stuck In a Tree",
       messages: [
         {
