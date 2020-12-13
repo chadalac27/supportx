@@ -28,6 +28,7 @@ const userSeed = [
 
 db.User.remove({})
   .then(() => db.User.create(userSeed[0]))
+  .then(() => db.User.create(userSeed[1]))
   .then((data) => {
     //console.log(data.result.n + " records inserted!");
     process.exit(0);

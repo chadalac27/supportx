@@ -13,4 +13,8 @@ router
   .put(companyController.update)
   .delete(companyController.remove);
 
+  router
+  .route("/by-user/:id")
+  .get(companyController.findByUserId);
+
 module.exports = router;

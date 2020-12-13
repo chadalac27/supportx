@@ -17,7 +17,7 @@ const signToken = (userID) => {
 
 router.post(
   "/login",
-  passport.authenticate("local", { session: true }),
+  passport.authenticate("local", { session: false }),
   (req, res) => {
     console.log("Inside Auth");
     if (req.isAuthenticated()) {
@@ -31,6 +31,24 @@ router.post(
       console.log("Failled To Authenticate!");
       res.status(400).json({ isAuthenticated: false });
     }
+  }
+);
+
+router.post(
+  "/logout",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.clearCookie("access_token");
+    res.json({ user: { username: "" }, success: true });
+  }
+);
+
+router.get(
+  "/authenticated",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const {username} = req.user;
+    res.status(200).json({isAuthenticated: true, user: {username}})
   }
 );
 

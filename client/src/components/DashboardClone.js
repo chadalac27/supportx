@@ -1,79 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ServerList from "./ServerList";
 import ChannelList from "./ChannelList";
+import API from "../utils/API";
 // import $ from "jquery";
 
 const DashboardClone = () => {
-  // function displayChat(title) {
-  //   $(".ticketList").css("display", "none");
-  //   // UPDATE CHAT FROM SERVER HERE
-  //   $(".chatInner").css("display", "flex");
-  //   $(".chatTitle").text(title);
-  // }
-  // $(document).on("click", ".ticketItem", function () {
-  //   displayChat($(this).children(":first").text());
-  // });
-  // $(document).on("click", ".backButton", function () {
-  //   $(".chatInner").css("display", "none");
-  //   // UPDATE TICKET LIST FROM SERVER HERE
-  //   $(".ticketList").css("display", "flex");
-
-  //   // Returns the chat title to the focused channel
-  //   const channelList = $(".channelListContent").children();
-  //   for (let i = 0; i < channelList.length; i++) {
-  //     const classList = $(channelList[i]).attr("class").split(/\s+/);
-  //     for (let j = 0; j < classList.length; j++) {
-  //       if (classList[j] === "focusChannel") {
-  //         $(".chatTitle").text($($($(channelList[i]).children(":first")).children()[1]).text());
-  //         return;
-  //       }
-  //     }
-  //   }
-  // });
-  // $(document).on("click", ".sendIcon", function (e) {
-  //   e.stopImmediatePropagation();
-  //   newMessage($(".messageInput").val());
-  //   // STORE THE MESSAGE ON THE SERVER HERE
-  // });
-  // $(document).on("click", ".serverButton", function (e) {
-  //   e.stopImmediatePropagation();
-  //   const serverArray = $($(this).parent()).children();
-  //   // Check if any server is focused
-  //   for (let i = 0; i < serverArray.length; i++) {
-  //     $(serverArray[i]).removeClass("focusServer");
-  //   }
-  //   $(this).addClass("focusServer");
-  // });
-  // $(document).on("click", ".channelListItem", function (e) {
-  //   e.stopImmediatePropagation();
-  //   const channelArray = $($(this).parent()).children();
-  //   // Check if any server is focused
-  //   for (let i = 0; i < channelArray.length; i++) {
-  //     $(channelArray[i]).removeClass("focusChannel");
-  //   }
-  //   $(this).addClass("focusChannel");
-  // });
-
-  // function newMessage(input) {
-  //   const message = $("<div>").addClass("message");
-  //   const userIcon = $("<img>").attr({
-  //     class: "userIcon",
-  //     alt: "User Icon",
-  //     // SOURCE NEEDS TO BE BROUGHT IN FROM SERVER OR DEFAULTED WITH RANDOM COLOUR
-  //     src: "https://via.placeholder.com/100",
-  //   });
-  //   const messageInfo = $("<div>").addClass("messageInfo");
-  //   const userInfo = $("<div>").addClass("userInfo");
-  //   const userName = $("<div>").addClass("userName").text("Sebastian Brear");
-  //   const timeStamp = $("<div>").addClass("timeStamp").text("Today at 2:03 AM");
-  //   const messageContent = $("<div>").addClass("messageContent").text(input);
-
-  //   userInfo.append(userName, timeStamp);
-  //   messageInfo.append(userInfo, messageContent);
-  //   message.append(userIcon, messageInfo);
-
-  //   $(".pastMessages").append(message);
-  // }
+  
 
   const serverData = [
     { name: "Profile", channels: [""] },
@@ -83,6 +15,7 @@ const DashboardClone = () => {
     { name: "Add New Server", channels: [""] },
   ];
 
+  const [userState, setUser] = React.useState({});
   const [focusServer, setFocusServer] = React.useState();
   const [currentChannels, setCurrentChannels] = React.useState(0);
 
@@ -91,6 +24,21 @@ const DashboardClone = () => {
     setFocusServer(serverIndex);
     setCurrentChannels(serverIndex)
   }
+
+  useEffect(() => {
+    loadUser()
+  }, []);
+
+  function loadUser(){
+    API.getUserByID("5fd2ead7b75ded58f0e43cb2")
+    .then(res => {
+      setUser(res.data);
+    })
+  }
+
+  function loadCompanies(){
+    
+  }
   
   return (
     <div className="app">
@@ -98,7 +46,7 @@ const DashboardClone = () => {
       <div className="chatOuter">
         <div className="channels">
           <nav className="nav">
-            <h3 className="serverTitle">Server 1</h3>
+            <h3 className="serverTitle">TEST 1</h3>
             <img
               className="icon"
               width="15px"
@@ -116,7 +64,8 @@ const DashboardClone = () => {
               className="userIcon"
             ></img>
             <div className="userName">
-              Sebastian Brear
+              {/* DBG-REF */}
+              {userState.username}
               <div className="userID">#1234</div>
             </div>
             <img

@@ -22,6 +22,33 @@ function StartSeed() {
       avatarURL:
         "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
     },
+    {
+      name: "The Bear Den2",
+      owner: "",
+      seats: "3",
+      tickets: [],
+      agents: [],
+      avatarURL:
+        "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
+    },
+    {
+      name: "Big Bears Only",
+      owner: "yolo",
+      seats: "5",
+      tickets: [],
+      agents: [],
+      avatarURL:
+        "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
+    },
+    {
+      name: "Polar Bear Only",
+      owner: "",
+      seats: "3",
+      tickets: [],
+      agents: [],
+      avatarURL:
+        "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
+    },
   ];
 
   let myMan;
@@ -30,8 +57,15 @@ function StartSeed() {
       db.Ticket.find({}).then((dbTicket) => {
         myMan = dbUser[0];
         companySeed[0].owner = myMan._id;
-        companySeed[0].agents.push({ agentID: myMan._id });
+        companySeed[0].agents.push({agentID:myMan._id });
         companySeed[0].tickets.push({ ticketID: dbTicket[0]._id });
+        companySeed[1].owner = myMan._id;
+        companySeed[1].agents.push( {agentID:dbUser[1]._id} );
+        companySeed[2].owner = dbUser[1]._id;
+        companySeed[2].agents.push([{agentID: dbUser[0]._id},{agentID: dbUser[1]._id}] );
+        companySeed[3].owner = dbUser[1]._id;
+        companySeed[3].agents.push({agentID: dbUser[1]._id } );
+        //companySeed[1].tickets.push({ ticketID: dbTicket[0]._id });
         UpdateDB();
       });
     })
@@ -41,7 +75,10 @@ function StartSeed() {
 
   function UpdateDB() {
     db.Company.remove({})
-      .then(() => db.Company.collection.insertMany(companySeed))
+      .then(() => db.Company.create(companySeed[0]))
+      .then(() => db.Company.create(companySeed[1]))
+      .then(() => db.Company.create(companySeed[2]))
+      .then(() => db.Company.create(companySeed[3]))
       .then((data) => {
         process.exit(0);
       })
