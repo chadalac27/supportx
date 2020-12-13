@@ -28,7 +28,7 @@ const userSchema = new Schema({
     //required: true,
     unique: true,
   },
-  companies: [{ type: Schema.Types.ObjectId, ref: "Company" }],
+  //companies: [{ type: Schema.Types.ObjectId, ref: "Company" }],
   avatarURL: { type: String },
 });
 
