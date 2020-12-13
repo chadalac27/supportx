@@ -19,7 +19,7 @@ function ChannelList(props) {
         <h3 className="channelDropdown">Channels</h3>
       </div>
       <div className="channelListContent">
-        {props.data.map((channel, i) => (
+        {props.data[props.focus].channels.map((channel, i) => (
           <button
             index={i}
             key={i}

@@ -76,23 +76,22 @@ const Dashboard = () => {
   // }
 
   const serverData = [
-    { name: "Profile", channels: [] },
+    { name: "Profile", channels: [""] },
     { name: "Server 1", channels: ["General", "Processing"] },
     { name: "Server 2", channels: ["General", "Shipping"] },
     { name: "Server 3", channels: ["Processing", "Shipping"] },
-    { name: "Add New Server", channels: [] },
+    { name: "Add New Server", channels: [""] },
   ];
 
-  let currentServer = { name: "", channels: [] };
-
   const [focusServer, setFocusServer] = React.useState();
+  const [currentChannels, setCurrentChannels] = React.useState(0);
 
   function serverClick(e) {
     const serverIndex = e.target.getAttribute("index");
     setFocusServer(serverIndex);
-    currentServer = serverData[serverIndex];
+    setCurrentChannels(serverIndex)
   }
-
+  
   return (
     <div className="app">
       <ServerList action={serverClick} data={serverData} focus={focusServer} />
@@ -108,7 +107,7 @@ const Dashboard = () => {
             ></img>
           </nav>
           <div className="channelListOuter">
-            <ChannelList data={currentServer.channels} />
+            <ChannelList data={serverData} focus={currentChannels} />
           </div>
           <div className="userArea">
             <img

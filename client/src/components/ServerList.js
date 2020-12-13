@@ -1,4 +1,3 @@
-import { connection } from "mongoose";
 import React from "react";
 
 function ServerList(props) {
