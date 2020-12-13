@@ -33,14 +33,29 @@ const ticketData = [
 ];
 
 function Chat(props) {
+  const [currentTicket, setTicket] = React.useState([false, null]);
+
+  // INITIALLY SETS THE TITLE AS THE NAME OF THE CHANNEL CLICKED ON
+  let currentTitle = props.data[props.server].channels[props.channel];
+
+  // PREVENTS 'UNDEFINED' FROM BEING THE TITLE WHEN CHANGING TO SERVERS WITH FEWER CHANNELS
+  if (currentTitle == null) {
+    currentTitle = "";
+  }
+
+  // RESETS THE STATE OF THE TITLE
+  function backButton() {
+    setTicket([false, null]);
+  }
+
   return (
     <div className="chat">
       <nav className="chatNav">
         <div className="chatHeader">
           <span className="hash">#</span>
-          <h2 className="chatTitle">
-            {props.data[props.server].channels[props.channel]}
-          </h2>
+          <h2 className="chatTitle">{`${
+            currentTicket[0] === false ? currentTitle : currentTicket[1]
+          }`}</h2>
         </div>
         <div className="chatIcons">
           <img
@@ -61,12 +76,12 @@ function Chat(props) {
           <input className="searchBar" placeholder="Search" type="text"></input>
         </div>
       </nav>
-      <ul className="ticketList">
-        <SeverityRow tickets={ticketData[0]} />
-        <SeverityRow tickets={ticketData[1]} />
-        <SeverityRow tickets={ticketData[2]} />
+      <ul className={`${currentTicket[0] ? "ticketListHide" : "ticketList"}`}>
+        <SeverityRow key={0} set={setTicket} tickets={ticketData[0]} />
+        <SeverityRow key={1} set={setTicket} tickets={ticketData[1]} />
+        <SeverityRow key={2} set={setTicket} tickets={ticketData[2]} />
       </ul>
-      <div className="chatInner">
+      <div className={`${currentTicket[0] ? "chatInner" : "chatInnerHide"}`}>
         <div className="messagesContainer">
           <div className="pastMessages"></div>
           <div className="messageSend">
@@ -88,7 +103,9 @@ function Chat(props) {
           </div>
         </div>
         <div className="sidebar">
-          <button className="backButton">Return to ticket list</button>
+          <button onClick={backButton} className="backButton">
+            Return to ticket list
+          </button>
         </div>
       </div>
     </div>

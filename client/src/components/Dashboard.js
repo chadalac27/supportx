@@ -4,15 +4,15 @@ import ChannelList from "./ChannelList";
 import ServerNav from "./ServerNav";
 import Chat from "./Chat";
 
-const Dashboard = () => {
-  const serverData = [
-    { name: "Profile", channels: [""] },
-    { name: "Server 1", channels: ["General", "Processing"] },
-    { name: "Server 2", channels: ["General", "Shipping"] },
-    { name: "Server 3", channels: ["Processing", "Shipping"] },
-    { name: "Add New Server", channels: [""] },
-  ];
+const serverData = [
+  { name: "Profile", channels: [""] },
+  { name: "Server 1", channels: ["General", "Processing"] },
+  { name: "Server 2", channels: ["General", "Shipping"] },
+  { name: "Server 3", channels: ["Processing", "Shipping"] },
+  { name: "Add New Server", channels: [""] },
+];
 
+const Dashboard = () => {
   // CONTROLS STYLING WHEN A SERVER/CHANNEL IS FOCUSED
   const [focusServer, setFocusServer] = React.useState(0);
   const [focusChannel, setFocusChannel] = React.useState("");
@@ -64,7 +64,7 @@ const Dashboard = () => {
             ></img>
           </div>
         </div>
-        <Chat data={serverData} server={focusServer} channel={focusChannel}/>
+        <Chat data={serverData} server={focusServer} channel={focusChannel} />
       </div>
     </div>
   );

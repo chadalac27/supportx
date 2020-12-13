@@ -8,6 +8,7 @@ function SeverityRow(props) {
         {/* CONSIDER SORTING THE TICKETS BY SEVERITY (NOT MVP) */}
         {props.tickets.map((ticket, i) => (
           <Ticket
+            set={props.set}
             key={i}
             title={ticket.title}
             severity={ticket.severity}

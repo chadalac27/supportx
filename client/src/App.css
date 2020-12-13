@@ -275,8 +275,11 @@ ul {
   cursor: pointer;
 }
 .chatInner {
-  display: none;
   height: 100%;
+  display: flex;
+}
+.chatInnerHide {
+  display: none;
 }
 .messagesContainer {
   padding: 15px;
@@ -365,10 +368,12 @@ ul {
   display: flex;
   flex-direction: column;
 }
+.ticketListHide {
+  display: none;
+}
 .ticketItem {
   border: 1px solid black;
   color: black;
-  padding: 24px;
   margin: 8px;
   background: #42b680;
   transition: all 0.2s ease-in-out;
@@ -378,6 +383,14 @@ ul {
 }
 .ticketItem:active {
   background: #226144;
+}
+.ticketBtn {
+  height: 100%;
+  width: 100%;
+  padding: 24px;
+  outline: inherit;
+  border: 0;
+  background: inherit;
 }
 .ticketInfo {
   padding: 8px;
