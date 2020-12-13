@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ServerList from "./ServerList";
 import ChannelList from "./ChannelList";
 import ServerNav from "./ServerNav";
+import Chat from "./Chat";
 
 const Dashboard = () => {
   const serverData = [
@@ -63,113 +64,7 @@ const Dashboard = () => {
             ></img>
           </div>
         </div>
-        <div className="chat">
-          <nav className="chatNav">
-            <div className="chatHeader">
-              <span className="hash">#</span>
-              <h2 className="chatTitle">General</h2>
-            </div>
-            <div className="chatIcons">
-              <img
-                alt="Notification Icon"
-                className="notificationIcon"
-                src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-bell-512.png"
-              ></img>
-              <img
-                alt="Pinned Messages Icon"
-                className="pinIcon"
-                src="https://simpleicon.com/wp-content/uploads/pin.png"
-              ></img>
-              <img
-                alt="Member List Toggle"
-                className="memberIcon"
-                src="https://static.thenounproject.com/png/983470-200.png"
-              ></img>
-              <input
-                className="searchBar"
-                placeholder="Search"
-                type="text"
-              ></input>
-            </div>
-          </nav>
-          <ul className="ticketList">
-            <li className="severityRow">
-              <ul className="maxRow">
-                <li className="ticketItem">
-                  <h1 className="ticketTitle">
-                    Cat stuck in tree on fire in tornado
-                  </h1>
-                  <summary className="ticketInfo">
-                    <div className="ticketSeverity">
-                      Severity: <span className="severityIndicator">10</span>
-                    </div>
-                    <div className="numAgents">
-                      Number of Agents Assigned:{" "}
-                      <span className="agentsIndicator">0</span>
-                    </div>
-                  </summary>
-                </li>
-              </ul>
-            </li>
-            <li className="severityRow">
-              <ul className="midRow">
-                <li className="ticketItem">
-                  <h1 className="ticketTitle">Cat stuck in tree on fire</h1>
-                  <summary className="ticketInfo">
-                    <div className="ticketSeverity">
-                      Severity: <span className="severityIndicator">6</span>
-                    </div>
-                    <div className="numAgents">
-                      Number of Agents Assigned:{" "}
-                      <span className="agentsIndicator">0</span>
-                    </div>
-                  </summary>
-                </li>
-              </ul>
-            </li>
-            <li className="severityRow">
-              <ul className="lowRow">
-                <li className="ticketItem">
-                  <h1 className="ticketTitle">Cat stuck in tree</h1>
-                  <summary className="ticketInfo">
-                    <div className="ticketSeverity">
-                      Severity: <span className="severityIndicator">2</span>
-                    </div>
-                    <div className="numAgents">
-                      Number of Agents Assigned:{" "}
-                      <span className="agentsIndicator">0</span>
-                    </div>
-                  </summary>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <div className="chatInner">
-            <div className="messagesContainer">
-              <div className="pastMessages"></div>
-              <div className="messageSend">
-                <img
-                  className="fileIcon"
-                  alt="Attach file icon"
-                  src="https://freeiconshop.com/wp-content/uploads/edd/plus-flat.png"
-                ></img>
-                <textarea
-                  placeholder="Message #General"
-                  className="messageInput"
-                  type="text"
-                ></textarea>
-                <img
-                  className="sendIcon"
-                  alt="Send message icon"
-                  src="https://icon-library.com/images/32c192cd9d.svg.svg"
-                ></img>
-              </div>
-            </div>
-            <div className="sidebar">
-              <button className="backButton">Return to ticket list</button>
-            </div>
-          </div>
-        </div>
+        <Chat data={serverData} server={focusServer} channel={focusChannel}/>
       </div>
     </div>
   );
