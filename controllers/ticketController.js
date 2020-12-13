@@ -27,7 +27,7 @@ module.exports = {
         .select("-companyID")
 
         //Fill in needed data for the agents
-        .populate("agents.agentID", ["username", "avatarURL"])
+        .populate("agents", ["username", "avatarURL"])
 
         //Now we sort the array of messages so its always in the same order
         .populate({ path: "messages", options: { sort: { timeStamp: -1 } } })

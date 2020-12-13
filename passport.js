@@ -1,7 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const JwtStrategy = require("passport-jwt").Strategy;
-const User = require("./models/user");
+const User = require("./models/agent");
 const env = require("dotenv").config();
 
 //Looks at cookies for the access_token then returns the token if it finds it

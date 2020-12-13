@@ -3,11 +3,10 @@ const Schema = mongoose.Schema;
 
 const companySchema = new Schema({
   name: {type: String, trim: true, required: true},
-  owner: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  managers: [{_id: false, managerID: { type: Schema.Types.ObjectId, ref: "User"} }],
-  agents: [{_id: false, agentID: { type: Schema.Types.ObjectId, ref: "User"} }],
+  owner: { type: Schema.Types.ObjectId, ref: "Agent", required: true },
+  managers: [{ type: Schema.Types.ObjectId, ref: "Agent"} ],
+  agents: [{ type: Schema.Types.ObjectId, ref: "Agent"} ],
   seats: { type: Number, default: 3},
-  //tickets: [{ ticketID: { type: Schema.Types.ObjectId, ref: "Ticket"} }],
   avatarURL: {type: String},
 });
 

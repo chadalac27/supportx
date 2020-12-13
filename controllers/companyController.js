@@ -9,16 +9,16 @@ module.exports = {
     db.Company.find(req.query)
       .sort({ date: -1 })
       .populate("owner", ["_id", "username", "firstName"])
-      .populate("managers.managerID", ["_id", "username", "firstName"])
-      .populate("agents.agentID", ["_id", "username", "firstName"])
+      .populate("managers", ["_id", "username", "firstName"])
+      .populate("agents", ["_id", "username", "firstName"])
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
   findById: function (req, res) {
     db.Company.findById(req.params.id)
       .populate("owner", ["_id", "username", "firstName"])
-      .populate("managers.managerID", ["_id", "username", "firstName"])
-      .populate("agents.agentID", ["_id", "username", "firstName"])
+      .populate("managers", ["_id", "username", "firstName"])
+      .populate("agents", ["_id", "username", "firstName"])
       .then((dbModel) => res.json(dbModel))
       .catch((err) => res.status(422).json(err));
   },
@@ -30,15 +30,15 @@ module.exports = {
       query = {
         $or: [
           { owner: req.params.id },
-          { agents: { $elemMatch: { agentID: req.params.id } } },
-          { managers: { $elemMatch: { managerID: req.params.id } } },
+          { agents: req.params.id } ,
+          { managers:req.params.id },
         ],
       };
 
       db.Company.find(query)
         .populate("owner", ["_id", "username", "firstName"])
-        .populate("managers.managerID", ["_id", "username", "firstName"])
-        .populate("agents.agentID", ["_id", "username", "firstName"])
+        .populate("managers", ["_id", "username", "firstName"])
+        .populate("agents", ["_id", "username", "firstName"])
         .then((dbModel) => res.json(dbModel))
         .catch((err) => res.status(422).json(err));
     }

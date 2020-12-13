@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 
-const userSchema = new Schema({
+const agentSchema = new Schema({
   username: {
     type: String,
     trim: true,
@@ -32,7 +32,7 @@ const userSchema = new Schema({
   avatarURL: { type: String },
 });
 
-userSchema.pre("save", function (next) {
+agentSchema.pre("save", function (next) {
   console.log("!!");
   if (!this.isModified("password")) return next();
 
@@ -45,7 +45,7 @@ userSchema.pre("save", function (next) {
   });
 });
 
-userSchema.methods.comparePassword = function (password, cb) {
+agentSchema.methods.comparePassword = function (password, cb) {
   bcrypt.compare(password, this.password, (err, isMatch) => {
     // Error so return error
     if (err) return cb(err);
@@ -58,4 +58,4 @@ userSchema.methods.comparePassword = function (password, cb) {
   });
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Agent", agentSchema);

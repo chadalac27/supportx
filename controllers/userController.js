@@ -1,10 +1,10 @@
-// User controller is where all the database calls are done
+// Agent controller is where all the database calls are done
 // This seperates the routes from the database code
 const db = require("../models");
 
 
 
-// Defining methods for the userController
+// Defining methods for the agentController
 module.exports = {
   login: function(req,res){
     console.log("Authenticating");
@@ -12,32 +12,32 @@ module.exports = {
       
   },
   findAll: function(req, res) {
-    db.User
+    db.Agent
       .find(req.query)
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.User
+    db.Agent
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.User
+    db.Agent
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    db.User
+    db.Agent
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.User
+    db.Agent
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
