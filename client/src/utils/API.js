@@ -35,6 +35,10 @@ export default {
   getTicketByID: function(id) {
     return axios.get("/api/tickets/" + id);
   },
+  // Gets the ticket with the given id
+  getTicketByCompanyID: function(id) {
+    return axios.get("/api/tickets/by-company/" + id);
+  },
   // Updates the user information for the given user id
   updateTicketByID: function(id) {
     return axios.put("/api/tickets/" + id);

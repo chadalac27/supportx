@@ -13,4 +13,8 @@ router
   .put(ticketController.update)
   .delete(ticketController.remove);
 
+  router
+  .route("/by-company/:id")
+  .get(ticketController.findByCompanyId);
+
 module.exports = router;

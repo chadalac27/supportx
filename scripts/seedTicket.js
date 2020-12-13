@@ -16,13 +16,14 @@ function StartSeed() {
   const ticketSeed = [
     {
       agents: [],
+      companyID: "5fd64a7461aafa52a4421961",
       severity: 0,
       title: "Help! My Cats Stuck In a Tree",
       messages: [
         {
           message: "Save My Pussy Cat",
           timeStamp: new Date(),
-          senderName: "",
+          senderName: "Customer",
         },
       ],
     },
@@ -33,8 +34,8 @@ function StartSeed() {
   db.User.find({})
     .then((dbUser) => {
       myMan = dbUser[0];
-      ticketSeed[0].agents[0] = myMan._id;
-      ticketSeed[0].messages[0].senderName = "Customer";
+      ticketSeed[0].agents.push({agentID:myMan._id });
+      //ticketSeed[0].messages[0].senderName = "Customer";
       ticketSeed[0].messages.push({
         message: "Ok, where is the cat?",
         timeStamp: new Date(),
@@ -48,7 +49,7 @@ function StartSeed() {
 
   function UpdateDB() {
     db.Ticket.remove({})
-      .then(() => db.Ticket.collection.insertMany(ticketSeed))
+      .then(() => db.Ticket.create(ticketSeed[0]))
       .then((data) => {
         process.exit(0);
       })

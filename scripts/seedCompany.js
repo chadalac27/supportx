@@ -19,6 +19,7 @@ function StartSeed() {
       seats: "5",
       tickets: [],
       agents: [],
+      managers:[],
       avatarURL:
         "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
     },
@@ -28,6 +29,7 @@ function StartSeed() {
       seats: "3",
       tickets: [],
       agents: [],
+      managers:[],
       avatarURL:
         "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
     },
@@ -37,6 +39,7 @@ function StartSeed() {
       seats: "5",
       tickets: [],
       agents: [],
+      managers:[],
       avatarURL:
         "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
     },
@@ -46,6 +49,7 @@ function StartSeed() {
       seats: "3",
       tickets: [],
       agents: [],
+      managers:[],
       avatarURL:
         "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
     },
@@ -62,7 +66,10 @@ function StartSeed() {
         companySeed[1].owner = myMan._id;
         companySeed[1].agents.push( {agentID:dbUser[1]._id} );
         companySeed[2].owner = dbUser[1]._id;
-        companySeed[2].agents.push([{agentID: dbUser[0]._id},{agentID: dbUser[1]._id}] );
+        companySeed[2].agents.push({agentID: dbUser[0]._id} );  
+        companySeed[2].agents.push({agentID: dbUser[1]._id} );
+        companySeed[2].managers.push({managerID: dbUser[0]._id} );  
+        companySeed[2].managers.push({managerID: dbUser[1]._id} );
         companySeed[3].owner = dbUser[1]._id;
         companySeed[3].agents.push({agentID: dbUser[1]._id } );
         //companySeed[1].tickets.push({ ticketID: dbTicket[0]._id });
