@@ -152,8 +152,6 @@ ul {
   text-transform: uppercase;
 }
 .channelListHeader:hover {
-  cursor: pointer;
-  color: white;
 }
 .channelDropdown {
   padding-left: 8px;
@@ -175,6 +173,7 @@ ul {
   border-radius: 5px;
   flex-direction: row;
   outline: 0;
+  z-index: 5;
 }
 .channelListItem:hover {
   cursor: pointer;

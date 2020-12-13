@@ -27,10 +27,9 @@ const Dashboard = () => {
   }
 
   function channelClick(e) {
-    const channelIndex = e.target.getAttribute("index");
+    const channelIndex = e.currentTarget.getAttribute("index");
     setFocusChannel(channelIndex);
     setCurrentChannel(channelIndex);
-    console.log(channelIndex);
   }
 
   return (
