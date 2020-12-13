@@ -1,12 +1,6 @@
 import React from "react";
 
 function ChannelList(props) {
-  const [focusChannel, setFocusChannel] = React.useState();
-
-  function btnClick(e) {
-    setFocusChannel(e.target.getAttribute("index"));
-  }
-
   return (
     <div className="channelListInner">
       <div className="channelListHeader">
@@ -24,9 +18,9 @@ function ChannelList(props) {
             index={i}
             key={i}
             className={`channelListItem ${
-              focusChannel === String(i) ? "focusChannel" : ""
+              props.subfocus === String(i) ? "focusChannel" : ""
             }`}
-            onClick={btnClick}
+            onClick={props.action}
           >
             <div className="channelListDiv">
               <span className="hash">#</span>

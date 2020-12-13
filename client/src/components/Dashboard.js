@@ -1,80 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ServerList from "./ServerList";
 import ChannelList from "./ChannelList";
-// import $ from "jquery";
+import ServerNav from "./ServerNav";
 
 const Dashboard = () => {
-  // function displayChat(title) {
-  //   $(".ticketList").css("display", "none");
-  //   // UPDATE CHAT FROM SERVER HERE
-  //   $(".chatInner").css("display", "flex");
-  //   $(".chatTitle").text(title);
-  // }
-  // $(document).on("click", ".ticketItem", function () {
-  //   displayChat($(this).children(":first").text());
-  // });
-  // $(document).on("click", ".backButton", function () {
-  //   $(".chatInner").css("display", "none");
-  //   // UPDATE TICKET LIST FROM SERVER HERE
-  //   $(".ticketList").css("display", "flex");
-
-  //   // Returns the chat title to the focused channel
-  //   const channelList = $(".channelListContent").children();
-  //   for (let i = 0; i < channelList.length; i++) {
-  //     const classList = $(channelList[i]).attr("class").split(/\s+/);
-  //     for (let j = 0; j < classList.length; j++) {
-  //       if (classList[j] === "focusChannel") {
-  //         $(".chatTitle").text($($($(channelList[i]).children(":first")).children()[1]).text());
-  //         return;
-  //       }
-  //     }
-  //   }
-  // });
-  // $(document).on("click", ".sendIcon", function (e) {
-  //   e.stopImmediatePropagation();
-  //   newMessage($(".messageInput").val());
-  //   // STORE THE MESSAGE ON THE SERVER HERE
-  // });
-  // $(document).on("click", ".serverButton", function (e) {
-  //   e.stopImmediatePropagation();
-  //   const serverArray = $($(this).parent()).children();
-  //   // Check if any server is focused
-  //   for (let i = 0; i < serverArray.length; i++) {
-  //     $(serverArray[i]).removeClass("focusServer");
-  //   }
-  //   $(this).addClass("focusServer");
-  // });
-  // $(document).on("click", ".channelListItem", function (e) {
-  //   e.stopImmediatePropagation();
-  //   const channelArray = $($(this).parent()).children();
-  //   // Check if any server is focused
-  //   for (let i = 0; i < channelArray.length; i++) {
-  //     $(channelArray[i]).removeClass("focusChannel");
-  //   }
-  //   $(this).addClass("focusChannel");
-  // });
-
-  // function newMessage(input) {
-  //   const message = $("<div>").addClass("message");
-  //   const userIcon = $("<img>").attr({
-  //     class: "userIcon",
-  //     alt: "User Icon",
-  //     // SOURCE NEEDS TO BE BROUGHT IN FROM SERVER OR DEFAULTED WITH RANDOM COLOUR
-  //     src: "https://via.placeholder.com/100",
-  //   });
-  //   const messageInfo = $("<div>").addClass("messageInfo");
-  //   const userInfo = $("<div>").addClass("userInfo");
-  //   const userName = $("<div>").addClass("userName").text("Sebastian Brear");
-  //   const timeStamp = $("<div>").addClass("timeStamp").text("Today at 2:03 AM");
-  //   const messageContent = $("<div>").addClass("messageContent").text(input);
-
-  //   userInfo.append(userName, timeStamp);
-  //   messageInfo.append(userInfo, messageContent);
-  //   message.append(userIcon, messageInfo);
-
-  //   $(".pastMessages").append(message);
-  // }
-
   const serverData = [
     { name: "Profile", channels: [""] },
     { name: "Server 1", channels: ["General", "Processing"] },
@@ -83,31 +12,40 @@ const Dashboard = () => {
     { name: "Add New Server", channels: [""] },
   ];
 
-  const [focusServer, setFocusServer] = React.useState();
-  const [currentChannels, setCurrentChannels] = React.useState(0);
+  // CONTROLS STYLING WHEN A SERVER/CHANNEL IS FOCUSED
+  const [focusServer, setFocusServer] = React.useState(0);
+  const [focusChannel, setFocusChannel] = React.useState("");
+
+  // CONTROLS OTHER ELEMENTS WHEN A SERVER/CHANNEL IS CLICKED
+  const [currentChannelList, setCurrentChannelList] = React.useState(0);
+  const [currentChannel, setCurrentChannel] = React.useState(0);
 
   function serverClick(e) {
     const serverIndex = e.target.getAttribute("index");
     setFocusServer(serverIndex);
-    setCurrentChannels(serverIndex)
+    setCurrentChannelList(serverIndex);
   }
-  
+
+  function channelClick(e) {
+    const channelIndex = e.target.getAttribute("index");
+    setFocusChannel(channelIndex);
+    setCurrentChannel(channelIndex);
+    console.log(channelIndex);
+  }
+
   return (
     <div className="app">
       <ServerList action={serverClick} data={serverData} focus={focusServer} />
       <div className="chatOuter">
         <div className="channels">
-          <nav className="nav">
-            <h3 className="serverTitle">Server 1</h3>
-            <img
-              className="icon"
-              width="15px"
-              src="https://image.flaticon.com/icons/png/512/120/120890.png"
-              alt="dropdown icon"
-            ></img>
-          </nav>
+          <ServerNav data={serverData} focus={focusServer} />
           <div className="channelListOuter">
-            <ChannelList data={serverData} focus={currentChannels} />
+            <ChannelList
+              action={channelClick}
+              data={serverData}
+              focus={currentChannelList}
+              subfocus={currentChannel}
+            />
           </div>
           <div className="userArea">
             <img
