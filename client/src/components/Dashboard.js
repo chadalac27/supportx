@@ -13,8 +13,8 @@ const serverData = [
     name: "Server 1",
   },
   {
-    name: "Server 2"
-  }
+    name: "Server 2",
+  },
 ];
 
 const Dashboard = () => {
@@ -106,9 +106,7 @@ const Dashboard = () => {
         action={serverClick}
         focus={currentServer}
       />
-      <div
-        className={`smooth ${currentServer === null ? "hide" : "chatOuter"}`}
-      >
+      <div className={`${currentServer === null ? "none" : "chatOuter"}`}>
         <div className="channels">
           <ServerNav
             name={`${
@@ -139,7 +137,10 @@ const Dashboard = () => {
             ></img>
           </div>
         </div>
-        <Chat currentChannel={channelData[currentChannel]} ticketData={ticketData} />
+        <Chat
+          currentChannel={channelData[currentChannel]}
+          ticketData={ticketData}
+        />
       </div>
     </div>
   );

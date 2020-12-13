@@ -80,8 +80,11 @@ ul {
 .smooth {
   transition: all 0.5s;
 }
-.hide {
+.none {
   display: none;
+}
+.hide {
+  visibility: hidden;
 }
 .serverList {
   background: #202326;

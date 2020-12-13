@@ -2,7 +2,7 @@ import React from "react";
 
 function ChannelList(props) {
   return (
-    <div className="channelListInner">
+    <div className="smooth channelListInner">
       <div className="channelListHeader">
         <img
           className="icon"

@@ -21,7 +21,7 @@ function Chat(props) {
   }
 
   return (
-    <div className={`${props.currentChannel === null ? "hide" : "chat"}`}>
+    <div className={`${props.currentChannel == null ? "none" : "chat"}`}>
       <nav className="chatNav">
         <div className="chatHeader">
           <span className="hash">#</span>
@@ -48,10 +48,10 @@ function Chat(props) {
           <input className="searchBar" placeholder="Search" type="text"></input>
         </div>
       </nav>
-      <ul className={`${currentTicket[0] ? "hide" : "ticketList"}`}>
+      <ul className={`${currentTicket[0] ? "none" : "ticketList"}`}>
         <SeverityRow set={setTicket} tickets={props.ticketData} />
       </ul>
-      <div className={`${currentTicket[0] ? "chatInner" : "hide"}`}>
+      <div className={`${currentTicket[0] ? "chatInner" : "none"}`}>
         <div className="messagesContainer">
           <div className="pastMessages">
             {/* NEEDS TO BE PASSED CHAT HISTORY DATA FROM SERVER DATA AND USE A LOOP TO CREATE MESSAGES */}
