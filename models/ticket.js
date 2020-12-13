@@ -14,6 +14,7 @@ const ticketSchema = new Schema({
       senderName: {type: String, required: true},
     },
   ],
+  channel: {type:String, required: true}
 });
 
 const Ticket = mongoose.model("Ticket", ticketSchema);

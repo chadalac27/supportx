@@ -62,6 +62,10 @@ export default {
   getCompanyByID: function(id) {
     return axios.get("/api/companies/" + id);
   },
+  // Gets the company with the given id
+  getCompanyByUserID: function(id) {
+    return axios.get("/api/companies/by-user/" + id);
+  },
   // Updates the company information for the given company id
   updateCompanyByID: function(id, companyData) {
     return axios.put("/api/companies/" + id, companyData);

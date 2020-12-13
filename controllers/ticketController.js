@@ -22,13 +22,16 @@ module.exports = {
 
       query = { companyID: req.params.id };
       db.Ticket.find(query)
-        .select('-companyID')
+
+        //Because we are searching by company, we will remove the company return because its redundent
+        .select("-companyID")
 
         //Fill in needed data for the agents
-        .populate("agents.agentID", ["_id", "username", "firstName"])
+        .populate("agents.agentID", ["username", "avatarURL"])
 
         //Now we sort the array of messages so its always in the same order
         .populate({ path: "messages", options: { sort: { timeStamp: -1 } } })
+
         .then((dbModel) => {
           res.json(dbModel);
         })

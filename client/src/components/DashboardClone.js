@@ -16,6 +16,7 @@ const DashboardClone = () => {
   ];
 
   const [userState, setUser] = React.useState({});
+  const [companyState, setCompany] = React.useState({});
   const [focusServer, setFocusServer] = React.useState();
   const [currentChannels, setCurrentChannels] = React.useState(0);
 
@@ -25,24 +26,31 @@ const DashboardClone = () => {
     setCurrentChannels(serverIndex)
   }
 
-  useEffect(() => {
-    loadUser()
-  }, []);
-
-  function loadUser(){
-    API.getUserByID("5fd2ead7b75ded58f0e43cb2")
+  if(userState.username == null)
+  {
+    API.getUserByID("5fd64054b26792467c18c4b7")
     .then(res => {
       setUser(res.data);
+      console.log("1",userState);
+      loadCompanies()
     })
   }
+  else console.log(userState);
+
+
 
   function loadCompanies(){
-    
+    console.log("2",userState);
+    API.getCompanyByUserID(userState._id)
+    .then(res => {
+      console.log("3",userState);
+      setCompany({...companyState},res.data);
+    })
   }
   
   return (
     <div className="app">
-      <ServerList action={serverClick} data={serverData} focus={focusServer} />
+      <ServerList action={serverClick} data={serverData} companyData={companyState} focus={focusServer} />
       <div className="chatOuter">
         <div className="channels">
           <nav className="nav">
