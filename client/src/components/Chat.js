@@ -1,6 +1,8 @@
 import React from "react";
 import SeverityRow from "./SeverityRow";
+import Message from "./Message";
 
+// TICKET DATA SHOULD BE PASSED IN FROM THE SELECTED CHANNEL
 const ticketData = [
   [
     {
@@ -83,23 +85,29 @@ function Chat(props) {
       </ul>
       <div className={`${currentTicket[0] ? "chatInner" : "chatInnerHide"}`}>
         <div className="messagesContainer">
-          <div className="pastMessages"></div>
+          <div className="pastMessages">
+            <Message text="Hello" />
+          </div>
           <div className="messageSend">
-            <img
-              className="fileIcon"
-              alt="Attach file icon"
-              src="https://freeiconshop.com/wp-content/uploads/edd/plus-flat.png"
-            ></img>
+            <button className="fileBtn">
+              <img
+                className="fileIcon"
+                alt="Attach file icon"
+                src="https://freeiconshop.com/wp-content/uploads/edd/plus-flat.png"
+              ></img>
+            </button>
             <textarea
               placeholder="Message #General"
               className="messageInput"
               type="text"
             ></textarea>
-            <img
-              className="sendIcon"
-              alt="Send message icon"
-              src="https://icon-library.com/images/32c192cd9d.svg.svg"
-            ></img>
+            <button className="sendBtn">
+              <img
+                className="sendIcon"
+                alt="Send message icon"
+                src="https://icon-library.com/images/32c192cd9d.svg.svg"
+              ></img>
+            </button>
           </div>
         </div>
         <div className="sidebar">

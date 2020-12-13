@@ -327,6 +327,7 @@ ul {
   padding-left: 10px;
   resize: none;
   background: none;
+  overflow-wrap: anywhere;
 }
 .messageInfo {
   display: flex;
@@ -343,17 +344,31 @@ ul {
   color: #777777;
   font-size: 12px;
 }
-.fileIcon {
-  width: 40px;
+.fileBtn {
+  width: 60px;
   margin-right: 16px;
   user-select: none;
   cursor: pointer;
+  background: 0;
+  outline: 0;
+  border: 0;
 }
-.sendIcon {
-  width: 40px;
+.fileIcon {
+  width: 100%;
+  height: 100%;
+}
+.sendBtn {
+  width: 60px;
   margin-left: 16px;
   user-select: none;
   cursor: pointer;
+  background: 0;
+  outline: 0;
+  border: 0;
+}
+.sendIcon {
+  width: 100%;
+  height: 100%;
 }
 .sidebar {
   user-select: none;
