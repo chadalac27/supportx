@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ServerButton from "./ServerButton";
+import ServerList from "./ServerList";
+import ChannelList from "./ChannelList";
 // import $ from "jquery";
 
 const Dashboard = () => {
@@ -74,177 +75,162 @@ const Dashboard = () => {
   //   $(".pastMessages").append(message);
   // }
 
+  const serverData = [
+    { name: "Profile", channels: [] },
+    { name: "Server 1", channels: ["General", "Processing"] },
+    { name: "Server 2", channels: ["General", "Shipping"] },
+    { name: "Server 3", channels: ["Processing", "Shipping"] },
+    { name: "Add New Server", channels: [] },
+  ];
+
+  let currentServer = { name: "", channels: [] };
+
+  const [focusServer, setFocusServer] = React.useState();
+
+  function serverClick(e) {
+    const serverIndex = e.target.getAttribute("index");
+    setFocusServer(serverIndex);
+    currentServer = serverData[serverIndex];
+  }
+
   return (
-    <div class="app">
-      <div class="serverList">
-        <ServerButton name="Profile" dataVal="profile" />
-        <ServerButton name="Server 1" dataVal="1" />
-        <ServerButton name="Server 2" dataVal="2" />
-        <ServerButton name="Server 3" dataVal="3" />
-        <ServerButton name="Server 4" dataVal="4" />
-        <ServerButton name="Add New Server" dataVal="newServer" />
-      </div>
-      <div class="chatOuter">
-        <div class="channels">
-          <nav class="nav">
-            <h3 class="serverTitle">Server 1</h3>
+    <div className="app">
+      <ServerList action={serverClick} data={serverData} focus={focusServer} />
+      <div className="chatOuter">
+        <div className="channels">
+          <nav className="nav">
+            <h3 className="serverTitle">Server 1</h3>
             <img
-              class="icon"
+              className="icon"
               width="15px"
               src="https://image.flaticon.com/icons/png/512/120/120890.png"
               alt="dropdown icon"
             ></img>
           </nav>
-          <div class="channelListOuter">
-            <div class="channelListInner">
-              <div class="channelListHeader">
-                <img
-                  class="icon"
-                  width="10px"
-                  src="https://image.flaticon.com/icons/png/512/120/120890.png"
-                  alt="dropdown icon"
-                ></img>
-                <h3 class="channelDropdown">Channels</h3>
-              </div>
-              <div class="channelListContent">
-                <button class="channelListItem">
-                  <div class="channelListDiv">
-                    <span class="hash">#</span>
-                    <h5 class="channelName">General</h5>
-                  </div>
-                </button>
-                <button class="channelListItem">
-                  <div class="channelListDiv">
-                    <span class="hash">#</span>
-                    <h5 class="channelName">Shipping</h5>
-                  </div>
-                </button>
-                <button class="channelListItem">
-                  <div class="channelListDiv">
-                    <span class="hash">#</span>
-                    <h5 class="channelName">Processing</h5>
-                  </div>
-                </button>
-              </div>
-            </div>
+          <div className="channelListOuter">
+            <ChannelList data={currentServer.channels} />
           </div>
-          <div class="userArea">
+          <div className="userArea">
             <img
               alt="User Icon"
               src="https://via.placeholder.com/100"
-              class="userIcon"
+              className="userIcon"
             ></img>
-            <div class="userName">
+            <div className="userName">
               Sebastian Brear
-              <div class="userID">#1234</div>
+              <div className="userID">#1234</div>
             </div>
             <img
               alt="Settings icon"
               src="https://cdn.iconscout.com/icon/premium/png-256-thumb/gear-1961574-1659804.png"
-              class="settingsIcon"
+              className="settingsIcon"
             ></img>
           </div>
         </div>
-        <div class="chat">
-          <nav class="chatNav">
-            <div class="chatHeader">
-              <span class="hash">#</span>
-              <h2 class="chatTitle">General</h2>
+        <div className="chat">
+          <nav className="chatNav">
+            <div className="chatHeader">
+              <span className="hash">#</span>
+              <h2 className="chatTitle">General</h2>
             </div>
-            <div class="chatIcons">
+            <div className="chatIcons">
               <img
                 alt="Notification Icon"
-                class="notificationIcon"
+                className="notificationIcon"
                 src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-bell-512.png"
               ></img>
               <img
                 alt="Pinned Messages Icon"
-                class="pinIcon"
+                className="pinIcon"
                 src="https://simpleicon.com/wp-content/uploads/pin.png"
               ></img>
               <img
                 alt="Member List Toggle"
-                class="memberIcon"
+                className="memberIcon"
                 src="https://static.thenounproject.com/png/983470-200.png"
               ></img>
-              <input class="searchBar" placeholder="Search" type="text"></input>
+              <input
+                className="searchBar"
+                placeholder="Search"
+                type="text"
+              ></input>
             </div>
           </nav>
-          <ul class="ticketList">
-            <li class="severityRow">
-              <ul class="maxRow">
-                <li class="ticketItem">
-                  <h1 class="ticketTitle">
+          <ul className="ticketList">
+            <li className="severityRow">
+              <ul className="maxRow">
+                <li className="ticketItem">
+                  <h1 className="ticketTitle">
                     Cat stuck in tree on fire in tornado
                   </h1>
-                  <summary class="ticketInfo">
-                    <div class="ticketSeverity">
-                      Severity: <span class="severityIndicator">10</span>
+                  <summary className="ticketInfo">
+                    <div className="ticketSeverity">
+                      Severity: <span className="severityIndicator">10</span>
                     </div>
-                    <div class="numAgents">
+                    <div className="numAgents">
                       Number of Agents Assigned:{" "}
-                      <span class="agentsIndicator">0</span>
+                      <span className="agentsIndicator">0</span>
                     </div>
                   </summary>
                 </li>
               </ul>
             </li>
-            <li class="severityRow">
-              <ul class="midRow">
-                <li class="ticketItem">
-                  <h1 class="ticketTitle">Cat stuck in tree on fire</h1>
-                  <summary class="ticketInfo">
-                    <div class="ticketSeverity">
-                      Severity: <span class="severityIndicator">6</span>
+            <li className="severityRow">
+              <ul className="midRow">
+                <li className="ticketItem">
+                  <h1 className="ticketTitle">Cat stuck in tree on fire</h1>
+                  <summary className="ticketInfo">
+                    <div className="ticketSeverity">
+                      Severity: <span className="severityIndicator">6</span>
                     </div>
-                    <div class="numAgents">
+                    <div className="numAgents">
                       Number of Agents Assigned:{" "}
-                      <span class="agentsIndicator">0</span>
+                      <span className="agentsIndicator">0</span>
                     </div>
                   </summary>
                 </li>
               </ul>
             </li>
-            <li class="severityRow">
-              <ul class="lowRow">
-                <li class="ticketItem">
-                  <h1 class="ticketTitle">Cat stuck in tree</h1>
-                  <summary class="ticketInfo">
-                    <div class="ticketSeverity">
-                      Severity: <span class="severityIndicator">2</span>
+            <li className="severityRow">
+              <ul className="lowRow">
+                <li className="ticketItem">
+                  <h1 className="ticketTitle">Cat stuck in tree</h1>
+                  <summary className="ticketInfo">
+                    <div className="ticketSeverity">
+                      Severity: <span className="severityIndicator">2</span>
                     </div>
-                    <div class="numAgents">
+                    <div className="numAgents">
                       Number of Agents Assigned:{" "}
-                      <span class="agentsIndicator">0</span>
+                      <span className="agentsIndicator">0</span>
                     </div>
                   </summary>
                 </li>
               </ul>
             </li>
           </ul>
-          <div class="chatInner">
-            <div class="messagesContainer">
-              <div class="pastMessages"></div>
-              <div class="messageSend">
+          <div className="chatInner">
+            <div className="messagesContainer">
+              <div className="pastMessages"></div>
+              <div className="messageSend">
                 <img
-                  class="fileIcon"
+                  className="fileIcon"
                   alt="Attach file icon"
                   src="https://freeiconshop.com/wp-content/uploads/edd/plus-flat.png"
                 ></img>
                 <textarea
                   placeholder="Message #General"
-                  class="messageInput"
+                  className="messageInput"
                   type="text"
                 ></textarea>
                 <img
-                  class="sendIcon"
+                  className="sendIcon"
                   alt="Send message icon"
                   src="https://icon-library.com/images/32c192cd9d.svg.svg"
                 ></img>
               </div>
             </div>
-            <div class="sidebar">
-              <button class="backButton">Return to ticket list</button>
+            <div className="sidebar">
+              <button className="backButton">Return to ticket list</button>
             </div>
           </div>
         </div>
