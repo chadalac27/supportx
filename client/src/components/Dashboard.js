@@ -4,47 +4,122 @@ import ChannelList from "./ChannelList";
 import ServerNav from "./ServerNav";
 import Chat from "./Chat";
 
+// DATA STRUCTURE RECEIVED FROM A SINGLE SERVER
+let ticketData = [];
+let channelData = [];
+
 const serverData = [
-  { name: "Profile", channels: [""] },
-  { name: "Server 1", channels: ["General", "Processing"] },
-  { name: "Server 2", channels: ["General", "Shipping"] },
-  { name: "Server 3", channels: ["Processing", "Shipping"] },
-  { name: "Add New Server", channels: [""] },
+  {
+    name: "Server 1",
+  },
+  {
+    name: "Server 2"
+  }
 ];
 
 const Dashboard = () => {
-  // CONTROLS STYLING WHEN A SERVER/CHANNEL IS FOCUSED
-  const [focusServer, setFocusServer] = React.useState(0);
-  const [focusChannel, setFocusChannel] = React.useState("");
-
-  // CONTROLS OTHER ELEMENTS WHEN A SERVER/CHANNEL IS CLICKED
-  const [currentChannelList, setCurrentChannelList] = React.useState(0);
-  const [currentChannel, setCurrentChannel] = React.useState(0);
+  const [currentServer, setServer] = React.useState(null);
+  const [currentChannel, setChannel] = React.useState(null);
 
   function serverClick(e) {
-    const serverIndex = e.target.getAttribute("index");
-    setFocusServer(serverIndex);
-    setCurrentChannelList(serverIndex);
+    const serverIndex = e.currentTarget.getAttribute("index");
+    setChannel(null);
+    setServer(serverIndex);
+    // API CALL TO RETRIEVE TICKET DATA FROM SERVER
+    ticketData = [
+      {
+        agents: [
+          {
+            _id: "1234",
+            username: "asda",
+            avatarURL: "https://via.placeholder.com/100",
+          },
+        ],
+        severity: "0",
+        id: "34123421",
+        title: "Cat in tree",
+        messages: [
+          {
+            message: "sss",
+            timeStamp: "sss",
+            senderName: "sss",
+          },
+        ],
+        channel: "General",
+      },
+      {
+        agents: [
+          {
+            _id: "1234",
+            username: "asda",
+            avatarURL: "https://via.placeholder.com/100",
+          },
+        ],
+        severity: "0",
+        id: "34123421",
+        title: "Cat in tree",
+        messages: [
+          {
+            message: "sss",
+            timeStamp: "sss",
+            senderName: "sss",
+          },
+        ],
+        channel: "Processing",
+      },
+      {
+        agents: [
+          {
+            _id: "1234",
+            username: "asda",
+            avatarURL: "https://via.placeholder.com/100",
+          },
+        ],
+        severity: "0",
+        id: "34123421",
+        title: "Cat in tree",
+        messages: [
+          {
+            message: "sss",
+            timeStamp: "sss",
+            senderName: "sss",
+          },
+        ],
+        channel: "General",
+      },
+    ];
+    channelData = ticketData
+      .map((ticket) => ticket.channel)
+      .filter((name, i, array) => array.indexOf(name) === i);
   }
 
   function channelClick(e) {
     const channelIndex = e.currentTarget.getAttribute("index");
-    setFocusChannel(channelIndex);
-    setCurrentChannel(channelIndex);
+    setChannel(channelIndex);
+    // POPULATE TICKETS WITH STORED DATA
   }
 
   return (
     <div className="app">
-      <ServerList action={serverClick} data={serverData} focus={focusServer} />
-      <div className="chatOuter">
+      <ServerList
+        data={serverData}
+        action={serverClick}
+        focus={currentServer}
+      />
+      <div
+        className={`smooth ${currentServer === null ? "hide" : "chatOuter"}`}
+      >
         <div className="channels">
-          <ServerNav data={serverData} focus={focusServer} />
+          <ServerNav
+            name={`${
+              currentServer === null ? "" : serverData[currentServer].name
+            }`}
+          />
           <div className="channelListOuter">
             <ChannelList
               action={channelClick}
-              data={serverData}
-              focus={currentChannelList}
-              subfocus={currentChannel}
+              data={channelData}
+              focus={currentChannel}
             />
           </div>
           <div className="userArea">
@@ -64,7 +139,7 @@ const Dashboard = () => {
             ></img>
           </div>
         </div>
-        <Chat data={serverData} server={focusServer} channel={focusChannel} />
+        <Chat currentChannel={channelData[currentChannel]} ticketData={ticketData} />
       </div>
     </div>
   );

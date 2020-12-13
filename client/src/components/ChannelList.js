@@ -13,12 +13,12 @@ function ChannelList(props) {
         <h3 className="channelDropdown">Channels</h3>
       </div>
       <div className="channelListContent">
-        {props.data[props.focus].channels.map((channel, i) => (
+        {props.data.map((channel, i) => (
           <button
             index={i}
             key={i}
             className={`channelListItem ${
-              props.subfocus === String(i) ? "focusChannel" : ""
+              props.focus === String(i) ? "focusChannel" : ""
             }`}
             onClick={props.action}
           >

@@ -3,7 +3,7 @@ import React from "react";
 function ServerNav(props) {
   return (
     <nav className="nav">
-      <h3 className="serverTitle">{props.data[props.focus].name}</h3>
+      <h3 className="serverTitle">{props.name}</h3>
       <img
         className="icon"
         width="15px"

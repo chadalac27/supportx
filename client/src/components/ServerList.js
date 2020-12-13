@@ -2,7 +2,7 @@ import React from "react";
 
 function ServerList(props) {
   return (
-    <div className="serverList">
+    <div className={`smooth ${props.focus === null ? "serverListBegin" : "serverList"}`}>
       {props.data.map((server, i) => (
         <button
           className={`serverButton ${

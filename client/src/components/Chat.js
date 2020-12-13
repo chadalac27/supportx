@@ -3,42 +3,12 @@ import SeverityRow from "./SeverityRow";
 import Message from "./Message";
 
 // TICKET DATA SHOULD BE PASSED IN FROM THE SELECTED CHANNEL
-const ticketData = [
-  [
-    {
-      title: "Cat stuck in tree on fire in tornado",
-      severity: "8",
-      numAgents: "0",
-    },
-    { title: "Wife is coming home early", severity: "9", numAgents: "3" },
-  ],
-  [
-    {
-      title: "Cat stuck in tree on fire",
-      severity: "5",
-      numAgents: "0",
-    },
-    { title: "Internet is down", severity: "7", numAgents: "0" },
-  ],
-  [
-    {
-      title: "Cat stuck in tree",
-      severity: "2",
-      numAgents: "0",
-    },
-    {
-      title: "No one will date me",
-      severity: "0",
-      numAgents: "8",
-    },
-  ],
-];
 
 function Chat(props) {
   const [currentTicket, setTicket] = React.useState([false, null]);
 
   // INITIALLY SETS THE TITLE AS THE NAME OF THE CHANNEL CLICKED ON
-  let currentTitle = props.data[props.server].channels[props.channel];
+  let currentTitle = props.currentChannel;
 
   // PREVENTS 'UNDEFINED' FROM BEING THE TITLE WHEN CHANGING TO SERVERS WITH FEWER CHANNELS
   if (currentTitle == null) {
@@ -51,7 +21,7 @@ function Chat(props) {
   }
 
   return (
-    <div className="chat">
+    <div className={`${props.currentChannel === null ? "hide" : "chat"}`}>
       <nav className="chatNav">
         <div className="chatHeader">
           <span className="hash">#</span>
@@ -78,14 +48,13 @@ function Chat(props) {
           <input className="searchBar" placeholder="Search" type="text"></input>
         </div>
       </nav>
-      <ul className={`${currentTicket[0] ? "ticketListHide" : "ticketList"}`}>
-        <SeverityRow key={0} set={setTicket} tickets={ticketData[0]} />
-        <SeverityRow key={1} set={setTicket} tickets={ticketData[1]} />
-        <SeverityRow key={2} set={setTicket} tickets={ticketData[2]} />
+      <ul className={`${currentTicket[0] ? "hide" : "ticketList"}`}>
+        <SeverityRow set={setTicket} tickets={props.ticketData} />
       </ul>
-      <div className={`${currentTicket[0] ? "chatInner" : "chatInnerHide"}`}>
+      <div className={`${currentTicket[0] ? "chatInner" : "hide"}`}>
         <div className="messagesContainer">
           <div className="pastMessages">
+            {/* NEEDS TO BE PASSED CHAT HISTORY DATA FROM SERVER DATA AND USE A LOOP TO CREATE MESSAGES */}
             <Message text="Hello" />
           </div>
           <div className="messageSend">
@@ -97,7 +66,7 @@ function Chat(props) {
               ></img>
             </button>
             <textarea
-              placeholder="Message #General"
+              placeholder={`Message #${currentTicket[1]}`}
               className="messageInput"
               type="text"
             ></textarea>
