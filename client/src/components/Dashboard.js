@@ -36,7 +36,7 @@ const Dashboard = () => {
           },
         ],
         severity: "0",
-        id: "34123421",
+        _id: "1",
         title: "Cat in tree",
         messages: [
           {
@@ -56,8 +56,8 @@ const Dashboard = () => {
           },
         ],
         severity: "0",
-        id: "34123421",
-        title: "Cat in tree",
+        _id: "2",
+        title: "Cat in tree stuck processing",
         messages: [
           {
             message: "sss",
@@ -76,7 +76,7 @@ const Dashboard = () => {
           },
         ],
         severity: "0",
-        id: "34123421",
+        _id: "3",
         title: "Cat in tree",
         messages: [
           {

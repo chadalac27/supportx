@@ -2,21 +2,21 @@ import React from "react";
 
 function Ticket(props) {
   function selectTicket() {
-    props.set([true, props.title]);
+    props.set([true, props.ticket.title, props.ticket._id]);
   }
 
   return (
     <li className="ticketItem">
       <button onClick={selectTicket} className="ticketBtn">
-        <h1 className="ticketTitle">{props.title}</h1>
+        <h1 className="ticketTitle">{props.ticket.title}</h1>
         <summary className="ticketInfo">
           <div className="ticketSeverity">
             Severity:
-            <span className="severityIndicator">{props.severity}</span>
+            <span className="severityIndicator">{props.ticket.severity}</span>
           </div>
           <div className="numAgents">
             Number of Agents Assigned:
-            <span className="agentsIndicator">{props.numAgents}</span>
+            <span className="agentsIndicator">{props.ticket.agents.length}</span>
           </div>
         </summary>
       </button>

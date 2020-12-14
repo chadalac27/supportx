@@ -1,11 +1,11 @@
 import React from "react";
 import SeverityRow from "./SeverityRow";
-import Message from "./Message";
+import Messages from "./Messages";
 
 // TICKET DATA SHOULD BE PASSED IN FROM THE SELECTED CHANNEL
 
 function Chat(props) {
-  const [currentTicket, setTicket] = React.useState([false, null]);
+  const [currentTicket, setTicket] = React.useState([false, null, null]);
 
   // INITIALLY SETS THE TITLE AS THE NAME OF THE CHANNEL CLICKED ON
   let currentTitle = props.currentChannel;
@@ -17,7 +17,7 @@ function Chat(props) {
 
   // RESETS THE STATE OF THE TITLE
   function backButton() {
-    setTicket([false, null]);
+    setTicket([false, null, null]);
   }
 
   return (
@@ -49,13 +49,16 @@ function Chat(props) {
         </div>
       </nav>
       <ul className={`${currentTicket[0] ? "none" : "ticketList"}`}>
-        <SeverityRow set={setTicket} tickets={props.ticketData} />
+        <SeverityRow
+          currentChannel={props.currentChannel}
+          set={setTicket}
+          ticketData={props.ticketData}
+        />
       </ul>
       <div className={`${currentTicket[0] ? "chatInner" : "none"}`}>
         <div className="messagesContainer">
+          <Messages ticketData={props.ticketData} ticketId={currentTicket[2]}/>
           <div className="pastMessages">
-            {/* NEEDS TO BE PASSED CHAT HISTORY DATA FROM SERVER DATA AND USE A LOOP TO CREATE MESSAGES */}
-            <Message text="Hello" />
           </div>
           <div className="messageSend">
             <button className="fileBtn">
