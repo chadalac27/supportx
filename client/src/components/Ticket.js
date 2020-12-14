@@ -7,7 +7,11 @@ function Ticket(props) {
 
   return (
     <li className="ticketItem">
-      <button onClick={selectTicket} className="ticketBtn">
+      <button
+        onClick={selectTicket}
+        className="ticketBtn"
+        id={`${props.ticket._id}`}
+      >
         <h1 className="ticketTitle">{props.ticket.title}</h1>
         <summary className="ticketInfo">
           <div className="ticketSeverity">
@@ -16,7 +20,9 @@ function Ticket(props) {
           </div>
           <div className="numAgents">
             Number of Agents Assigned:
-            <span className="agentsIndicator">{props.ticket.agents.length}</span>
+            <span className="agentsIndicator">
+              {props.ticket.agents.length}
+            </span>
           </div>
         </summary>
       </button>

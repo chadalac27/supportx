@@ -7,7 +7,6 @@ function Messages(props) {
     const ticket = props.ticketData.filter(
       (element) => element._id === props.ticketId
     )[0];
-    console.log(ticket);
     return (
       <div className="pastMessages">
         {ticket.messages.map((message, i) => {

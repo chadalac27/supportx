@@ -1,6 +1,7 @@
 import React from "react";
 import SeverityRow from "./SeverityRow";
 import Messages from "./Messages";
+import API from "../utils/API";
 
 // TICKET DATA SHOULD BE PASSED IN FROM THE SELECTED CHANNEL
 
@@ -34,16 +35,22 @@ function Chat(props) {
     )[0];
     let newMessage = {
       message: currentMessage,
-      timeStamp: "",
-      senderName: "",
+      timeStamp: "Time not supported",
+      senderName: props.user[0],
     };
     let ticketIndex = previousTickets.findIndex(
       (ticket) => ticket._id === props.currentTicket[2]
     );
     updatedTicket.messages.push(newMessage);
-    previousTickets[ticketIndex] = updatedTicket;
-    props.setTicketData(previousTickets);
-    setMessage("");
+    console.log(props.currentTicket[2], updatedTicket);
+    API.updateTicketById(props.currentTicket[2], updatedTicket).then((res) => {
+      API.getTicketByID(props.currentTicket[2]).then(res => {
+        console.log(res);
+      })
+    });
+    // previousTickets[ticketIndex] = updatedTicket;
+    // props.setTicketData(previousTickets);
+    // setMessage("");
   }
 
   const onEnterPress = (e) => {

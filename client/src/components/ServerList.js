@@ -17,7 +17,13 @@ function ServerList(props) {
           onClick={props.action}
           data-id={server._id}
         >
-          {server.name}
+          <img
+            className="serverAvatar"
+            alt="Server Avatar"
+            src={server.avatarURL}
+          ></img>
+          {/* Consider only making visible on hover */}
+          <span className="serverTooltip">{server.name}</span>
         </button>
       ))}
     </div>
