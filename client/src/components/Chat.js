@@ -20,6 +20,23 @@ function Chat(props) {
     setTicket([false, null, null]);
   }
 
+  function sendMessage() {
+    console.log("click");
+    let ticketData = props.ticketData;
+    console.log(ticketData);
+    let updatedTicket = ticketData.filter(
+      (element) => element._id === currentTicket[2]
+    )[0];
+    let newMessage = {
+      message: "",
+      timeStamp: "",
+      senderName: "",
+    };
+    let ticketIndex = ticketData.findIndex(ticket => ticket._id === currentTicket[2])
+    updatedTicket.messages.push(newMessage);
+    ticketData[ticketIndex] = updatedTicket;
+  }
+
   return (
     <div className={`${props.currentChannel == null ? "none" : "chat"}`}>
       <nav className="chatNav">
@@ -57,9 +74,8 @@ function Chat(props) {
       </ul>
       <div className={`${currentTicket[0] ? "chatInner" : "none"}`}>
         <div className="messagesContainer">
-          <Messages ticketData={props.ticketData} ticketId={currentTicket[2]}/>
-          <div className="pastMessages">
-          </div>
+          <Messages ticketData={props.ticketData} ticketId={currentTicket[2]} />
+          <div className="pastMessages"></div>
           <div className="messageSend">
             <button className="fileBtn">
               <img
@@ -73,7 +89,7 @@ function Chat(props) {
               className="messageInput"
               type="text"
             ></textarea>
-            <button className="sendBtn">
+            <button className="sendBtn" onClick={sendMessage}>
               <img
                 className="sendIcon"
                 alt="Send message icon"

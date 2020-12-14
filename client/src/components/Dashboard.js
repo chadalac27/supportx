@@ -5,7 +5,6 @@ import ServerNav from "./ServerNav";
 import Chat from "./Chat";
 
 // DATA STRUCTURE RECEIVED FROM A SINGLE SERVER
-let ticketData = [];
 let channelData = [];
 
 const serverData = [
@@ -20,74 +19,76 @@ const serverData = [
 const Dashboard = () => {
   const [currentServer, setServer] = React.useState(null);
   const [currentChannel, setChannel] = React.useState(null);
+  // INITIALIZE TICKETDATA WITH API CALL
+  const [ticketData, setTicketData] = React.useState([
+    {
+      agents: [
+        {
+          _id: "1234",
+          username: "asda",
+          avatarURL: "https://via.placeholder.com/100",
+        },
+      ],
+      severity: "0",
+      _id: "1",
+      title: "Cat in tree",
+      messages: [
+        {
+          message: "sss",
+          timeStamp: "sss",
+          senderName: "sss",
+        },
+      ],
+      channel: "General",
+    },
+    {
+      agents: [
+        {
+          _id: "1234",
+          username: "asda",
+          avatarURL: "https://via.placeholder.com/100",
+        },
+      ],
+      severity: "0",
+      _id: "2",
+      title: "Cat in tree stuck processing",
+      messages: [
+        {
+          message: "sss",
+          timeStamp: "sss",
+          senderName: "sss",
+        },
+      ],
+      channel: "Processing",
+    },
+    {
+      agents: [
+        {
+          _id: "1234",
+          username: "asda",
+          avatarURL: "https://via.placeholder.com/100",
+        },
+      ],
+      severity: "0",
+      _id: "3",
+      title: "Cat in tree",
+      messages: [
+        {
+          message: "sss",
+          timeStamp: "sss",
+          senderName: "sss",
+        },
+      ],
+      channel: "General",
+    },
+  ]);
 
   function serverClick(e) {
     const serverIndex = e.currentTarget.getAttribute("index");
     setChannel(null);
     setServer(serverIndex);
     // API CALL TO RETRIEVE TICKET DATA FROM SERVER
-    ticketData = [
-      {
-        agents: [
-          {
-            _id: "1234",
-            username: "asda",
-            avatarURL: "https://via.placeholder.com/100",
-          },
-        ],
-        severity: "0",
-        _id: "1",
-        title: "Cat in tree",
-        messages: [
-          {
-            message: "sss",
-            timeStamp: "sss",
-            senderName: "sss",
-          },
-        ],
-        channel: "General",
-      },
-      {
-        agents: [
-          {
-            _id: "1234",
-            username: "asda",
-            avatarURL: "https://via.placeholder.com/100",
-          },
-        ],
-        severity: "0",
-        _id: "2",
-        title: "Cat in tree stuck processing",
-        messages: [
-          {
-            message: "sss",
-            timeStamp: "sss",
-            senderName: "sss",
-          },
-        ],
-        channel: "Processing",
-      },
-      {
-        agents: [
-          {
-            _id: "1234",
-            username: "asda",
-            avatarURL: "https://via.placeholder.com/100",
-          },
-        ],
-        severity: "0",
-        _id: "3",
-        title: "Cat in tree",
-        messages: [
-          {
-            message: "sss",
-            timeStamp: "sss",
-            senderName: "sss",
-          },
-        ],
-        channel: "General",
-      },
-    ];
+    // setTicketData()
     channelData = ticketData
       .map((ticket) => ticket.channel)
       .filter((name, i, array) => array.indexOf(name) === i);
@@ -140,6 +141,7 @@ const Dashboard = () => {
         <Chat
           currentChannel={channelData[currentChannel]}
           ticketData={ticketData}
+          setTicketData={setTicketData}
         />
       </div>
     </div>
