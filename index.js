@@ -29,12 +29,12 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/supportx_db");
 //Open routes
 app.use(routes);
 
-passport.serializeUser(function (user, done) {
-  done(null, user);
+passport.serializeUser(function (agent, done) {
+  done(null, agent);
 });
 
-passport.deserializeUser(function (user, done) {
-  done(null, user);
+passport.deserializeUser(function (agent, done) {
+  done(null, agent);
 });
 
 app.listen(PORT, function () {

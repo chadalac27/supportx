@@ -4,11 +4,11 @@ const passport = require("passport");
 const passportConfig = require("../../passport");
 const JWT = require("jsonwebtoken");
 
-const signToken = (userID) => {
+const signToken = (agentID) => {
   return JWT.sign(
     {
       iss: "Boom Boom",
-      sub: userID,
+      sub: agentID,
     },
     process.env.JWT_TOKEN,
     { expiresIn: "2h" }
@@ -19,14 +19,15 @@ router.post(
   "/login",
   passport.authenticate("local", { session: false }),
   (req, res) => {
-    console.log("Inside Auth");
+    console.log("api.user.login:req", req);
     if (req.isAuthenticated()) {
       console.log("User Was Authenticated");
-      const { _id, username } = req.user;
+      //console.log(req);
+      const { _id, username,avatarURL } = req.user;
       const token = signToken(_id);
       console.log("Creating Cookie");
       res.cookie("access_token", token, { httpOnly: true, sameSite: true });
-      res.status(200).json({ isAuthenticated: true, user: { username } });
+      res.status(200).json({ isAuthenticated: true, agent: { _id, username, avatarURL } });
     } else {
       console.log("Failled To Authenticate!");
       res.status(400).json({ isAuthenticated: false });
@@ -40,7 +41,7 @@ router.post(
   (req, res) => {
     console.log("Attempting to logout");
     res.clearCookie("access_token");
-    res.json({ user: { username: "" }, success: true });
+    res.json({ agent: { username: "" }, success: true });
   }
 );
 
@@ -48,9 +49,9 @@ router.get(
   "/authenticated",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("Someone trying to authenticate");
-    const {username} = req.user;
-    res.status(200).json({isAuthenticated: true, user: {username}})
+    //console.log("api/user/authenticated:req", req);
+    const {_id,username,avatarURL} = req.user;
+    res.status(200).json({isAuthenticated: true, agent: {_id,username,avatarURL}})
   }
 );
 

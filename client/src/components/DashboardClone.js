@@ -1,69 +1,102 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import ServerList from "./ServerList";
 import ChannelList from "./ChannelList";
+import ServerNav from "./ServerNav";
+import Chat from "./Chat";
 import API from "../utils/API";
-// import $ from "jquery";
+import {AuthContext} from "../Context/AuthContext";
+
+
+
+// DATA STRUCTURE RECEIVED FROM A SINGLE SERVER
+let channelData = [];
+let serverApi = [];
+let ticketApi = [];
+
+
 
 const DashboardClone = () => {
+  const authContext = useContext(AuthContext)
+    API.getCompanyByUserID(authContext.agent._id).then((res) => {
+    res.data.forEach((server) => {
+      serverApi.push(server);
+    })
+    console.log("serverAPI", serverApi);
+  }
+  )
   
-
-  const serverData = [
-    { name: "Profile", channels: [""] },
-    { name: "Server 1", channels: ["General", "Processing"] },
-    { name: "Server 2", channels: ["General", "Shipping"] },
-    { name: "Server 3", channels: ["Processing", "Shipping"] },
-    { name: "Add New Server", channels: [""] },
-  ];
-
-  const [userState, setUser] = React.useState({});
-  const [companyState, setCompany] = React.useState({});
-  const [focusServer, setFocusServer] = React.useState();
-  const [currentChannels, setCurrentChannels] = React.useState(0);
+  console.log("componenets/test/authContext", authContext);
+  const [currentServer, setServer] = React.useState(null);
+  const [currentChannel, setChannel] = React.useState(null);
+  const [currentTicket, setTicket] = React.useState([false, null, null]);
+  const [load, setLoad] = React.useState(false);
+  const [ticketData, setTicketData] = React.useState(ticketApi);
 
   function serverClick(e) {
-    const serverIndex = e.target.getAttribute("index");
-    setFocusServer(serverIndex);
-    setCurrentChannels(serverIndex)
+    const serverIndex = e.currentTarget.getAttribute("index");
+    const serverListNode = e.currentTarget.parentNode;
+    API.getTicketByCompanyID(e.currentTarget.dataset.id).then((res) => {
+      if (load === false) {
+        serverListNode.style.visibility = "hidden";
+        serverListNode.style.opacity = "0";
+        setTimeout(function () {
+          setChannel(null);
+          setServer(serverIndex);
+          channelData = res.data
+            .map((ticket) => ticket.channel)
+            .filter((name, i, array) => array.indexOf(name) === i);
+          setTicketData(res.data);
+          setTimeout(function () {
+            setLoad(true);
+            serverListNode.style.visibility = "visible";
+            serverListNode.style.opacity = "1";
+          }, 500);
+        }, 500);
+        return;
+      }
+      setChannel(null);
+      setServer(serverIndex);
+      // API CALL TO RETRIEVE TICKET DATA FROM SERVER
+      // setTicketData()
+      channelData = res.data
+        .map((ticket) => ticket.channel)
+        .filter((name, i, array) => array.indexOf(name) === i);
+      setTicketData(res.data);
+    });
   }
 
-  if(userState.username == null)
-  {
-    API.getUserByID("5fd64054b26792467c18c4b7")
-    .then(res => {
-      setUser(res.data);
-      console.log("1",userState);
-      loadCompanies()
-    })
+  function channelClick(e) {
+    const channelIndex = e.currentTarget.getAttribute("index");
+    setChannel(channelIndex);
+    setTicket([false, null, null]);
+    // POPULATE TICKETS WITH STORED DATA
   }
-  else console.log(userState);
 
-
-
-  function loadCompanies(){
-    console.log("2",userState);
-    API.getCompanyByUserID(userState._id)
-    .then(res => {
-      console.log("3",userState);
-      setCompany({...companyState},res.data);
-    })
-  }
-  
   return (
     <div className="app">
-      <ServerList action={serverClick} data={serverData} companyData={companyState} focus={focusServer} />
-      <div className="chatOuter">
+      <ServerList
+        load={load}
+        data={serverApi}
+        action={serverClick}
+        focus={currentServer}
+      />
+      <div
+        className={`${currentServer === null ? "none" : "chatOuter"} ${
+          load === false ? "hide" : ""
+        }`}
+      >
         <div className="channels">
-          <nav className="nav">
-            <h3 className="serverTitle">TEST 1</h3>
-            <img
-              className="icon"
-              width="15px"
-              src="https://image.flaticon.com/icons/png/512/120/120890.png"
-              alt="dropdown icon"
-            ></img>
-          </nav>
+          <ServerNav
+            name={`${
+              currentServer === null ? "" : serverApi[currentServer].name
+            }`}
+          />
           <div className="channelListOuter">
-            <ChannelList data={serverData} focus={currentChannels} />
+            <ChannelList
+              action={channelClick}
+              data={channelData}
+              focus={currentChannel}
+            />
           </div>
           <div className="userArea">
             <img
@@ -72,8 +105,7 @@ const DashboardClone = () => {
               className="userIcon"
             ></img>
             <div className="userName">
-              {/* DBG-REF */}
-              {userState.username}
+            {authContext.agent.username}
               <div className="userID">#1234</div>
             </div>
             <img
@@ -83,113 +115,13 @@ const DashboardClone = () => {
             ></img>
           </div>
         </div>
-        <div className="chat">
-          <nav className="chatNav">
-            <div className="chatHeader">
-              <span className="hash">#</span>
-              <h2 className="chatTitle">General</h2>
-            </div>
-            <div className="chatIcons">
-              <img
-                alt="Notification Icon"
-                className="notificationIcon"
-                src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-bell-512.png"
-              ></img>
-              <img
-                alt="Pinned Messages Icon"
-                className="pinIcon"
-                src="https://simpleicon.com/wp-content/uploads/pin.png"
-              ></img>
-              <img
-                alt="Member List Toggle"
-                className="memberIcon"
-                src="https://static.thenounproject.com/png/983470-200.png"
-              ></img>
-              <input
-                className="searchBar"
-                placeholder="Search"
-                type="text"
-              ></input>
-            </div>
-          </nav>
-          <ul className="ticketList">
-            <li className="severityRow">
-              <ul className="maxRow">
-                <li className="ticketItem">
-                  <h1 className="ticketTitle">
-                    Cat stuck in tree on fire in tornado
-                  </h1>
-                  <summary className="ticketInfo">
-                    <div className="ticketSeverity">
-                      Severity: <span className="severityIndicator">10</span>
-                    </div>
-                    <div className="numAgents">
-                      Number of Agents Assigned:{" "}
-                      <span className="agentsIndicator">0</span>
-                    </div>
-                  </summary>
-                </li>
-              </ul>
-            </li>
-            <li className="severityRow">
-              <ul className="midRow">
-                <li className="ticketItem">
-                  <h1 className="ticketTitle">Cat stuck in tree on fire</h1>
-                  <summary className="ticketInfo">
-                    <div className="ticketSeverity">
-                      Severity: <span className="severityIndicator">6</span>
-                    </div>
-                    <div className="numAgents">
-                      Number of Agents Assigned:{" "}
-                      <span className="agentsIndicator">0</span>
-                    </div>
-                  </summary>
-                </li>
-              </ul>
-            </li>
-            <li className="severityRow">
-              <ul className="lowRow">
-                <li className="ticketItem">
-                  <h1 className="ticketTitle">Cat stuck in tree</h1>
-                  <summary className="ticketInfo">
-                    <div className="ticketSeverity">
-                      Severity: <span className="severityIndicator">2</span>
-                    </div>
-                    <div className="numAgents">
-                      Number of Agents Assigned:{" "}
-                      <span className="agentsIndicator">0</span>
-                    </div>
-                  </summary>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <div className="chatInner">
-            <div className="messagesContainer">
-              <div className="pastMessages"></div>
-              <div className="messageSend">
-                <img
-                  className="fileIcon"
-                  alt="Attach file icon"
-                  src="https://freeiconshop.com/wp-content/uploads/edd/plus-flat.png"
-                ></img>
-                <textarea
-                  placeholder="Message #General"
-                  className="messageInput"
-                  type="text"
-                ></textarea>
-                <img
-                  className="sendIcon"
-                  alt="Send message icon"
-                  src="https://icon-library.com/images/32c192cd9d.svg.svg"
-                ></img>
-              </div>
-            </div>
-            <div className="sidebar">
-              <button className="backButton">Return to ticket list</button>
-            </div>
-          </div>
-        </div>
+        <Chat
+          currentChannel={channelData[currentChannel]}
+          currentTicket={currentTicket}
+          setTicket={setTicket}
+          ticketData={ticketData}
+          setTicketData={setTicketData}
+        />
       </div>
     </div>
   );

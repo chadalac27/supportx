@@ -6,18 +6,20 @@ import Alert from './Alert';
 
 const Login = (props) => {
 
-  const [agent, setAgent] = useState({username: "", password: ""});
+  const [agent, setAgent] = useState({ username: "", password: ""});
   const [message, setMessage] = useState(null);
   const authContext = useContext(AuthContext);
 
 
   const onChange = e => {
+    console.log(agent);
     setAgent({...agent, [e.target.name] : e.target.value})
   }
 
   const onSubmit = e =>{
     e.preventDefault();
     AuthService.login(agent).then(data => {
+      console.log("componenet/login/onsubmit:data", data);
       const {isAuthenticated, agent, message} = data;
       if(isAuthenticated){
         authContext.setAgent(agent);

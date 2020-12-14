@@ -7,7 +7,7 @@ const db = require("../models");
 // Defining methods for the agentController
 module.exports = {
   login: function(req,res){
-    console.log("Authenticating");
+    console.log("controllers/userController/login  Authenticating");
     
       
   },
@@ -19,9 +19,10 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
+    console.log("userController/findById.req.params",req.params);
     db.Agent
-      .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
+      .findById({_id: req.params.id})
+      .then(dbModel => {console.log("Found Agent By ID:", dbModel); res.json(dbModel)})
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {

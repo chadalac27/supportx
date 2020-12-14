@@ -9,8 +9,8 @@ import {AuthContext} from './Context/AuthContext';
 
 function App() {
   const {agent, setAgent, isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
-  console.log(agent);
-  console.log(isAuthenticated);
+  //console.log(agent);
+  //console.log(isAuthenticated);
   return (
     <div>
       <Route path="/" exact component={Home} />
