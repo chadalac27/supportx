@@ -40,7 +40,8 @@ ul {
   align-items: center;
 }
 
-.login-form, .signup-form {
+.login-form,
+.signup-form {
   margin-top: 24px;
   display: flex;
   flex-direction: column;
@@ -52,6 +53,7 @@ ul {
   font-family: Corben;
 }
 .app {
+  background: #202326;
   height: 100vh;
   display: flex;
 }
@@ -87,6 +89,7 @@ ul {
 }
 .hide {
   visibility: hidden;
+  opacity: 0;
 }
 .serverList {
   background: #202326;
@@ -96,15 +99,9 @@ ul {
   flex-direction: column;
   align-items: center;
   padding-top: 12px;
-}
-.serverListBegin {
-  background: #202326;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 12px;
+  transition: all 0.5s;
+  visibility: visible;
+  opacity: 1;
 }
 .serverButton {
   background: #363a3e;
@@ -120,6 +117,25 @@ ul {
   transition: all 0.2s ease-in-out;
   position: relative;
   user-select: none;
+  font-weight: 900;
+  font-family: Corben;
+  font-size: 12px;
+}
+.serverListBegin {
+  background: #202326;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 12px;
+  justify-content: center;
+}
+.serverListBegin .serverButton {
+  margin: 0 4px;
+  height: 150px;
+  width: 150px;
+  font-size: 24px;
 }
 .serverButton:hover {
   border-radius: 20%;
@@ -137,6 +153,7 @@ ul {
   height: 100%;
   width: 100%;
   display: flex;
+  transition: all 0.5s;
 }
 .channels {
   background: #2f3236;

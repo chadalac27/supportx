@@ -10,7 +10,7 @@ const signToken = (userID) => {
       iss: "Boom Boom",
       sub: userID,
     },
-    "dream d86!rS[gohn-LYL!VEt@6PS$bA Love",
+    process.env.JWT_TOKEN,
     { expiresIn: "2h" }
   );
 };
@@ -38,6 +38,7 @@ router.post(
   "/logout",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("Attempting to logout");
     res.clearCookie("access_token");
     res.json({ user: { username: "" }, success: true });
   }
@@ -47,6 +48,7 @@ router.get(
   "/authenticated",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("Someone trying to authenticate");
     const {username} = req.user;
     res.status(200).json({isAuthenticated: true, user: {username}})
   }
