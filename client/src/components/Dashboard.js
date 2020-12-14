@@ -20,6 +20,7 @@ const Dashboard = () => {
   const [currentServer, setServer] = React.useState(null);
   const [currentChannel, setChannel] = React.useState(null);
   const [currentTicket, setTicket] = React.useState([false, null, null]);
+  const [load, setLoad] = React.useState(false);
   // INITIALIZE TICKETDATA WITH API CALL
   const [ticketData, setTicketData] = React.useState([
     {
@@ -68,6 +69,26 @@ const Dashboard = () => {
 
   function serverClick(e) {
     const serverIndex = e.currentTarget.getAttribute("index");
+    const serverListNode = e.currentTarget.parentNode;
+    if (load === false) {
+      serverListNode.style.visibility = "hidden";
+      serverListNode.style.opacity = "0";
+      setTimeout(function () {
+        setChannel(null);
+        setServer(serverIndex);
+        // API CALL TO RETRIEVE TICKET DATA FROM SERVER
+        // setTicketData()
+        channelData = ticketData
+          .map((ticket) => ticket.channel)
+          .filter((name, i, array) => array.indexOf(name) === i);
+        setTimeout(function () {
+          setLoad(true);
+          serverListNode.style.visibility = "visible";
+          serverListNode.style.opacity = "1";
+        }, 500);
+      }, 500);
+      return;
+    }
     setChannel(null);
     setServer(serverIndex);
     // API CALL TO RETRIEVE TICKET DATA FROM SERVER
@@ -87,11 +108,16 @@ const Dashboard = () => {
   return (
     <div className="app">
       <ServerList
+        load={load}
         data={serverData}
         action={serverClick}
         focus={currentServer}
       />
-      <div className={`${currentServer === null ? "none" : "chatOuter"}`}>
+      <div
+        className={`${currentServer === null ? "none" : "chatOuter"} ${
+          load === false ? "hide" : ""
+        }`}
+      >
         <div className="channels">
           <ServerNav
             name={`${
