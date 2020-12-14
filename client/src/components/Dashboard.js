@@ -33,13 +33,7 @@ const Dashboard = () => {
       severity: "0",
       _id: "1",
       title: "Cat in tree",
-      messages: [
-        {
-          message: "sss",
-          timeStamp: "sss",
-          senderName: "sss",
-        },
-      ],
+      messages: [],
       channel: "General",
     },
     {
@@ -53,13 +47,7 @@ const Dashboard = () => {
       severity: "0",
       _id: "2",
       title: "Cat in tree stuck processing",
-      messages: [
-        {
-          message: "sss",
-          timeStamp: "sss",
-          senderName: "sss",
-        },
-      ],
+      messages: [],
       channel: "Processing",
     },
     {
@@ -73,13 +61,7 @@ const Dashboard = () => {
       severity: "0",
       _id: "3",
       title: "Cat in tree",
-      messages: [
-        {
-          message: "sss",
-          timeStamp: "sss",
-          senderName: "sss",
-        },
-      ],
+      messages: [],
       channel: "General",
     },
   ]);
@@ -98,6 +80,7 @@ const Dashboard = () => {
   function channelClick(e) {
     const channelIndex = e.currentTarget.getAttribute("index");
     setChannel(channelIndex);
+    setTicket([false, null, null]);
     // POPULATE TICKETS WITH STORED DATA
   }
 
