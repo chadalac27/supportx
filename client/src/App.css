@@ -40,7 +40,7 @@ ul {
   align-items: center;
 }
 
-form {
+.login-form, .signup-form {
   margin-top: 24px;
   display: flex;
   flex-direction: column;
@@ -314,6 +314,10 @@ form {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+.messageForm {
+  margin-top: 0;
+  width: 100%;
 }
 .messageInput {
   width: 100%;

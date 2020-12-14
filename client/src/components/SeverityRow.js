@@ -10,7 +10,7 @@ function SeverityRow(props) {
         {props.ticketData
           .filter((ticket) => ticket.channel === props.currentChannel)
           .map((ticket, i) => (
-            <Ticket set={props.set} key={i} ticket={ticket} />
+            <Ticket set={props.setTicket} key={i} ticket={ticket} />
           ))}
       </ul>
     </li>

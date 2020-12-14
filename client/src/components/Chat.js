@@ -5,7 +5,7 @@ import Messages from "./Messages";
 // TICKET DATA SHOULD BE PASSED IN FROM THE SELECTED CHANNEL
 
 function Chat(props) {
-  const [currentTicket, setTicket] = React.useState([false, null, null]);
+  const [currentMessage, setMessage] = React.useState("");
 
   // INITIALLY SETS THE TITLE AS THE NAME OF THE CHANNEL CLICKED ON
   let currentTitle = props.currentChannel;
@@ -17,27 +17,42 @@ function Chat(props) {
 
   // RESETS THE STATE OF THE TITLE
   function backButton() {
-    setTicket([false, null, null]);
+    props.setTicket([false, null, null]);
   }
 
-  function sendMessage() {
-    console.log("click");
-    let ticketData = props.ticketData;
-    let updatedTicket = ticketData.filter(
-      (element) => element._id === currentTicket[2]
+  function updateMessage(e) {
+    setMessage(e.target.value);
+  }
+
+  function sendMessage(e) {
+    if (currentMessage === "") {
+      return;
+    }
+    let previousTickets = [...props.ticketData];
+    let updatedTicket = props.ticketData.filter(
+      (element) => element._id === props.currentTicket[2]
     )[0];
+    console.log(updatedTicket);
     let newMessage = {
-      message: "",
+      message: currentMessage,
       timeStamp: "",
       senderName: "",
     };
-    let ticketIndex = ticketData.findIndex(
-      (ticket) => ticket._id === currentTicket[2]
+    let ticketIndex = previousTickets.findIndex(
+      (ticket) => ticket._id === props.currentTicket[2]
     );
     updatedTicket.messages.push(newMessage);
-    ticketData[ticketIndex] = updatedTicket;
-    props.setTicketData(ticketData);
+    previousTickets[ticketIndex] = updatedTicket;
+    props.setTicketData(previousTickets);
+    setMessage("");
   }
+
+  const onEnterPress = (e) => {
+    if (e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault();
+      sendMessage();
+    }
+  };
 
   return (
     <div className={`${props.currentChannel == null ? "none" : "chat"}`}>
@@ -45,7 +60,9 @@ function Chat(props) {
         <div className="chatHeader">
           <span className="hash">#</span>
           <h2 className="chatTitle">{`${
-            currentTicket[0] === false ? currentTitle : currentTicket[1]
+            props.currentTicket[0] === false
+              ? currentTitle
+              : props.currentTicket[1]
           }`}</h2>
         </div>
         <div className="chatIcons">
@@ -67,16 +84,19 @@ function Chat(props) {
           <input className="searchBar" placeholder="Search" type="text"></input>
         </div>
       </nav>
-      <ul className={`${currentTicket[0] ? "none" : "ticketList"}`}>
+      <ul className={`${props.currentTicket[0] ? "none" : "ticketList"}`}>
         <SeverityRow
           currentChannel={props.currentChannel}
-          set={setTicket}
+          setTicket={props.setTicket}
           ticketData={props.ticketData}
         />
       </ul>
-      <div className={`${currentTicket[0] ? "chatInner" : "none"}`}>
+      <div className={`${props.currentTicket[0] ? "chatInner" : "none"}`}>
         <div className="messagesContainer">
-          <Messages ticketData={props.ticketData} ticketId={currentTicket[2]} />
+          <Messages
+            ticketData={props.ticketData}
+            ticketId={props.currentTicket[2]}
+          />
           <div className="messageSend">
             <button className="fileBtn">
               <img
@@ -85,11 +105,16 @@ function Chat(props) {
                 src="https://freeiconshop.com/wp-content/uploads/edd/plus-flat.png"
               ></img>
             </button>
-            <textarea
-              placeholder={`Message #${currentTicket[1]}`}
-              className="messageInput"
-              type="text"
-            ></textarea>
+            <form className="messageForm" action={sendMessage}>
+              <textarea
+                onKeyDown={onEnterPress}
+                value={currentMessage}
+                onChange={updateMessage}
+                placeholder={`Message #${props.currentTicket[1]}`}
+                className="messageInput"
+                type="text"
+              ></textarea>
+            </form>
             <button className="sendBtn" onClick={sendMessage}>
               <img
                 className="sendIcon"

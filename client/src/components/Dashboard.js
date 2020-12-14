@@ -19,6 +19,7 @@ const serverData = [
 const Dashboard = () => {
   const [currentServer, setServer] = React.useState(null);
   const [currentChannel, setChannel] = React.useState(null);
+  const [currentTicket, setTicket] = React.useState([false, null, null]);
   // INITIALIZE TICKETDATA WITH API CALL
   const [ticketData, setTicketData] = React.useState([
     {
@@ -140,6 +141,8 @@ const Dashboard = () => {
         </div>
         <Chat
           currentChannel={channelData[currentChannel]}
+          currentTicket={currentTicket}
+          setTicket={setTicket}
           ticketData={ticketData}
           setTicketData={setTicketData}
         />
