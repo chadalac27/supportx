@@ -10,6 +10,7 @@ function Messages(props) {
     return (
       <div className="pastMessages">
         {ticket.messages.map((message, i) => {
+          console.log(message);
           // Time stuff
           let timeStamp = message.timeStamp
             .split("T")[1]
