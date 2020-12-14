@@ -32,7 +32,6 @@ function Chat(props) {
     let updatedTicket = props.ticketData.filter(
       (element) => element._id === props.currentTicket[2]
     )[0];
-    console.log(updatedTicket);
     let newMessage = {
       message: currentMessage,
       timeStamp: "",
@@ -105,7 +104,7 @@ function Chat(props) {
                 src="https://freeiconshop.com/wp-content/uploads/edd/plus-flat.png"
               ></img>
             </button>
-            <form className="messageForm" action={sendMessage}>
+            <form className="messageForm">
               <textarea
                 onKeyDown={onEnterPress}
                 value={currentMessage}

@@ -2,7 +2,11 @@ import React from "react";
 
 function ServerList(props) {
   return (
-    <div className={`smooth ${props.focus === null ? "serverListBegin" : "serverList"}`}>
+    <div
+      className={`smooth ${
+        props.focus === null ? "serverListBegin" : "serverList"
+      }`}
+    >
       {props.data.map((server, i) => (
         <button
           className={`serverButton ${
@@ -11,6 +15,7 @@ function ServerList(props) {
           index={i}
           key={i}
           onClick={props.action}
+          data-id={server._id}
         >
           {server.name}
         </button>

@@ -3,99 +3,57 @@ import ServerList from "./ServerList";
 import ChannelList from "./ChannelList";
 import ServerNav from "./ServerNav";
 import Chat from "./Chat";
+import API from "../utils/API";
 
 // DATA STRUCTURE RECEIVED FROM A SINGLE SERVER
 let channelData = [];
+let serverApi = [];
+let ticketApi = [];
 
-const serverData = [
-  {
-    name: "Server 1",
-  },
-  {
-    name: "Server 2",
-  },
-];
+API.getCompanyByUserID("5fd6f4dea883194e5c628636").then((res) => {
+  res.data.forEach((server) => {
+    serverApi.push(server);
+  });
+});
 
 const Dashboard = () => {
   const [currentServer, setServer] = React.useState(null);
   const [currentChannel, setChannel] = React.useState(null);
   const [currentTicket, setTicket] = React.useState([false, null, null]);
   const [load, setLoad] = React.useState(false);
-  // INITIALIZE TICKETDATA WITH API CALL
-  const [ticketData, setTicketData] = React.useState([
-    {
-      agents: [
-        {
-          _id: "1234",
-          username: "asda",
-          avatarURL: "https://via.placeholder.com/100",
-        },
-      ],
-      severity: "0",
-      _id: "1",
-      title: "Cat in tree",
-      messages: [],
-      channel: "General",
-    },
-    {
-      agents: [
-        {
-          _id: "1234",
-          username: "asda",
-          avatarURL: "https://via.placeholder.com/100",
-        },
-      ],
-      severity: "0",
-      _id: "2",
-      title: "Cat in tree stuck processing",
-      messages: [],
-      channel: "Processing",
-    },
-    {
-      agents: [
-        {
-          _id: "1234",
-          username: "asda",
-          avatarURL: "https://via.placeholder.com/100",
-        },
-      ],
-      severity: "0",
-      _id: "3",
-      title: "Cat in tree",
-      messages: [],
-      channel: "General",
-    },
-  ]);
+  const [ticketData, setTicketData] = React.useState(ticketApi);
 
   function serverClick(e) {
     const serverIndex = e.currentTarget.getAttribute("index");
     const serverListNode = e.currentTarget.parentNode;
-    if (load === false) {
-      serverListNode.style.visibility = "hidden";
-      serverListNode.style.opacity = "0";
-      setTimeout(function () {
-        setChannel(null);
-        setServer(serverIndex);
-        // API CALL TO RETRIEVE TICKET DATA FROM SERVER
-        // setTicketData()
-        channelData = ticketData
-          .map((ticket) => ticket.channel)
-          .filter((name, i, array) => array.indexOf(name) === i);
+    API.getTicketByCompanyID(e.currentTarget.dataset.id).then((res) => {
+      if (load === false) {
+        serverListNode.style.visibility = "hidden";
+        serverListNode.style.opacity = "0";
         setTimeout(function () {
-          setLoad(true);
-          serverListNode.style.visibility = "visible";
-          serverListNode.style.opacity = "1";
+          setChannel(null);
+          setServer(serverIndex);
+          channelData = res.data
+            .map((ticket) => ticket.channel)
+            .filter((name, i, array) => array.indexOf(name) === i);
+          setTicketData(res.data);
+          setTimeout(function () {
+            setLoad(true);
+            serverListNode.style.visibility = "visible";
+            serverListNode.style.opacity = "1";
+          }, 500);
         }, 500);
-      }, 500);
-      return;
-    }
-    setChannel(null);
-    setServer(serverIndex);
-    // API CALL TO RETRIEVE TICKET DATA FROM SERVER
-    // setTicketData()
-    channelData = ticketData
-      .map((ticket) => ticket.channel)
-      .filter((name, i, array) => array.indexOf(name) === i);
+        return;
+      }
+      setChannel(null);
+      setServer(serverIndex);
+      // API CALL TO RETRIEVE TICKET DATA FROM SERVER
+      // setTicketData()
+      channelData = res.data
+        .map((ticket) => ticket.channel)
+        .filter((name, i, array) => array.indexOf(name) === i);
+      setTicketData(res.data);
+    });
   }
 
   function channelClick(e) {
@@ -109,7 +67,7 @@ const Dashboard = () => {
     <div className="app">
       <ServerList
         load={load}
-        data={serverData}
+        data={serverApi}
         action={serverClick}
         focus={currentServer}
       />
@@ -121,7 +79,7 @@ const Dashboard = () => {
         <div className="channels">
           <ServerNav
             name={`${
-              currentServer === null ? "" : serverData[currentServer].name
+              currentServer === null ? "" : serverApi[currentServer].name
             }`}
           />
           <div className="channelListOuter">
