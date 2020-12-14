@@ -44,7 +44,6 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   update: function (req, res) {
-    console.log(req.params.id);
     console.log(req.body);
     db.Ticket.findByIdAndUpdate(
       req.params.id,
@@ -52,7 +51,7 @@ module.exports = {
       { new: true }
     )
       .then((updatedTicket) => {
-        res.json(updatedTicket);
+        res.send(updatedTicket);
       })
       .catch((err) => res.status(422).json(err));
   },

@@ -42,14 +42,9 @@ function Chat(props) {
       (ticket) => ticket._id === props.currentTicket[2]
     );
     updatedTicket.messages.push(newMessage);
-    console.log(props.currentTicket[2], updatedTicket.messages);
     API.updateTicketByID(props.currentTicket[2], updatedTicket.messages).then(
-      (res) => {
-        console.log(res);
-        console.log(previousTickets);
-        console.log(res.data);
-        previousTickets[ticketIndex] = res.data;
-        console.log(previousTickets);
+      () => {
+        previousTickets[ticketIndex] = updatedTicket;
         props.setTicketData(previousTickets);
         setMessage("");
       }
