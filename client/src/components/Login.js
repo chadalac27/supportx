@@ -1,9 +1,10 @@
 import React, {useState, useContext} from "react";
 import { Link } from "react-router-dom";
 import {AuthContext} from '../Context/AuthContext';
-import AuthService from '../utils/API';
+import AuthService from '../utils/AuthServices';
+import Alert from './Alert';
 
-const Login = () => {
+const Login = (props) => {
 
   const [agent, setAgent] = useState({username: "", password: ""});
   const [message, setMessage] = useState(null);
@@ -11,24 +12,22 @@ const Login = () => {
 
 
   const onChange = e => {
-    e.preventDefault();
     setAgent({...agent, [e.target.name] : e.target.value})
-    console.log(agent);
   }
 
   const onSubmit = e =>{
     e.preventDefault();
-    AuthService.Login(agent).then(data => {
+    AuthService.login(agent).then(data => {
       const {isAuthenticated, agent, message} = data;
       if(isAuthenticated){
         authContext.setAgent(agent);
         authContext.setIsAuthenticated(isAuthenticated);
+        props.history.push('/dashboard')
       }
       else{
         setMessage(message);
       }
-    })
-    console.log(e.target);
+    });
   }
 
   
@@ -42,9 +41,9 @@ const Login = () => {
           <label htmlFor="login-email">Email: </label>
           <input
             id="login-email"
-            type="email"
+            type="test"
             className="inputStyle"
-            name="email"
+            name="username"
             onChange={onChange}
             placeholder="Enter Username"
           />
@@ -61,7 +60,7 @@ const Login = () => {
             Log In
           </button>
         </form>
-        {/* {message ? <Message message={message}/> : null} */}
+        {message ? <Alert message={message}/> : null}
       </div>
     </div>
   );

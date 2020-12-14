@@ -1,7 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const JwtStrategy = require("passport-jwt").Strategy;
-const User = require("./models/agent");
+const Agent = require("./models/agent");
 const env = require("dotenv").config();
 
 //Looks at cookies for the access_token then returns the token if it finds it
@@ -23,7 +23,7 @@ passport.use(
     },
     (payload, done) => {
         console.log("Here");
-      User.findById({ _id: payload.sub }, (err, user) => {
+      Agent.findById({ _id: payload.sub }, (err, user) => {
         if (err)
         { 
             console.log("Error", err);
@@ -32,7 +32,7 @@ passport.use(
         if (user) return done(null, user);
         else 
         {
-            console.log("Could not find User");
+            console.log("Could not find Agent");
             return done(null, false);
         }
       });
@@ -45,17 +45,17 @@ passport.use(
 //*Only used on Login*
 passport.use(
   new LocalStrategy((username, password, done) => {
-    User.findOne({ username }, (err, user) => {
-        console.log("Finding User");
+    Agent.findOne({ username }, (err, agent) => {
+        console.log("Finding Agent");
       //Something went wrong with database
       if (err) return done(err);
 
       //Called if no user exists
-      if (!user) return done(null, false);
+      if (!agent) return done(null, false);
 
     console.log("Compairing Passwords");
     //Check if password is correct
-      user.comparePassword(password, done);
+    agent.comparePassword(password, done);
     });
   })
 );
