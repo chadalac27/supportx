@@ -44,10 +44,9 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   update: function (req, res) {
-    console.log(req.body);
     db.Ticket.findByIdAndUpdate(
       req.params.id,
-      { messages: req.body },
+      req.body,
       { new: true }
     )
       .then((updatedTicket) => {
