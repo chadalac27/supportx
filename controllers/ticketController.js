@@ -44,8 +44,16 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   update: function (req, res) {
-    db.Ticket.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true })
-      .then((dbModel) => res.json(dbModel))
+    console.log(req.params.id);
+    console.log(req.body);
+    db.Ticket.findByIdAndUpdate(
+      req.params.id,
+      { messages: req.body },
+      { new: true }
+    )
+      .then((updatedTicket) => {
+        res.json(updatedTicket);
+      })
       .catch((err) => res.status(422).json(err));
   },
   remove: function (req, res) {

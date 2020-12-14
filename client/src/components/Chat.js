@@ -42,15 +42,18 @@ function Chat(props) {
       (ticket) => ticket._id === props.currentTicket[2]
     );
     updatedTicket.messages.push(newMessage);
-    console.log(props.currentTicket[2], updatedTicket);
-    API.updateTicketById(props.currentTicket[2], updatedTicket).then((res) => {
-      API.getTicketByID(props.currentTicket[2]).then(res => {
+    console.log(props.currentTicket[2], updatedTicket.messages);
+    API.updateTicketByID(props.currentTicket[2], updatedTicket.messages).then(
+      (res) => {
         console.log(res);
-      })
-    });
-    // previousTickets[ticketIndex] = updatedTicket;
-    // props.setTicketData(previousTickets);
-    // setMessage("");
+        console.log(previousTickets);
+        console.log(res.data);
+        previousTickets[ticketIndex] = res.data;
+        console.log(previousTickets);
+        props.setTicketData(previousTickets);
+        setMessage("");
+      }
+    );
   }
 
   const onEnterPress = (e) => {
