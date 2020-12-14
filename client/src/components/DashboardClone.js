@@ -16,12 +16,15 @@ let ticketApi = [];
 
 
 const DashboardClone = () => {
+  const [ticketData, setTicketData] = React.useState(ticketApi);
   const authContext = useContext(AuthContext)
     API.getCompanyByUserID(authContext.agent._id).then((res) => {
     res.data.forEach((server) => {
       serverApi.push(server);
     })
     console.log("serverAPI", serverApi);
+    setTicketData(ticketApi);
+    
   }
   )
   
@@ -30,7 +33,6 @@ const DashboardClone = () => {
   const [currentChannel, setChannel] = React.useState(null);
   const [currentTicket, setTicket] = React.useState([false, null, null]);
   const [load, setLoad] = React.useState(false);
-  const [ticketData, setTicketData] = React.useState(ticketApi);
 
   function serverClick(e) {
     const serverIndex = e.currentTarget.getAttribute("index");

@@ -7,12 +7,12 @@ const env = require("dotenv").config();
 //Looks at cookies for the access_token then returns the token if it finds it
 const cookieExtractor = (req) => {
   let token = null;
-  console.log("passport/cookieExtractor:req.cookies", req.cookies);
+  //console.log("passport/cookieExtractor:req.cookies", req.cookies);
   if (req && req.cookies) {
     token = req.cookies["access_token"];
-    console.log("passport/cookieExtractor:token", token);
+    //console.log("passport/cookieExtractor:token", token);
   }
-  console.log("passport/cookieExtractor:req.cookies", "returning token");
+  //console.log("passport/cookieExtractor:req.cookies", "returning token");
   return token;
 };
 
@@ -25,7 +25,7 @@ passport.use(
       secretOrKey: process.env.JWT_TOKEN,
     },
     (payload, done) => {
-        console.log("Passport/JwtStrategy:payload",payload);
+        //console.log("Passport/JwtStrategy:payload",payload);
       Agent.findById({ _id: payload.sub }, (err, agent) => {
         if (err)
         { 
@@ -33,7 +33,7 @@ passport.use(
             return done(err, false);
         }
         if (agent){
-          console.log("Passport/JwtStrategy:payload:agent",agent);
+          //console.log("Passport/JwtStrategy:payload:agent",agent);
            return done(null, agent)
           }
         else 
@@ -52,14 +52,14 @@ passport.use(
 passport.use(
   new LocalStrategy((username, password, done) => {
     Agent.findOne({ username }, (err, agent) => {
-        console.log("Finding Agent");
+        //console.log("Finding Agent");
       //Something went wrong with database
       if (err) return done(err);
 
       //Called if no user exists
       if (!agent) return done(null, false);
 
-    console.log("Compairing Passwords");
+    //console.log("Compairing Passwords");
     //Check if password is correct
     agent.comparePassword(password, done);
     });

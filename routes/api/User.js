@@ -19,13 +19,13 @@ router.post(
   "/login",
   passport.authenticate("local", { session: false }),
   (req, res) => {
-    console.log("api.user.login:req", req);
+    //console.log("api.user.login:req", req);
     if (req.isAuthenticated()) {
-      console.log("User Was Authenticated");
+      //console.log("User Was Authenticated");
       //console.log(req);
       const { _id, username,avatarURL } = req.user;
       const token = signToken(_id);
-      console.log("Creating Cookie");
+      //console.log("Creating Cookie");
       res.cookie("access_token", token, { httpOnly: true, sameSite: true });
       res.status(200).json({ isAuthenticated: true, agent: { _id, username, avatarURL } });
     } else {
@@ -39,7 +39,7 @@ router.post(
   "/logout",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("Attempting to logout");
+    //console.log("Attempting to logout");
     res.clearCookie("access_token");
     res.json({ agent: { username: "" }, success: true });
   }

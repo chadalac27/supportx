@@ -1,6 +1,6 @@
 export default {
   login: (agent) => {
-    console.log("AuthService/login:agent",agent);
+    //console.log("AuthService/login:agent",agent);
     return fetch("/api/users/login", {
       method: "post",
       body: JSON.stringify(agent),
@@ -9,7 +9,7 @@ export default {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      console.log("AuthService/login/then:res",res);
+      //console.log("AuthService/login/then:res",res);
       if (res.status !== 401) {
         return res.json().then((data) => data);
       } else { 
@@ -18,7 +18,7 @@ export default {
     });
   },
   register: (agent) => {
-    console.log("AuthService/register:agent",agent);
+    //console.log("AuthService/register:agent",agent);
     return fetch("/api/users/register", {
       
       method: "post",

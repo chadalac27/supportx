@@ -19,7 +19,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    console.log("userController/findById.req.params",req.params);
+    //console.log("userController/findById.req.params",req.params);
     db.Agent
       .findById({_id: req.params.id})
       .then(dbModel => {console.log("Found Agent By ID:", dbModel); res.json(dbModel)})
