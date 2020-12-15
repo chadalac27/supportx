@@ -41,8 +41,8 @@ export default {
     return axios.get("/api/tickets/by-company/" + id);
   },
   // Updates the user information for the given user id
-  updateTicketByID: function(id, updatedMessages) {
-    return axios.put("/api/tickets/" + id, updatedMessages);
+  updateTicketByID: function(id, updatedProps) {
+    return axios.put("/api/tickets/" + id, updatedProps);
   },
   // Deletes the ticket with the given id
   deleteTicketByID: function(id) {

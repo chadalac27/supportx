@@ -1,4 +1,5 @@
 import React from "react";
+import API from "../utils/API";
 
 function Messages(props) {
   if (props.ticketId == null) {
@@ -10,7 +11,6 @@ function Messages(props) {
     return (
       <div className="pastMessages">
         {ticket.messages.map((message, i) => {
-          console.log(message);
           // Time stuff
           let timeStamp = message.timeStamp
             .split("T")[1]
@@ -26,11 +26,16 @@ function Messages(props) {
           let convertedStamp = `${timeStamp[0]}:${timeStamp[1]}${label}`;
           let senderIcon = "https://via.placeholder.com/100";
           // Image stuff
+          console.log(ticket);
           if (message.senderName !== "Customer") {
             let agent = ticket.agents.filter(
               (element) => element.username === message.senderName
             )[0];
-            senderIcon = agent.avatarURL;
+            if (agent != null) {
+              senderIcon = agent.avatarURL;
+            } else {
+              senderIcon = props.user[2];
+            }
           }
           return (
             <div key={i} className="message">

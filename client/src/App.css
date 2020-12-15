@@ -526,9 +526,18 @@ ul {
   transition: all 0.2s;
   height: 150px;
 }
-.backButton:hover {
+.joinButton:hover, .backButton:hover {
   border-radius: 50%;
 }
-.backButton:active {
+.joinButton:active, .backButton:active {
   background: #226144;
+}
+.joinButton {
+  background: #42b680;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  transition: all 0.2s;
+  height: 150px;
+  margin-top: auto;
 }

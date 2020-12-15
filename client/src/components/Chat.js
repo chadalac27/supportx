@@ -6,6 +6,20 @@ import API from "../utils/API";
 // TICKET DATA SHOULD BE PASSED IN FROM THE SELECTED CHANNEL
 
 function Chat(props) {
+  // Check if agent is already assigned to this ticket
+  const [isAssigned, assign] = React.useState(false);
+  let assignedList = [];
+  if (props.currentTicket[0] && !isAssigned) {
+    API.getTicketByID(props.currentTicket[2]).then((res) => {
+      for (let i = 0; i < res.data.agents.length; i++) {
+        assignedList.push(res.data.agents[i]);
+        if (res.data.agents[i] === props.user[1]) {
+          assign(true);
+        }
+      }
+    });
+  }
+
   const [currentMessage, setMessage] = React.useState("");
 
   // INITIALLY SETS THE TITLE AS THE NAME OF THE CHANNEL CLICKED ON
@@ -21,12 +35,25 @@ function Chat(props) {
     props.setTicket([false, null, null]);
   }
 
+  function joinButton() {
+    if (isAssigned === true) {
+      return;
+    } else {
+      assignedList.push(props.user[1]);
+      API.updateTicketByID(props.currentTicket[2], {
+        agents: assignedList,
+      }).then(() => {
+        assign(true);
+      });
+    }
+  }
+
   function updateMessage(e) {
     setMessage(e.target.value);
   }
 
   function sendMessage(e) {
-    if (currentMessage === "") {
+    if (currentMessage === "" || !isAssigned) {
       return;
     }
     let previousTickets = [...props.ticketData];
@@ -132,6 +159,12 @@ function Chat(props) {
         <div className="sidebar">
           <button onClick={backButton} className="backButton">
             Return to ticket list
+          </button>
+          <button
+            onClick={joinButton}
+            className={`${isAssigned ? "none" : "joinButton"}`}
+          >
+            Join Ticket
           </button>
         </div>
       </div>
