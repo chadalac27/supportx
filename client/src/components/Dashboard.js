@@ -29,7 +29,6 @@ const Dashboard = (props) => {
   ]);
 
   if (user[3] === false) {
-    console.log(authContext);
     serverApi = [
       {
         _id: "Logout",
@@ -39,8 +38,10 @@ const Dashboard = (props) => {
       },
     ];
     API.getCompanyByUserID(authContext.agent._id).then((res) => {
-      res.data.forEach((server) => {
-        serverApi.push(server);
+      res.data.forEach((newServer) => {
+        if (serverApi.filter(anyServer => (anyServer._id === newServer._id)).length === 0) {
+          serverApi.push(newServer)
+        }
       });
       setUser([
         authContext.agent.username,
@@ -100,8 +101,7 @@ const Dashboard = (props) => {
 
   function logout() {
     AuthService.logout().then((res) => {
-      if(res.success === true)
-      {
+      if (res.success === true) {
         authContext.setIsAuthenticated(false);
         props.history.push("/");
       }
