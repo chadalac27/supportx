@@ -7,14 +7,13 @@ import API from "../utils/API";
 
 function Chat(props) {
   // Check if agent is already assigned to this ticket
-  const [isAssigned, assign] = React.useState(false);
   let assignedList = [];
-  if (props.currentTicket[0] && !isAssigned) {
+  if (props.currentTicket[0] && !props.isAssigned) {
     API.getTicketByID(props.currentTicket[2]).then((res) => {
       for (let i = 0; i < res.data.agents.length; i++) {
         assignedList.push(res.data.agents[i]);
         if (res.data.agents[i] === props.user[1]) {
-          assign(true);
+          props.assign(true);
         }
       }
     });
@@ -33,17 +32,18 @@ function Chat(props) {
   // RESETS THE STATE OF THE TITLE
   function backButton() {
     props.setTicket([false, null, null]);
+    props.assign(false);
   }
 
   function joinButton() {
-    if (isAssigned === true) {
+    if (props.isAssigned === true) {
       return;
     } else {
       assignedList.push(props.user[1]);
       API.updateTicketByID(props.currentTicket[2], {
         agents: assignedList,
       }).then(() => {
-        assign(true);
+        props.assign(true);
       });
     }
   }
@@ -53,7 +53,7 @@ function Chat(props) {
   }
 
   function sendMessage(e) {
-    if (currentMessage === "" || !isAssigned) {
+    if (currentMessage === "" || !props.isAssigned) {
       return;
     }
     let previousTickets = [...props.ticketData];
@@ -158,12 +158,14 @@ function Chat(props) {
           </div>
         </div>
         <div className="sidebar">
-          <button onClick={backButton} className="backButton">
+          <button onClick={backButton} className="$ backButton">
             Return to ticket list
           </button>
           <button
             onClick={joinButton}
-            className={`${isAssigned ? "none" : "joinButton"}`}
+            className={`${props.currentTicket[0] === false ? "hide" : "show"} ${
+              props.isAssigned ? "none" : "joinButton"
+            }`}
           >
             Join Ticket
           </button>
