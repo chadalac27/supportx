@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default {
   login: (agent) => {
     //console.log("AuthService/login:agent",agent);

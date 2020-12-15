@@ -1,56 +1,51 @@
-import React, {useState, useRef,useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AuthService from '../utils/AuthServices';
-import Alert from './Alert';
+import AuthService from "../utils/AuthServices";
+import Alert from "./Alert";
 
 const Signup = (props) => {
-
-  const [agent, setAgent] = useState({username: "", password: ""});
+  const [agent, setAgent] = useState({ username: "", password: "" });
   const [message, setMessage] = useState(null);
   let timerID = useRef(null);
 
   useEffect(() => {
-    return() =>{
+    return () => {
       clearTimeout(timerID);
-    }
-  },[]);
+    };
+  }, []);
 
+  const onChange = (e) => {
+    setAgent({ ...agent, [e.target.name]: e.target.value });
+  };
 
-  const onChange = e => {
-    setAgent({...agent, [e.target.name] : e.target.value});
-  }
-
-  const resetForm= () => {
+  const resetForm = () => {
     //setAgent({})
-  }
+  };
 
-  const onSubmit = e =>{
+  const onSubmit = (e) => {
     e.preventDefault();
     setMessage({});
-    console.log("onSubmit - Agent",agent);
-    AuthService.register(agent).then(data => {
-      console.log("data",data);
+    console.log("onSubmit - Agent", agent);
+    AuthService.register(agent).then((data) => {
+      console.log("data", data);
       const { message } = data;
       console.log("Message", message);
       setMessage(message);
       resetForm();
-      if(!message.msgBody){
+      if (!message.msgBody) {
         timerID = setTimeout(() => {
-          props.history.push('/login');
-        },2000)
+          props.history.push("/login");
+        }, 2000);
       }
     });
-  }
-
-  
-
+  };
 
   return (
     <div className="login-wrapper">
       <div className="title">SupportX</div>
       <div className="formStyle">
         <form className="login-form" onSubmit={onSubmit}>
-        <label htmlFor="login-email">Email: </label>
+          <label htmlFor="login-email">Email: </label>
           <input
             id="login-email"
             type="email"
@@ -81,7 +76,7 @@ const Signup = (props) => {
             Sign Up
           </button>
         </form>
-        {message ? <Alert message={message}/> : null}
+        {message ? <Alert message={message} /> : null}
       </div>
     </div>
   );

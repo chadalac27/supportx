@@ -6,6 +6,7 @@ import Chat from "./Chat";
 import Title from "./Title";
 import API from "../utils/API";
 import { AuthContext } from "../Context/AuthContext";
+import AuthService from "../utils/AuthServices";
 
 // DATA STRUCTURE RECEIVED FROM A SINGLE SERVER
 let channelData = [];
@@ -28,6 +29,7 @@ const Dashboard = () => {
   ]);
 
   if (user[3] === false) {
+    console.log(authContext);
     serverApi = [
       {
         _id: "Logout",
@@ -51,7 +53,7 @@ const Dashboard = () => {
 
   function serverClick(e) {
     const serverIndex = e.currentTarget.getAttribute("index");
-    if (serverIndex === 0) {
+    if (parseInt(serverIndex) === 0) {
       logout();
       return;
     }
@@ -96,7 +98,11 @@ const Dashboard = () => {
     assign(false);
   }
 
-  function logout() {}
+  function logout() {
+    AuthService.logout().then((res) => {
+      console.log(res.data);
+    });
+  }
 
   return (
     <div className={`${load === true ? "app" : "appBegin"}`}>
