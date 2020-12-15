@@ -36,11 +36,11 @@ router.post(
 );
 
 
-router.post(
+router.get(
   "/logout",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    //console.log("Attempting to logout");
+    console.log("Attempting to logout");
     res.clearCookie("access_token");
     res.json({ agent: { username: "" }, success: true });
   }

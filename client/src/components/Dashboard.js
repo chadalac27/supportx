@@ -13,7 +13,7 @@ let channelData = [];
 let ticketApi = [];
 let serverApi = [];
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const authContext = React.useContext(AuthContext);
   const [currentServer, setServer] = React.useState(null);
   const [currentChannel, setChannel] = React.useState(null);
@@ -100,7 +100,11 @@ const Dashboard = () => {
 
   function logout() {
     AuthService.logout().then((res) => {
-      console.log(res.data);
+      if(res.success === true)
+      {
+        authContext.setIsAuthenticated(false);
+        props.history.push("/");
+      }
     });
   }
 
