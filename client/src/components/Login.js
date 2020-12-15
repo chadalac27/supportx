@@ -53,11 +53,11 @@ const Login = (props) => {
             onChange={onChange}
           />
           <Link to="/signup">Don't have an account?</Link>
+          {message ? <Alert message={message} /> : null}
           <button type="submit" className="buttonStyle">
             Log In
           </button>
         </form>
-        {message ? <Alert message={message} /> : null}
       </div>
     </div>
   );
