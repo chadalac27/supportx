@@ -11,12 +11,12 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/supportx_db");
 //         console.log(data);
 //     })
 let companies = [];
-let users = [];
+let agents = [];
 
 db.Company.find({}).then((dbCompanies) => {
   companies = dbCompanies;
   db.Agent.find({}).then((dbAgents) => {
-    users = dbAgents;
+    agents = dbAgents;
     StartSeed();
   });
 });
@@ -24,7 +24,7 @@ db.Company.find({}).then((dbCompanies) => {
 function StartSeed() {
   const ticketSeed = [
     {
-      agents: [users[0]._id],
+      agents: [agents[0]._id],
       companyID: companies[0]._id,
       severity: 0,
       title: "Help! My Cats Stuck In a Tree",
@@ -37,14 +37,14 @@ function StartSeed() {
         {
           message: "Ok, where is the cat?",
           timeStamp: new Date(),
-          senderName: users[0].username,
-          avatarURL: users[0].avatarURL
+          senderName: agents[0].username,
+          avatarURL: agents[0].avatarURL
         },
       ],
       channel: "General",
     },
     {
-      agents: [users[1]._id],
+      agents: [agents[1]._id],
       companyID: companies[0]._id,
       severity: 8,
       title: "My order is stuck",
@@ -59,14 +59,14 @@ function StartSeed() {
           message:
             "Oh! im sorry to hear you are having problems.  Please try holding ALT and pressing F4 at the same time. Your problem should be resolved ",
           timeStamp: new Date(),
-          senderName: users[1].username,
-          avatarURL: users[1].avatarURL
+          senderName: agents[1].username,
+          avatarURL: agents[1].avatarURL
         },
       ],
       channel: "Processing",
     },
     {
-      agents: [users[1]._id],
+      agents: [agents[1]._id],
       companyID: companies[0]._id,
       severity: 2,
       title: "Can you tell me my tracking number?",
@@ -80,8 +80,8 @@ function StartSeed() {
         {
           message: "What is your order number?",
           timeStamp: new Date(),
-          senderName: users[1].username,
-          avatarURL: users[1].avatarURL
+          senderName: agents[1].username,
+          avatarURL: agents[1].avatarURL
         },
         {
           message: "My order number is 559137",
@@ -91,8 +91,8 @@ function StartSeed() {
         {
           message: "I see it!  Your tracking number is #2345fd456ssY",
           timeStamp: new Date(),
-          senderName: users[1].username,
-          avatarURL: users[1].avatarURL
+          senderName: agents[1].username,
+          avatarURL: agents[1].avatarURL
         },
         {
           message: "Sweet Thank you!",
@@ -102,12 +102,33 @@ function StartSeed() {
       ],
       channel: "Shipping",
     },
+    {
+      agents: [agents[3]._id],
+      companyID: companies[2]._id,
+      severity: 5,
+      title: "How do I filter my search?",
+      messages: [
+        {
+          message: "Hi, im on your website and i was curious if you knew how i could filter my search",
+          timeStamp: new Date(),
+          senderName: "Customer",
+        },
+        {
+          message: "On the left hand side you will see Filters",
+          timeStamp: new Date(),
+          senderName: agents[3].username,
+          avatarURL: agents[3].avatarURL
+        },
+      ],
+      channel: "General",
+    },
   ];
 
   db.Ticket.remove({})
     .then(() => db.Ticket.create(ticketSeed[0]))
     .then(() => db.Ticket.create(ticketSeed[1]))
     .then(() => db.Ticket.create(ticketSeed[2]))
+    .then(() => db.Ticket.create(ticketSeed[3]))
     .then((data) => {
       process.exit(0);
     })

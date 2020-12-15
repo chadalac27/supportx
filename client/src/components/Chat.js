@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import SeverityRow from "./SeverityRow";
 import Messages from "./Messages";
 import API from "../utils/API";
@@ -18,6 +18,7 @@ function Chat(props) {
       }
     });
   }
+  
 
   const [currentMessage, setMessage] = React.useState("");
 
@@ -85,6 +86,16 @@ function Chat(props) {
       sendMessage();
     }
   };
+
+  
+
+  function heartbeat_ChatData ()
+  {
+    // On set interval call this function to do the following
+    // request the current ticket data for the current ticket the agent is looking at
+    //Update the array of messages with this fresh data
+    
+  }
 
   return (
     <div className={`${props.currentChannel == null ? "none" : "chat"}`}>
