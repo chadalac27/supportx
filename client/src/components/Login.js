@@ -35,7 +35,7 @@ const Login = (props) => {
       <div className="title">SupportX</div>
       <div className="formStyle">
         <form className="login-form" onSubmit={onSubmit}>
-          <label htmlFor="login-email">Email: </label>
+          <label htmlFor="login-email">Username: </label>
           <input
             id="login-email"
             type="test"
