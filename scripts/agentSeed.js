@@ -13,7 +13,7 @@ const agentSeed = [
     lastName: "Mc Testerson",
     emailAddress: "dan@mochi.com",
     avatarURL:
-      "https://us.123rf.com/450wm/fizkes/fizkes2007/fizkes200701793/152407909-profile-picture-of-smiling-young-caucasian-man-in-glasses-show-optimism-positive-and-motivation-head.jpg?ver=6",
+      "https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/810/profiles/19338/profileImage/profile-square-extra-small.png",
   },
   {
     username: "mochi_sarah",
@@ -21,8 +21,7 @@ const agentSeed = [
     password: "password1",
     lastName: "Mc Testerson",
     emailAddress: "sarah@mochi.com",
-    avatarURL:
-      "https://images.pexels.com/photos/1310522/pexels-photo-1310522.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    avatarURL: "https://dieteticallyspeaking.com/wp-content/uploads/2017/01/profile-square.jpg"
   },
   {
     username: "iryna",
