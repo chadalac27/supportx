@@ -196,7 +196,7 @@ function StartSeed() {
     },
     {
       agents: [agents[2]._id],
-      companyID: companies[1]._id,
+      companyID: companies[2]._id,
       severity: 8,
       title: "Is this correct formatting?",
       messages: [
@@ -210,7 +210,7 @@ function StartSeed() {
     },
     {
       agents: [agents[2]._id],
-      companyID: companies[1]._id,
+      companyID: companies[2]._id,
       severity: 10,
       title: "When are projects due?",
       messages: [
