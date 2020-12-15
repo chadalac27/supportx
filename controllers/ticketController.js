@@ -44,13 +44,15 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   update: function (req, res) {
+    console.log(req.body);
     db.Ticket.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     )
       .then((updatedTicket) => {
-        res.send(updatedTicket);
+        console.log(updatedTicket);
+        res.json(updatedTicket);
       })
       .catch((err) => res.status(422).json(err));
   },

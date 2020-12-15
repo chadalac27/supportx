@@ -35,20 +35,20 @@ function Chat(props) {
     )[0];
     let newMessage = {
       message: currentMessage,
-      timeStamp: "Time not supported",
+      timeStamp: new Date(),
       senderName: props.user[0],
     };
     let ticketIndex = previousTickets.findIndex(
       (ticket) => ticket._id === props.currentTicket[2]
     );
     updatedTicket.messages.push(newMessage);
-    API.updateTicketByID(props.currentTicket[2], updatedTicket.messages).then(
-      () => {
-        previousTickets[ticketIndex] = updatedTicket;
-        props.setTicketData(previousTickets);
-        setMessage("");
-      }
-    );
+    API.updateTicketByID(props.currentTicket[2], {
+      messages: updatedTicket.messages,
+    }).then((res) => {
+      previousTickets[ticketIndex] = res.data;
+      props.setTicketData(previousTickets);
+      setMessage("");
+    });
   }
 
   const onEnterPress = (e) => {
@@ -98,6 +98,7 @@ function Chat(props) {
       <div className={`${props.currentTicket[0] ? "chatInner" : "none"}`}>
         <div className="messagesContainer">
           <Messages
+            user={props.user}
             ticketData={props.ticketData}
             ticketId={props.currentTicket[2]}
           />
