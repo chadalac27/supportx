@@ -19,11 +19,12 @@ const Dashboard = () => {
   const [currentTicket, setTicket] = React.useState([false, null, null]);
   const [load, setLoad] = React.useState(false);
   const [ticketData, setTicketData] = React.useState(ticketApi);
+  const [isAssigned, assign] = React.useState(false);
   const [user, setUser] = React.useState([
     "temp",
     "temp",
     "https://via.placeholder.com/100",
-    false
+    false,
   ]);
 
   if (user[3] === false) {
@@ -36,7 +37,7 @@ const Dashboard = () => {
         authContext.agent.username,
         authContext.agent._id,
         authContext.agent.avatarURL,
-        true
+        true,
       ]);
     });
   }
@@ -81,7 +82,7 @@ const Dashboard = () => {
     const channelIndex = e.currentTarget.getAttribute("index");
     setChannel(channelIndex);
     setTicket([false, null, null]);
-    // POPULATE TICKETS WITH STORED DATA
+    assign(false)
   }
 
   return (
@@ -125,6 +126,8 @@ const Dashboard = () => {
           </div>
         </div>
         <Chat
+          isAssigned={isAssigned}
+          assign={assign}
           currentChannel={channelData[currentChannel]}
           currentTicket={currentTicket}
           setTicket={setTicket}
