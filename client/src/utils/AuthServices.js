@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 export default {
   login: (agent) => {
     //console.log("AuthService/login:agent",agent);
@@ -10,11 +11,11 @@ export default {
       },
     }).then((res) => {
       //console.log("AuthService/login/then:res",res);
-      if (res.status !== 401) {
+      if (res.status !== 401) 
         return res.json().then((data) => data);
-      } else { 
-        return { isAuthenticated: false, agent: {_id:"", username: "" } };
-      }
+       else 
+        return { isAuthenticated: false,message: {msgBody: `Incorrect Username or Password`}, agent: {_id:"", username: "" } };
+      
     });
   },
   register: (agent) => {
@@ -37,11 +38,16 @@ export default {
   },
   isAuthenticated: () => {
     return fetch("/api/users/authenticated").then((res) => {
-      if (res.status !== 401) {
+      //console.log("Status", res.status);
+      if (res.status !== 401){
+        //console.log("Was not 401");
         return res.json().then((data) => data);
-      } else {
-        return { isAuthenticated: false, agent: {_id:"", username: "" } };
       }
+       else {
+         //console.log("Was 401");
+        return { isAuthenticated: false, agent: {_id:"", username: "" } };
+       }
+      
     });
   },
 };

@@ -9,9 +9,9 @@ function ServerList(props) {
     >
       {props.data.map((server, i) => (
         <button
-          className={`serverButton ${
-            props.focus === String(i) ? "focusServer" : ""
-          }`}
+          className={`${props.focus === String(i) ? "focusServer" : ""} ${
+            i === 0 ? "" : "serverButton"
+          } ${i === 0 ? "logoutButton" : ""} `}
           index={i}
           key={i}
           onClick={props.action}
@@ -20,10 +20,14 @@ function ServerList(props) {
           <img
             className="serverAvatar"
             alt="Server Avatar"
-            src={server.avatarURL}
+            src={`${
+              server.avatarURL.length > 0
+                ? server.avatarURL
+                : "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
+            }`}
           ></img>
           {/* Consider only making visible on hover */}
-          <span className="serverTooltip">{server.name}</span>
+          <span className="serverTooltip">{`${i === 0 ? "Logout" : ""}`}</span>
         </button>
       ))}
     </div>

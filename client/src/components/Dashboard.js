@@ -6,43 +6,58 @@ import Chat from "./Chat";
 import Title from "./Title";
 import API from "../utils/API";
 import { AuthContext } from "../Context/AuthContext";
+import AuthService from "../utils/AuthServices";
 
 // DATA STRUCTURE RECEIVED FROM A SINGLE SERVER
 let channelData = [];
-let serverApi = [];
 let ticketApi = [];
+let serverApi = [];
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const authContext = React.useContext(AuthContext);
   const [currentServer, setServer] = React.useState(null);
   const [currentChannel, setChannel] = React.useState(null);
   const [currentTicket, setTicket] = React.useState([false, null, null]);
   const [load, setLoad] = React.useState(false);
   const [ticketData, setTicketData] = React.useState(ticketApi);
+  const [isAssigned, assign] = React.useState(false);
   const [user, setUser] = React.useState([
     "temp",
     "temp",
     "https://via.placeholder.com/100",
-    false
+    false,
   ]);
 
   if (user[3] === false) {
-    serverApi = [];
+    serverApi = [
+      {
+        _id: "Logout",
+        name: "Logout",
+        avatarURL: "",
+        agents: [""],
+      },
+    ];
     API.getCompanyByUserID(authContext.agent._id).then((res) => {
-      res.data.forEach((server) => {
-        serverApi.push(server);
+      res.data.forEach((newServer) => {
+        if (serverApi.filter(anyServer => (anyServer._id === newServer._id)).length === 0) {
+          serverApi.push(newServer)
+        }
       });
       setUser([
         authContext.agent.username,
         authContext.agent._id,
         authContext.agent.avatarURL,
-        true
+        true,
       ]);
     });
   }
 
   function serverClick(e) {
     const serverIndex = e.currentTarget.getAttribute("index");
+    if (parseInt(serverIndex) === 0) {
+      logout();
+      return;
+    }
     const serverListNode = e.currentTarget.parentNode;
     const wrapper = document.getElementsByClassName("wrapper")[0];
     API.getTicketByCompanyID(e.currentTarget.dataset.id).then((res) => {
@@ -81,7 +96,16 @@ const Dashboard = () => {
     const channelIndex = e.currentTarget.getAttribute("index");
     setChannel(channelIndex);
     setTicket([false, null, null]);
-    // POPULATE TICKETS WITH STORED DATA
+    assign(false);
+  }
+
+  function logout() {
+    AuthService.logout().then((res) => {
+      if (res.success === true) {
+        authContext.setIsAuthenticated(false);
+        props.history.push("/");
+      }
+    });
   }
 
   return (
@@ -125,6 +149,8 @@ const Dashboard = () => {
           </div>
         </div>
         <Chat
+          isAssigned={isAssigned}
+          assign={assign}
           currentChannel={channelData[currentChannel]}
           currentTicket={currentTicket}
           setTicket={setTicket}

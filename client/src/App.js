@@ -3,9 +3,11 @@ import { Route } from "react-router-dom";
 import Home from "./components/Login";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
-import DashboardClone from "./components/DashboardClone";
 import React, {useContext} from 'react';
 import {AuthContext} from './Context/AuthContext';
+import PrivateRoute from './hocs/PrivateRoute';
+import UnPrivateRoute from './hocs/UnPrivateRoute';
+import OpenAPI from './components/OpenAPI';
 
 function App() {
   const {agent, setAgent, isAuthenticated, setIsAuthenticated} = useContext(AuthContext);
@@ -13,10 +15,10 @@ function App() {
   //console.log(isAuthenticated);
   return (
     <div>
-      <Route path="/" exact component={Home} />
-      <Route path="/signup" exact component={Signup} />
-      <Route path="/dashboard" exact component={Dashboard} />
-      <Route path="/test" exact component={DashboardClone} />
+      <UnPrivateRoute path="/" exact component={Home} />
+      <UnPrivateRoute path="/signup" exact component={Signup} />
+      <PrivateRoute path="/dashboard" exact component={Dashboard} />
+      <Route path="/test/:companyID" exact component={OpenAPI} />
     </div>
   );
 }

@@ -30,17 +30,17 @@ router.post(
       res.status(200).json({ isAuthenticated: true, agent: { _id, username, avatarURL } });
     } else {
       console.log("Failled To Authenticate!");
-      res.status(400).json({ isAuthenticated: false });
+      res.status(400).json({ isAuthenticated: false, message: {msgBody: `Incorrect Username or Password`} });
     }
   }
 );
 
 
-router.post(
+router.get(
   "/logout",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    //console.log("Attempting to logout");
+    console.log("Attempting to logout");
     res.clearCookie("access_token");
     res.json({ agent: { username: "" }, success: true });
   }

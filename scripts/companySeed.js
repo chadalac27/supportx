@@ -21,40 +21,64 @@ db.Agent.find({}).then((dbAgents) => {
 function StartSeed() {
   const companySeed = [
     {
-      name: "The Bear Den",
+      name: "Mochi Madness",
       owner: agents[0]._id,
       seats: "5",
-      agents: [agents[0]._id,agents[1]._id],
+      agents: [agents[1]._id,agents[2]._id,agents[3]._id,agents[4]._id,agents[5]._id],
       managers:[agents[1]._id],
       avatarURL:
-        "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
+        "https://image.shutterstock.com/image-vector/mochi-icon-wagashi-japanese-rice-260nw-459417508.jpg",
     },
     {
-      name: "The Bear Den2",
-      owner: agents[0]._id,
+      name: "Nike",
+      owner: agents[2]._id,
       seats: "3",
-      agents: [agents[1]._id],
-      managers:[agents[0]._id],
+      agents: [agents[2]._id],
+      managers:[agents[2]._id],
       avatarURL:
-        "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
+        "https://cdn.iconscout.com/icon/free/png-512/nike-1-202653.png",
     },
     {
-      name: "Big Bears Only",
-      owner: agents[0]._id,
+      name: "Trilogy Edu",
+      owner: agents[2]._id,
+      seats: "3",
+      agents: [agents[2]._id],
+      managers:[agents[2]._id],
+      avatarURL:
+        "https://photos.angel.co/startups/i/2784197-e6b31eeb437202f94e63c4ab4ca1b94f-medium_jpg.jpg?buster=1477923906",
+    },
+    {
+      name: "Magic Darts",
+      owner: agents[3]._id,
       seats: "5",
-      agents: [agents[0]._id],
-      managers:[agents[0]._id],
+      agents: [agents[3]._id],
+      managers:[agents[3]._id],
       avatarURL:
-        "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
+        "https://pbs.twimg.com/profile_images/1111768768252923908/hyiHj_ue_400x400.jpg",
     },
     {
-      name: "Polar Bear Only",
-      owner: agents[1]._id,
-      seats: "3",
-      agents: [agents[1]._id],
-      managers:[agents[1]._id],
+      name: "Weedmates",
+      owner: agents[5]._id,
+      seats: "5",
+      agents: [agents[3]._id, agents[5]._id],
       avatarURL:
-        "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpPwBcjF5nDl_h920Hurhkh_dyCAqv8cXCcQ&usqp=CAU",
+    },
+    {
+      name: "Super Similar",
+      owner: agents[3]._id,
+      seats: "5",
+      agents: [agents[3]._id, agents[4]._id],
+      avatarURL:
+        "https://github.com/jbaxter91/super-similar/blob/master/assets/images/loading_poster.gif?raw=true",
+    },
+    {
+      name: "Quick Trends",
+      owner: agents[4]._id,
+      seats: "5",
+      agents: [agents[4]._id],
+      avatarURL:
+        "https://github.com/ssbrear/quicktrends-v2/blob/main/public/assets/pictures/logo.png?raw=true",
     },
   ];
 
@@ -85,10 +109,13 @@ function StartSeed() {
   UpdateDB();
   function UpdateDB() {
     db.Company.remove({})
-      .then(() => db.Company.create(companySeed[0]))
-      .then(() => db.Company.create(companySeed[1]))
-      .then(() => db.Company.create(companySeed[2]))
-      .then(() => db.Company.create(companySeed[3]))
+      .then(() => db.Company.create(companySeed[0]))  //Mochi Madness
+      .then(() => db.Company.create(companySeed[1]))  //Nike
+      .then(() => db.Company.create(companySeed[2]))  //Trilogy Edu
+      .then(() => db.Company.create(companySeed[3]))  //Magic Darts
+      .then(() => db.Company.create(companySeed[4]))  //weedmates
+      .then(() => db.Company.create(companySeed[5]))  //Super Similar
+      .then(() => db.Company.create(companySeed[6]))  //Quick trends
       .then((data) => {
         process.exit(0);
       })

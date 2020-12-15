@@ -79,4 +79,11 @@ export default {
   createCompany: function(companyData) {
     return axios.post(`/api/companies`, companyData);
   },
+
+
+  // Open API Calls (more strict on the data it returns)
+
+  createTicket: function(companyID){
+    return axios.post(`/api/companies`, companyID);
+  }
 };

@@ -1,39 +1,34 @@
-import React, {useState, useContext} from "react";
-import { Link } from "react-router-dom";
-import {AuthContext} from '../Context/AuthContext';
-import AuthService from '../utils/AuthServices';
-import Alert from './Alert';
+import React, { useState, useContext } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
+import AuthService from "../utils/AuthServices";
+import Alert from "./Alert";
 
 const Login = (props) => {
-
-  const [agent, setAgent] = useState({ username: "", password: ""});
+  const [agent, setAgent] = useState({ username: "", password: "" });
   const [message, setMessage] = useState(null);
   const authContext = useContext(AuthContext);
 
-
-  const onChange = e => {
+  const onChange = (e) => {
     console.log(agent);
-    setAgent({...agent, [e.target.name] : e.target.value})
-  }
+    setAgent({ ...agent, [e.target.name]: e.target.value });
+  };
 
-  const onSubmit = e =>{
+  const onSubmit = (e) => {
     e.preventDefault();
-    AuthService.login(agent).then(data => {
+    AuthService.login(agent).then((data) => {
       console.log("componenet/login/onsubmit:data", data);
-      const {isAuthenticated, agent, message} = data;
-      if(isAuthenticated){
+      const { isAuthenticated, agent, message } = data;
+      if (isAuthenticated) {
         authContext.setAgent(agent);
         authContext.setIsAuthenticated(isAuthenticated);
-        props.history.push('/dashboard')
-      }
-      else{
+        props.history.push("/dashboard");
+        //<Redirect to="/dashboard" />
+      } else {
         setMessage(message);
       }
     });
-  }
-
-  
-
+  };
 
   return (
     <div className="login-wrapper">
@@ -62,7 +57,7 @@ const Login = (props) => {
             Log In
           </button>
         </form>
-        {message ? <Alert message={message}/> : null}
+        {message ? <Alert message={message} /> : null}
       </div>
     </div>
   );
