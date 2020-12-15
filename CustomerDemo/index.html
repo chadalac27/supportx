@@ -22,17 +22,17 @@
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div id="modalwrap" class="modal-dialog modal-sm modal-dialog-centered" role="document">
-            <div id="modalcontent" class=" modal-content">
-                <div id="UserForm" class=" size rounded bg-dark">
+            <div style="background-color:  #6c747c;" id="modalcontent" class=" modal-content">
+                <div style="background-color:  #6c747c;" id="UserForm" class=" size rounded ">
                     <button onclick=closebutton() id="closeBtn" type="button" class="close btn" data-dismiss="modal"
                         aria-label="Close" style="color: red; position: absolute;margin-top: 1px;margin-left: 275px;">
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <form id="test" class="size mx-auto my-3 rounded">
-                        <label for="fname">Email:</label><br>
+                        <label style="color:  #27292b;" for="fname">Email:</label><br>
                         <input class="form-control" type="text" id="fname" name="fname" value="sample@sample.com"><br>
-                        <label for="lname">Category:</label><br>
-                        <select class="form-control" id="sel1" value=" select one">
+                        <label style="color:  #27292b;"for="lname">Category:</label><br>
+                        <select style="color:  #27292b;" class="form-control" id="sel1" value=" select one">
                             <option>Select One</option>
                             <option>General </option>
                             <option>Online/Login Support</option>
@@ -75,7 +75,7 @@
                             <textarea class="mx-auto" style="width: 750px;" placeholder="Please wait for your Agent to Connect..."
                                 name="msg" required></textarea>
                             <br>
-                            <button style="color:;" type="submit" class="btn">Send</button>
+                            <button  type="submit" class="btn">Send</button>
                             <button style="color:  #27292b;"type="button" class="btn cancel" onclick="closeForm()">Close</button>
                         </div>
                     </form>
