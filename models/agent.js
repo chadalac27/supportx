@@ -6,12 +6,12 @@ const agentSchema = new Schema({
   username: {
     type: String,
     trim: true,
-    required: true,
+    required: [true,"Incorrect Username Format"],
     unique: true,
   },
   password: {
     type: String,
-    required: true,
+    required: [true, "Password Required"],
   },
   firstName: {
     type: String,
@@ -51,7 +51,7 @@ agentSchema.methods.comparePassword = function (password, cb) {
     if (err) return cb(err);
     else {
       // Password not a match, returning ismatch
-      if (!isMatch) return cb(null, ismatch);
+      if (!isMatch) return cb(null, false);
       //Password is a match, returning this user
       return cb(null, this);
     }
