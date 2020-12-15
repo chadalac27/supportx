@@ -41,7 +41,7 @@ function StartSeed() {
           avatarURL: users[0].avatarURL
         },
       ],
-      channel: "General, Processing, Shipping",
+      channel: "General",
     },
     {
       agents: [users[1]._id],

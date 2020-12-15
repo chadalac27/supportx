@@ -1,5 +1,5 @@
 import React, {useState, useContext} from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import {AuthContext} from '../Context/AuthContext';
 import AuthService from '../utils/AuthServices';
 import Alert from './Alert';
@@ -24,7 +24,8 @@ const Login = (props) => {
       if(isAuthenticated){
         authContext.setAgent(agent);
         authContext.setIsAuthenticated(isAuthenticated);
-        props.history.push('/dashboard')
+        props.history.push('/dashboard');
+        //<Redirect to="/dashboard" />
       }
       else{
         setMessage(message);

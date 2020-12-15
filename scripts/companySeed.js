@@ -21,40 +21,31 @@ db.Agent.find({}).then((dbAgents) => {
 function StartSeed() {
   const companySeed = [
     {
-      name: "The Bear Den",
+      name: "Mochi Madness",
       owner: agents[0]._id,
       seats: "5",
       agents: [agents[0]._id,agents[1]._id],
       managers:[agents[1]._id],
       avatarURL:
-        "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
+        "https://image.shutterstock.com/image-vector/mochi-icon-wagashi-japanese-rice-260nw-459417508.jpg",
     },
     {
-      name: "The Bear Den2",
-      owner: agents[0]._id,
+      name: "Nike",
+      owner: agents[2]._id,
       seats: "3",
-      agents: [agents[1]._id],
-      managers:[agents[0]._id],
+      agents: [agents[2]._id],
+      managers:[agents[2]._id],
       avatarURL:
-        "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
+        "https://cdn.iconscout.com/icon/free/png-512/nike-1-202653.png",
     },
     {
-      name: "Big Bears Only",
-      owner: agents[0]._id,
+      name: "Magic Darts",
+      owner: agents[3]._id,
       seats: "5",
-      agents: [agents[0]._id],
-      managers:[agents[0]._id],
+      agents: [agents[3]._id],
+      managers:[agents[3]._id],
       avatarURL:
-        "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
-    },
-    {
-      name: "Polar Bear Only",
-      owner: agents[1]._id,
-      seats: "3",
-      agents: [agents[1]._id],
-      managers:[agents[1]._id],
-      avatarURL:
-        "https://i1.sndcdn.com/avatars-000560560761-z676ev-t500x500.jpg",
+        "https://pbs.twimg.com/profile_images/1111768768252923908/hyiHj_ue_400x400.jpg",
     },
   ];
 

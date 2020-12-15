@@ -30,7 +30,7 @@ router.post(
       res.status(200).json({ isAuthenticated: true, agent: { _id, username, avatarURL } });
     } else {
       console.log("Failled To Authenticate!");
-      res.status(400).json({ isAuthenticated: false });
+      res.status(400).json({ isAuthenticated: false, message: {msgBody: `Incorrect Username or Password`} });
     }
   }
 );

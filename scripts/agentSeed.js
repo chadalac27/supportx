@@ -7,28 +7,48 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/supportx_db");
 
 const agentSeed = [
   {
-    username: "FluffyBear",
-    password: "password1",
-    firstName: "Testy",
+    username: "mochi_dan",
+    password: "mochi",
+    firstName: "Dan",
     lastName: "Mc Testerson",
-    emailAddress: "test@testy.com",
+    emailAddress: "dan@mochi.com",
     avatarURL:
-      "https://cdn0.iconfinder.com/data/icons/brown-bear-emoticon-filled/64/cute_bear_face_avatar-28-512.png",
+      "https://image.shutterstock.com/image-vector/mochi-icon-wagashi-japanese-rice-260nw-459417508.jpg",
   },
   {
-    username: "FluffyPanda",
-    firstName: "Testy2",
+    username: "mochi_sarah",
+    firstName: "Sarah",
     password: "password1",
-    lastName: "Mc Testerson2",
-    emailAddress: "test@testy2.com",
+    lastName: "Mc Testerson",
+    emailAddress: "sarah@mochi.com",
     avatarURL:
-      "https://store.playstation.com/store/api/chihiro/00_09_000/container/SG/en/999/UP2538-CUSA05620_00-ASIA000000000302/1578099581000/image?w=240&h=240&bg_color=000000&opacity=100&_version=00_09_000",
+      "https://image.shutterstock.com/image-vector/mochi-icon-wagashi-japanese-rice-260nw-459417508.jpg",
+  },
+  {
+    username: "iryna",
+    firstName: "Iryna",
+    password: "password1",
+    lastName: "Mc Testerson",
+    emailAddress: "iryna@nike.com",
+    avatarURL:
+      "https://cdn.iconscout.com/icon/free/png-512/nike-1-202653.png",
+  },
+  {
+    username: "jbaxter",
+    firstName: "John",
+    password: "password1",
+    lastName: "Mc Testerson",
+    emailAddress: "john@a-zdarts.com",
+    avatarURL:
+      "https://avatars3.githubusercontent.com/u/67088604?s=460&v=4",
   },
 ];
 
 db.Agent.remove({})
   .then(() => db.Agent.create(agentSeed[0]))
   .then(() => db.Agent.create(agentSeed[1]))
+  .then(() => db.Agent.create(agentSeed[2]))
+  .then(() => db.Agent.create(agentSeed[3]))
   .then((data) => {
     //console.log(data.result.n + " records inserted!");
     process.exit(0);
