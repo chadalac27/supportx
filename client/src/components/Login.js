@@ -42,7 +42,6 @@ const Login = (props) => {
             className="inputStyle"
             name="username"
             onChange={onChange}
-            placeholder="Enter Username"
           />
           <label htmlFor="login-pw">Password: </label>
           <input

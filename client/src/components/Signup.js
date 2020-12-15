@@ -52,7 +52,6 @@ const Signup = (props) => {
             className="inputStyle"
             name="emailAddress"
             onChange={onChange}
-            placeholder="Enter Username"
           />
           <label htmlFor="login-email">Username: </label>
           <input
@@ -61,7 +60,6 @@ const Signup = (props) => {
             className="inputStyle"
             name="username"
             onChange={onChange}
-            placeholder="Enter Username"
           />
           <label htmlFor="login-pw">Password: </label>
           <input
@@ -71,7 +69,7 @@ const Signup = (props) => {
             name="password"
             onChange={onChange}
           />
-          {/* <Link to="/signup">Don't have an account?</Link> */}
+          <Link to="/">Already have an account?</Link>
           <button type="submit" className="buttonStyle">
             Sign Up
           </button>
