@@ -26,18 +26,20 @@ const Signup = (props) => {
 
   const onSubmit = e =>{
     e.preventDefault();
+    setMessage({});
     console.log("onSubmit - Agent",agent);
     AuthService.register(agent).then(data => {
+      console.log("data",data);
       const { message } = data;
+      console.log("Message", message);
       setMessage(message);
       resetForm();
-      if(!message.msgError){
+      if(!message.msgBody){
         timerID = setTimeout(() => {
           props.history.push('/login');
         },2000)
       }
     });
-    console.log(e.target);
   }
 
   
@@ -48,10 +50,19 @@ const Signup = (props) => {
       <div className="title">SupportX</div>
       <div className="formStyle">
         <form className="login-form" onSubmit={onSubmit}>
-          <label htmlFor="login-email">Email: </label>
+        <label htmlFor="login-email">Email: </label>
           <input
             id="login-email"
-            type="test"
+            type="email"
+            className="inputStyle"
+            name="emailAddress"
+            onChange={onChange}
+            placeholder="Enter Username"
+          />
+          <label htmlFor="login-email">Username: </label>
+          <input
+            id="login-email"
+            type="text"
             className="inputStyle"
             name="username"
             onChange={onChange}
@@ -65,9 +76,9 @@ const Signup = (props) => {
             name="password"
             onChange={onChange}
           />
-          <Link to="/signup">Don't have an account?</Link>
+          {/* <Link to="/signup">Don't have an account?</Link> */}
           <button type="submit" className="buttonStyle">
-            Log In
+            Sign Up
           </button>
         </form>
         {message ? <Alert message={message}/> : null}

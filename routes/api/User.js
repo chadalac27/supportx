@@ -35,6 +35,7 @@ router.post(
   }
 );
 
+
 router.post(
   "/logout",
   passport.authenticate("jwt", { session: false }),
@@ -55,8 +56,12 @@ router.get(
   }
 );
 
+router.route('/register').post(userController.create);
+
 // Matches with "/api/users"
-router.route("/").get(userController.findAll).post(userController.create);
+router.route("/").get(userController.findAll);
+
+
 
 // Matches with "/api/users/:id"
 router
