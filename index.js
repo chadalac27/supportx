@@ -1,52 +1,42 @@
-
 const express = require("express");
-const path = require("path");
 const mongoose = require("mongoose");
-const db = require("./models");
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/supportx_db");
-
-
-
+const passport = require("passport");
+const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
+app.use(
+  require("express-session")({
+    secret: "keyboard cat",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
+//express urlencoded allows use of params
+app.use(require("body-parser").urlencoded({ extended: true }));
+//json.. nuff said :D
+app.use(express.json());
+app.use(require("cookie-parser")());
 
+// Serve up static assets
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+app.use(passport.initialize());
+app.use(passport.session());
+// connect mongo server
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/supportx_db");
+//Open routes
+app.use(routes);
 
-
-app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "./client/src/index.js"));
+passport.serializeUser(function (agent, done) {
+  done(null, agent);
 });
 
-app.get("/api/users", (req,res)=>{
-    db.User.find({})
-    .then((dbUser) => {
-        res.json(dbUser)
-    })
-    .catch((err) => {
-        console.log(err);
-      //res.status(400).json(err);
-    });
-})
-
-app.listen(PORT, function() {
-  console.log(` Server Running on port ${PORT}!`);
+passport.deserializeUser(function (agent, done) {
+  done(null, agent);
 });
-// // Connect to the Mongo DB
-// mongoose.connect(
-//   process.env.MONGODB_URI || "mongodb://localhost/reactrecipes",
-//   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
-// );
 
-// // Use apiRoutes
-// app.use("/api", apiRoutes);
-
-// Send every request to the React app
-// Define any API routes before this runs
-
-
-
-
-
-
-
-
+app.listen(PORT, function () {
+  console.log(`http://localhost:${PORT} Server Running on port ${PORT}!`);
+});

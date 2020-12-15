@@ -1,70 +1,90 @@
-import React from "react";
-import { makeStyles } from "@material-ui/styles";
-import Grid from "@material-ui/core/Grid";
+import React, {useState, useRef,useEffect} from "react";
 import { Link } from "react-router-dom";
+import AuthService from '../utils/AuthServices';
+import Alert from './Alert';
 
-const useStyles = makeStyles({
-  title: {
-    marginTop: "10rem",
-    fontSize: "40px",
-    fontFamily: "Corben",
-  },
-  formStyle: {
-    marginTop: "2rem",
-    textAlign: "center",
-  },
-  inputStyle: {
-    padding: "12px 20px",
-    margin: "8px 0",
-    boxSizing: "border-box",
-    transition: "all 1s",
-    "&:focus": {
-      width: "30%",
-    },
-  },
-  buttonStyle: {
-    marginTop: "16px",
-    background: "rgb(224, 221, 193)",
-    padding: "15px 32px",
-    borderRadius: "8px",
-    border: "none",
-    "&:active": {
-      background: "rgb(121, 119, 104)",
-    },
-  },
-});
+const Signup = (props) => {
 
-const Signup = () => {
-  const classes = useStyles();
-  return [
-    <div className="App">
-      <div className={classes.title}>SupportX</div>
-    </div>,
-    <div className={classes.formStyle}>
-      <form>
-        <Grid container direction="column" justify="center" alignItems="center">
-          <label htmlFor="login-email">Email: </label>
+  const [agent, setAgent] = useState({username: "", password: ""});
+  const [message, setMessage] = useState(null);
+  let timerID = useRef(null);
+
+  useEffect(() => {
+    return() =>{
+      clearTimeout(timerID);
+    }
+  },[]);
+
+
+  const onChange = e => {
+    setAgent({...agent, [e.target.name] : e.target.value});
+  }
+
+  const resetForm= () => {
+    //setAgent({})
+  }
+
+  const onSubmit = e =>{
+    e.preventDefault();
+    setMessage({});
+    console.log("onSubmit - Agent",agent);
+    AuthService.register(agent).then(data => {
+      console.log("data",data);
+      const { message } = data;
+      console.log("Message", message);
+      setMessage(message);
+      resetForm();
+      if(!message.msgBody){
+        timerID = setTimeout(() => {
+          props.history.push('/login');
+        },2000)
+      }
+    });
+  }
+
+  
+
+
+  return (
+    <div className="login-wrapper">
+      <div className="title">SupportX</div>
+      <div className="formStyle">
+        <form className="login-form" onSubmit={onSubmit}>
+        <label htmlFor="login-email">Email: </label>
           <input
             id="login-email"
             type="email"
-            className={classes.inputStyle}
-            name="email"
+            className="inputStyle"
+            name="emailAddress"
+            onChange={onChange}
+            placeholder="Enter Username"
+          />
+          <label htmlFor="login-email">Username: </label>
+          <input
+            id="login-email"
+            type="text"
+            className="inputStyle"
+            name="username"
+            onChange={onChange}
+            placeholder="Enter Username"
           />
           <label htmlFor="login-pw">Password: </label>
           <input
             id="login-pw"
             type="password"
-            className={classes.inputStyle}
+            className="inputStyle"
             name="password"
+            onChange={onChange}
           />
-          <Link to="/">Already have an account?</Link>
-          <button type="submit" className={classes.buttonStyle}>
+          {/* <Link to="/signup">Don't have an account?</Link> */}
+          <button type="submit" className="buttonStyle">
             Sign Up
           </button>
-        </Grid>
-      </form>
-    </div>,
-  ];
+        </form>
+        {message ? <Alert message={message}/> : null}
+      </div>
+    </div>
+  );
 };
 
 export default Signup;

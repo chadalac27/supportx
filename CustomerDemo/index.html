@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/supportx/CustomerDemo/stylesheet.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>SupportForm</title>
+</head>
+
+<body style="background-color: rgb(4, 31, 54);">
+    <div class="" id="HelpBtn">
+        <button onclick=generatebutton()
+            style="width: 100px; height: 30px;-ms-transform: rotate(90deg); /* IE 9 */ transform: rotate(90deg); position: fixed;bottom: 100px;right: 20px;"
+            type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+            Questions?
+        </button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div id="modalwrap" class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div id="modalcontent" class=" modal-content">
+                <div id="UserForm" class=" size rounded bg-dark">
+                    <button onclick=closebutton() id="closeBtn" type="button" class="close btn" data-dismiss="modal"
+                        aria-label="Close" style="color: red; position: absolute;margin-top: 1px;margin-left: 275px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <form id="test" class="size mx-auto my-3 rounded">
+                        <label for="fname">Email:</label><br>
+                        <input class="form-control" type="text" id="fname" name="fname" value="sample@sample.com"><br>
+                        <label for="lname">Category:</label><br>
+                        <select class="form-control" id="sel1" value=" select one">
+                            <option>Select One</option>
+                            <option>General </option>
+                            <option>Online/Login Support</option>
+                            <option>Finance</option>
+                            <option>Human Resources</option>
+                        </select><br><br>
+                        <label for="fname">Message:</label><br>
+                        <textarea class="form-control" type="text" id="fname"
+                            name="fname">Type your Questions here ..</textarea><br>
+                        <label for="lname">Severity:</label><br>
+
+                        <select class="form-control" id="sel1">
+                            <option>Select One</option>
+                            <option>Low</option>
+                            <option>Average</option>
+                            <option>High</option>
+                            <option>Critical</option>
+                        </select><br><br>
+                        <a onclick="routeXXX()">
+                            <input class="btn btn-dark" type="button" value="Submit">
+                        </a>
+                    </form>
+                </div>
+                <!-- chat window for holding api call -->
+                <div id="chatwindow" class=" rounded d-none mx-auto" style="background-color:  #6c747c;">
+                    <button onclick=closebutton() id="closeBtn" type="button" style="color:black; ;" class="close btn btn-danger" data-dismiss="modal"
+                        aria-label="Close" style="color: red; position: absolute;margin-top: 1px;margin-left: 750px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <form action="/action_page.php" class=" mx-3 my-3">
+                        <div class="mx-3">
+
+                            <h1 style="color: #27292b;">SupportX</h1>
+                            <br>
+                            <label style="color: #27292b;" for="msg"><b>Message</b></label>
+                            <div class=" rounded mx-auto">
+                                <textarea style="height: 250px; width: 750px;"></textarea>
+                            </div>
+                            <hr>
+                            <textarea class="mx-auto" style="width: 750px;" placeholder="Please wait for your Agent to Connect..."
+                                name="msg" required></textarea>
+                            <br>
+                            <button style="color:;" type="submit" class="btn">Send</button>
+                            <button style="color:  #27292b;"type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

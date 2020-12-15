@@ -2,12 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const companySchema = new Schema({
-  name: {type: String, trim: true, required: true},
-  owner: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  managers: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  agents: [{ type: Schema.Types.ObjectId, ref: "User" }],
+  name: {type: String, trim: true, required: [true, "Please add a company name"], unique: true},
+  owner: { type: Schema.Types.ObjectId, ref: "Agent", required: [true, "Owner Required for creating a new company"] },
+  managers: [{ type: Schema.Types.ObjectId, ref: "Agent"} ],
+  agents: [{ type: Schema.Types.ObjectId, ref: "Agent"} ],
   seats: { type: Number, default: 3},
-  tickets: [{ type: Schema.Types.ObjectId, ref: "Ticket" }],
   avatarURL: {type: String},
 });
 
