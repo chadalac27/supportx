@@ -9,8 +9,8 @@ import { AuthContext } from "../Context/AuthContext";
 
 // DATA STRUCTURE RECEIVED FROM A SINGLE SERVER
 let channelData = [];
-let serverApi = [];
 let ticketApi = [];
+let serverApi = [];
 
 const Dashboard = () => {
   const authContext = React.useContext(AuthContext);
@@ -28,7 +28,14 @@ const Dashboard = () => {
   ]);
 
   if (user[3] === false) {
-    serverApi = [];
+    serverApi = [
+      {
+        _id: "Logout",
+        name: "Logout",
+        avatarURL: "",
+        agents: [""],
+      },
+    ];
     API.getCompanyByUserID(authContext.agent._id).then((res) => {
       res.data.forEach((server) => {
         serverApi.push(server);
@@ -44,6 +51,10 @@ const Dashboard = () => {
 
   function serverClick(e) {
     const serverIndex = e.currentTarget.getAttribute("index");
+    if (serverIndex === 0) {
+      logout();
+      return;
+    }
     const serverListNode = e.currentTarget.parentNode;
     const wrapper = document.getElementsByClassName("wrapper")[0];
     API.getTicketByCompanyID(e.currentTarget.dataset.id).then((res) => {
@@ -82,8 +93,10 @@ const Dashboard = () => {
     const channelIndex = e.currentTarget.getAttribute("index");
     setChannel(channelIndex);
     setTicket([false, null, null]);
-    assign(false)
+    assign(false);
   }
+
+  function logout() {}
 
   return (
     <div className={`${load === true ? "app" : "appBegin"}`}>
