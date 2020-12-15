@@ -185,6 +185,7 @@ ul {
   font-size: 14px;
   position: relative;
   z-index: 1;
+  background: grey;
 }
 .serverAvatar {
   width: 100%;
@@ -202,11 +203,16 @@ ul {
   padding-top: 4rem;
   justify-content: center;
 }
-.serverListBegin .serverButton {
+.serverListBegin * {
   margin: 0 4px;
   height: 150px;
   width: 150px;
   font-size: 24px;
+}
+.serverTooltip {
+  width: 100%;
+  height: 100%;
+  margin-top: 50%;
 }
 .logoutButton:hover, .serverButton:hover {
   border-radius: 20%;

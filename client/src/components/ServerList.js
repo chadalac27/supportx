@@ -11,7 +11,7 @@ function ServerList(props) {
         <button
           className={`${props.focus === String(i) ? "focusServer" : ""} ${
             i === 0 ? "" : "serverButton"
-          } ${props.load === false && i === 0 ? "none" : "logoutButton"} `}
+          } ${i === 0 ? "logoutButton" : ""} `}
           index={i}
           key={i}
           onClick={props.action}
@@ -23,11 +23,11 @@ function ServerList(props) {
             src={`${
               server.avatarURL.length > 0
                 ? server.avatarURL
-                : "https://via.placeholder.com/100"
+                : "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D"
             }`}
           ></img>
           {/* Consider only making visible on hover */}
-          <span className="serverTooltip">{server.name}</span>
+          <span className="serverTooltip">{`${i === 0 ? "Logout" : ""}`}</span>
         </button>
       ))}
     </div>
