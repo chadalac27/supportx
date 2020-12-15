@@ -38,6 +38,7 @@ function StartSeed() {
           message: "Ok, where is the cat?",
           timeStamp: new Date(),
           senderName: users[0].username,
+          avatarURL: users[0].avatarURL
         },
       ],
       channel: "General, Processing, Shipping",
@@ -59,6 +60,7 @@ function StartSeed() {
             "Oh! im sorry to hear you are having problems.  Please try holding ALT and pressing F4 at the same time. Your problem should be resolved ",
           timeStamp: new Date(),
           senderName: users[1].username,
+          avatarURL: users[1].avatarURL
         },
       ],
       channel: "Processing",
@@ -79,6 +81,7 @@ function StartSeed() {
           message: "What is your order number?",
           timeStamp: new Date(),
           senderName: users[1].username,
+          avatarURL: users[1].avatarURL
         },
         {
           message: "My order number is 559137",
@@ -89,6 +92,7 @@ function StartSeed() {
           message: "I see it!  Your tracking number is #2345fd456ssY",
           timeStamp: new Date(),
           senderName: users[1].username,
+          avatarURL: users[1].avatarURL
         },
         {
           message: "Sweet Thank you!",

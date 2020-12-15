@@ -64,6 +64,7 @@ function Chat(props) {
       message: currentMessage,
       timeStamp: new Date(),
       senderName: props.user[0],
+      avatarURL: props.user[2],
     };
     let ticketIndex = previousTickets.findIndex(
       (ticket) => ticket._id === props.currentTicket[2]

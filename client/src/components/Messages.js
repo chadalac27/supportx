@@ -2,12 +2,12 @@ import React from "react";
 import API from "../utils/API";
 
 function Messages(props) {
-  if (props.ticketId == null) {
+  const ticket = props.ticketData.filter(
+    (element) => element._id === props.ticketId
+  )[0];
+  if (props.ticketId == null || ticket == null) {
     return null;
   } else {
-    const ticket = props.ticketData.filter(
-      (element) => element._id === props.ticketId
-    )[0];
     return (
       <div className="pastMessages">
         {ticket.messages.map((message, i) => {
@@ -26,16 +26,8 @@ function Messages(props) {
           let convertedStamp = `${timeStamp[0]}:${timeStamp[1]}${label}`;
           let senderIcon = "https://via.placeholder.com/100";
           // Image stuff
-          console.log(ticket);
           if (message.senderName !== "Customer") {
-            let agent = ticket.agents.filter(
-              (element) => element.username === message.senderName
-            )[0];
-            if (agent != null) {
-              senderIcon = agent.avatarURL;
-            } else {
-              senderIcon = props.user[2];
-            }
+            senderIcon = message.avatarURL;
           }
           return (
             <div key={i} className="message">
