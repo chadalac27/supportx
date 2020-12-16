@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<div id="bigDiv">
+
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Mochi Madness</title>
+        <link rel="stylesheet" href="style.css" type="text/css" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </head>
+
+    <body id="body">
+        <nav id="navbar" class="navbar navbar-expand-lg">
+            <a id="navbarTXT" class="navbar-brand" href="index.html">Mochi Madness</a>
+
+            <div class="" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a id="navbarTXT" id="currentUsername" class="nav-link" href="mochi1.html"> About Mochi<span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a id="navbarTXT" class="nav-link" href="mochi2.html">Mochi Dishes</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a id="navbarTXT" class="nav-link" href="mochiCutlutre.html">Mochi Culture</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+        <div id="page-container" class="container">
+            <div id="content-wrap" class="mt-3 row justify-content-center">
+                <h1 id="titles">What is Mochi?</h1>
+                <div class="row justify-content-center">
+                    <img id="photos"
+                        src="assests/images/1 - GRPVlXZ.png">
+                    <p id="description" class="container">Mochi is a sticky sweet glob of rice flour steamed to perfection and shaped into a ball. Mochi can be eaten as a side with almodt every meal, similar to white rice. It can be made as both a desert and part of daily meals, so it's extremely versatile!</p>
+                </div>
+            </div>
+        </div>
+        <!--Start of SUPPORT X CODE  -->
+        <!--Start of SUPPORT X CODE  -->
+        <!--Start of SUPPORT X CODE  -->
+        <!--Start of SUPPORT X CODE  -->
+        <!--Start of SUPPORT X CODE  -->
+        <!--Start of SUPPORT X CODE  -->
+        <!--Start of SUPPORT X CODE  -->
+        <div>
+
+            <div style="background-color: rgb(4, 31, 54);">
+                <div class="" id="HelpBtn">
+                    <button onclick=generatebutton()
+                        style="width: 100px; height: 30px;-ms-transform: rotate(90deg); /* IE 9 */ transform: rotate(90deg); position: fixed;bottom: 100px;right: 20px;"
+                        type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                        Questions?
+                    </button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div id="modalwrap" class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                        <div style="background-color:  #6c747c;" id="modalcontent" class=" modal-content">
+                            <div style="background-color:  #6c747c;" id="UserForm" class=" size rounded ">
+                                <button onclick=closebutton() id="closeBtn" type="button" class="close btn"
+                                    data-dismiss="modal" aria-label="Close"
+                                    style="color: red; position: absolute;margin-top: 1px;margin-left: 275px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <form id="test" class="size mx-auto my-3 rounded">
+                                    <label style="color:  #27292b;" for="fname">Email:</label><br>
+                                    <input class="form-control" type="text" id="fname" name="fname"
+                                        value="sample@sample.com"><br>
+                                    <label style="color:  #27292b;" for="lname">Category:</label><br>
+                                    <select style="color:  #27292b;" class="form-control" id="sel1" value=" select one">
+                                        <option>Select One</option>
+                                        <option>General </option>
+                                        <option>Online/Login Support</option>
+                                        <option>Finance</option>
+                                        <option>Human Resources</option>
+                                    </select><br><br>
+                                    <label for="fname">Message:</label><br>
+                                    <textarea class="form-control" type="text" id="fname"
+                                        name="fname">Type your Questions here ..</textarea><br>
+                                    <label for="lname">Severity:</label><br>
+
+                                    <select class="form-control" id="sel1">
+                                        <option>Select One</option>
+                                        <option>Low</option>
+                                        <option>Average</option>
+                                        <option>High</option>
+                                        <option>Critical</option>
+                                    </select><br><br>
+                                    <a onclick="routeXXX()">
+                                        <input class="btn btn-dark" type="button" value="Submit">
+                                    </a>
+                                </form>
+                            </div>
+                            <!-- chat window for holding api call -->
+                            <div id="chatwindow" class=" rounded d-none mx-auto" style="background-color:  #6c747c;">
+                                <button onclick=closebutton() id="closeBtn" type="button" style="color:black; ;"
+                                    class="close btn btn-danger" data-dismiss="modal" aria-label="Close"
+                                    style="color: red; position: absolute;margin-top: 1px;margin-left: 750px;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <form action="/action_page.php" class=" mx-3 my-3">
+                                    <div class="mx-3">
+
+                                        <h1 style="color: #27292b;">SupportX</h1>
+                                        <br>
+                                        <label style="color: #27292b;" for="msg"><b>Message</b></label>
+                                        <div class=" rounded mx-auto">
+                                            <textarea style="height: 250px; width: 750px;"></textarea>
+                                        </div>
+                                        <hr>
+                                        <textarea class="mx-auto" style="width: 750px;"
+                                            placeholder="Please wait for your Agent to Connect..." name="msg"
+                                            required></textarea>
+                                        <br>
+                                        <button type="submit" class="btn">Send</button>
+                                        <button style="color:  #27292b;" type="button" class="btn cancel"
+                                            onclick="closeForm()">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <script src="script.js"></script>
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                    crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                    crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                    crossorigin="anonymous"></script>
+            </div>
+        </div>
+        <!-- End of Support X Code -->
+        <!-- End of Support X Code -->
+        <!-- End of Support X Code -->
+        <!-- End of Support X Code -->
+        <!-- End of Support X Code -->
+        <!-- End of Support X Code -->
+        <!-- End of Support X Code -->
+    </body>
+
+    </html>
+</div>

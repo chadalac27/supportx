@@ -1,0 +1,53 @@
+#photos{
+    height: 350px;
+    width: 350px;
+    margin-bottom: 15px;
+}
+html{
+    background-color: #ffd1dc;
+}
+#page-container{
+background-color: #ffd1dc
+}
+#titles{
+    color: #c89aac;
+}
+#description{
+    width: max-content;
+    color: #c89aac;
+    font-size: 150%;
+}
+body{
+    background-color: #ffd1dc;
+}
+#bigDiv{
+    background-color: #ffd1dc;
+}
+#testtest{
+    background-image: url("MEwyp70.png");
+}
+#navbar{
+    background-color: #c89aac;
+    
+}
+#navbarTXT{
+    color: #ffd1dc;
+}
+.container{
+    width: 650px;
+}
+#description1{
+    width: fit-content;
+    color: #c89aac;
+    font-size: 150%;
+}
+#description2{
+    width: fit-content;
+    color: #c89aac;
+    font-size: 150%;
+}
+#list{
+    width: fit-content;
+    color: #c89aac;
+    font-size: 150%;
+}
