@@ -59,11 +59,9 @@ ul {
 
 .login-form,
 .signup-form {
-  margin-top: 24px;
   display: flex;
   flex-direction: column;
 }
-
 .title {
   margin-top: 3rem;
   font-size: 80px;
@@ -90,28 +88,25 @@ ul {
   display: none;
 }
 .formStyle {
-  margin-top: "2rem";
-  text-align: "center";
+  margin-top: 1rem;
+  text-align: center;
 }
 .inputStyle {
-  padding: "12px 20px";
-  margin: "8px 0";
-  box-sizing: "border-box";
-  transition: "all 1s";
-  display: "inline-block";
-}
-.inputStyle:focus {
-  width: "30%";
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  transition: all 1s;
+  display: inline-block;
 }
 .buttonStyle {
-  margin-top: "16px";
-  background: "rgb(224, 221, 193)";
-  padding: "15px 32px";
-  border-radius: "8px";
-  border: "none";
+  margin: 16px 0;
+  background: rgb(224, 221, 193);
+  padding: 15px 32px;
+  border-radius: 8px;
+  border: none;
 }
 .buttonStyle:active {
-  background: "rgb(121, 119, 104)";
+  background: rgb(121, 119, 104);
 }
 .wrapper {
   display: flex;
@@ -214,7 +209,8 @@ ul {
   height: 100%;
   margin-top: 50%;
 }
-.logoutButton:hover, .serverButton:hover {
+.logoutButton:hover,
+.serverButton:hover {
   border-radius: 20%;
   background: #42b680;
   cursor: pointer;
@@ -586,4 +582,21 @@ ul {
   transition: border-radius 0.2s;
   height: 150px;
   margin-top: auto;
+}
+.alert {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+.alert-primary {
+  color: #004085;
+  background-color: #cce5ff;
+  border-color: #b8daff;
 }
