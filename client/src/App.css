@@ -98,9 +98,6 @@ ul {
   transition: all 1s;
   display: inline-block;
 }
-.inputStyle:focus {
-  width: 30%;
-}
 .buttonStyle {
   margin: 16px 0;
   background: rgb(224, 221, 193);
