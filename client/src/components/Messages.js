@@ -24,7 +24,7 @@ function Messages(props) {
             timeStamp[0] = timeStamp[0] - 12;
           }
           let convertedStamp = `${timeStamp[0]}:${timeStamp[1]}${label}`;
-          let senderIcon = "https://via.placeholder.com/100";
+          let senderIcon = "https://www.seekpng.com/png/detail/46-462652_this-icon-for-gender-neutral-user-is-an.png";
           // Image stuff
           if (message.senderName !== "Customer") {
             senderIcon = message.avatarURL;

@@ -313,6 +313,7 @@ ul {
 }
 .userIcon {
   width: 50px;
+  height: 50px;
   margin-right: 8px;
   border-radius: 50%;
   margin-bottom: auto;
