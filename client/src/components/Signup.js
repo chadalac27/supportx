@@ -24,17 +24,15 @@ const Signup = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setMessage({});
-    console.log("onSubmit - Agent", agent);
+    setMessage();
+    //console.log("onSubmit - Agent", agent);
     AuthService.register(agent).then((data) => {
-      console.log("data", data);
       const { message } = data;
-      console.log("Message", message);
       setMessage(message);
       resetForm();
-      if (!message.msgBody) {
+      if (data.success === true) {
         timerID = setTimeout(() => {
-          props.history.push("/login");
+          props.history.push("/");
         }, 2000);
       }
     });
