@@ -14,16 +14,16 @@ SupportX is a help desk website that allows any user to put quality support on t
 * [License](#license)
 
 ## Installation
-N/A
+To install, clone this repo, then in console run "node index.js && cd client $$ npm start"
 
 ## Usage
-N/A
+Use this if you want a competitive edge in answering tickets
 
 ## Contributions
-N/A
+If you would like to contribute please message onw of the creators
 
 ## Testing
-N/A
+NEVER TEST!
 
 ## Credits
 ### GitHub: 
