@@ -28,7 +28,9 @@ N/A
 ## Credits
 GitHub: 
 John Baxter: https://www.github.com/jbaxter91
+
 Sebastian Brear: https://github.com/ssbrear
+
 Chad Coleman: https://github.com/chadalac27
 
 ##Images
